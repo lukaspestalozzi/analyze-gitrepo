@@ -3,6 +3,9 @@
 A Python CLI that auto-discovers git repositories under a directory and
 produces per-author commit statistics across all of them.
 
+> 📄 **The full specification lives in [spec.md](./spec.md).** Every
+> feature is specified there before it is implemented.
+
 ## Features (MVP)
 
 - **Auto-discovery** of git repos under a root directory (skips `.venv`,
