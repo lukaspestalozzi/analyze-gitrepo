@@ -50,11 +50,12 @@ combined. It is designed to answer questions like:
 
 ## 4. CLI surface
 
-The console script is `gitstats`. Two subcommands today:
+The console script is `gitstats`. Three subcommands today:
 
 - `gitstats scan ROOT` — discover repos, scan, generate reports.
 - `gitstats reports` (alias `gitstats reports list`) — print the
   available-report catalog and exit.
+- `gitstats jira <subcommand>` — Jira-workflow utilities (see §4.4).
 
 ### 4.1 `gitstats scan ROOT [OPTIONS]`
 
@@ -64,16 +65,28 @@ The console script is `gitstats`. Two subcommands today:
 | `--report ID` | str (repeatable) | — | Run only the listed reports. Mutually exclusive with `--skip`. |
 | `--skip ID` | str (repeatable) | — | Run all reports **except** the listed ones. Mutually exclusive with `--report`. |
 | `--output-dir / -o` | path | `./gitstats-reports/` | Directory where report files are written. Created if missing. Existing same-named files are overwritten. |
+| `--report-config` | path | — | YAML file with per-report parameters (see §10.2). |
+| `--tz` | str | local system tz | Timezone for date filters and time-bucketed reports. Accepts `utc`, `local`, or an IANA name (e.g. `Europe/Zurich`). |
 | `--jobs / -j` | int | `os.cpu_count()` | Worker processes for parallel repo scanning. |
-| `--since` | `YYYY-MM-DD` | — | Drop commits older than this date (UTC, inclusive). |
-| `--until` | `YYYY-MM-DD` | — | Drop commits newer than this date (UTC, inclusive). |
-| `--identity-map` | path | — | YAML file pinning canonical identities (see §10). |
+| `--since` | `YYYY-MM-DD` | — | Drop commits older than this date, interpreted in `--tz`, inclusive. |
+| `--until` | `YYYY-MM-DD` | — | Drop commits newer than this date, interpreted in `--tz`, inclusive. |
+| `--identity-map` | path | — | YAML file pinning canonical identities (see §10.1). |
 | `--include-merges` | flag | off | Include merge commits (counted with first-parent diff). |
+| `--jira-url URL` | url | — | If set, enables the Jira enricher (§11.1). Can also come from `GITSTATS_JIRA_URL`. |
+
+Auth env vars (no CLI flag — secrets never appear in shell history):
+
+| Variable | Purpose |
+|---|---|
+| `GITSTATS_JIRA_URL` | Jira base URL. Equivalent to `--jira-url`. |
+| `GITSTATS_JIRA_USER` | Account email or username for basic-auth Jira deployments. |
+| `GITSTATS_JIRA_TOKEN` | Personal Access Token / API token. **Required** whenever Jira is active. |
 
 Selection rules:
 
 - With **neither** `--report` nor `--skip`: every registered report
-  runs (see §9 for the MVP catalog).
+  whose preconditions are satisfied runs. (Jira-only reports are
+  skipped silently when Jira isn't active.)
 - With one or more `--report ID`: only those reports run; unknown IDs
   cause exit 2.
 - With one or more `--skip ID`: every registered report runs except
@@ -84,12 +97,15 @@ Selection rules:
 **Examples**
 
 ```bash
-gitstats scan ~/code                                # all reports
+gitstats scan ~/code                                # all default reports
 gitstats scan ~/code -o /tmp/report                 # custom output dir
-gitstats scan ~/code --report author-summary       # just one report
+gitstats scan ~/code --report author-summary        # just one report
 gitstats scan ~/code --skip commit-wordcloud --skip commit-heatmap
 gitstats scan ~/code --identity-map identities.yaml --since 2025-01-01
 gitstats scan ~/code -j 8 --include-merges
+gitstats scan ~/code --tz America/New_York
+gitstats scan ~/code --jira-url https://jira.example.com  # +2 jira reports
+gitstats scan ~/code --report-config reports.yaml         # tuning per-report
 ```
 
 ### 4.2 `gitstats reports [list]`
@@ -97,17 +113,22 @@ gitstats scan ~/code -j 8 --include-merges
 Prints the registered-report catalog as a small table to stdout:
 
 ```
-ID                  Output file              Description
-author-summary      author-summary.md        Markdown table of authors with totals.
-first-commits       first-commits.md         Per-author first/last commit per repo.
-commit-heatmap      commit-heatmap.html      Plotly heatmap of commit times.
-raw-data            raw-data.json            Full aggregate as JSON.
-commit-wordcloud    commit-wordcloud.png     Wordcloud of commit messages.
+ID                       Output file                    Jira  Description
+author-summary           author-summary.md                    Markdown table of authors with totals.
+first-commits            first-commits.md                     Per-author first/last commit per repo.
+commit-heatmap           commit-heatmap.html                  Plotly heatmap of commit times.
+raw-data                 raw-data.json                        Full aggregate as JSON.
+commit-wordcloud         commit-wordcloud.png                 Wordcloud of commit messages.
+repo-summary             repo-summary.md                      Markdown: per-repo totals and top contributors.
+author-leaderboard       author-leaderboard.html              Plotly bar chart, top-N authors.
+identity-debug           identity-debug.md                    Markdown: which identities merged into each author.
+jira-tickets-by-type     jira-tickets-by-type.md           ✓  Markdown: commits per author per Jira issue type.
+jira-tickets-by-type     jira-tickets-by-type.html         ✓  Plotly stacked bar of the same data.
 ```
 
-The trailing `list` keyword is optional; with no argument the same
-table is printed. Reserved for future siblings (e.g. `gitstats reports
-info <id>`).
+The `Jira` column marks reports that only run when Jira is active.
+With no argument or `list` the same table is printed. Reserved for
+future siblings (e.g. `gitstats reports info <id>`).
 
 ### 4.3 Exit codes
 
@@ -115,8 +136,20 @@ info <id>`).
 |---|---|
 | 0 | All requested reports rendered successfully. |
 | 1 | No git repositories found under `ROOT`. |
-| 2 | Bad CLI arguments — invalid path, unknown report ID, mutex violation, malformed date, etc. |
+| 2 | Bad CLI arguments — invalid path, unknown report ID, mutex violation, malformed date, invalid `--tz`, missing `GITSTATS_JIRA_TOKEN` when Jira is active, etc. |
 | 3 | At least one report failed to render. Other reports may still have written files. |
+
+### 4.4 `gitstats jira <subcommand>`
+
+Auxiliary commands for the Jira workflow (§11.1). Each requires
+`--jira-url` (or `GITSTATS_JIRA_URL`) and `GITSTATS_JIRA_TOKEN`.
+
+- `gitstats jira test-connection` — issues a single Jira API call
+  (`/rest/api/2/myself`) to validate the URL and credentials. Prints
+  the resolved account on success; non-zero exit on failure.
+- `gitstats jira clear-cache` — removes the per-host filesystem cache
+  directory at `~/.cache/gitstats/jira/<host>/`. Prints how many
+  cached entries were deleted.
 
 ## 5. Discovery rules
 
@@ -155,9 +188,11 @@ Implemented in `src/gitstats/scanner.py::scan_repo`.
   `diff.stats` (libgit2-computed; `files_changed` is the number of
   files in the patch).
 - **Filters**:
-  - `--since YYYY-MM-DD` and `--until YYYY-MM-DD` are converted to
-    UTC midnight and applied inclusively against the **author** time
-    of each commit.
+  - `--since YYYY-MM-DD` and `--until YYYY-MM-DD` are interpreted as
+    midnight in the timezone supplied by `--tz` (default: local
+    system tz), then applied inclusively against each commit's
+    **author** time (which carries its own offset; the comparison is
+    on absolute instants).
 - **Jira ticket extraction**: every commit message is scanned with
   the regex `\b[A-Z][A-Z0-9]+-\d+\b`. Matches are deduplicated
   preserving first-occurrence order and stored on `Commit.jira_tickets`.
@@ -319,7 +354,8 @@ A module-level `REPORTS: list[type[ReportRenderer]]` in
 
 ### 9.2 MVP report catalog
 
-Five reports ship in this MVP; all five run by default.
+Ten reports are registered. **Eight** run by default; the two Jira
+reports (§9.2.9, §9.2.10) only run when Jira is active (§11.1).
 
 #### 9.2.1 `author-summary` → `author-summary.md`
 
@@ -358,8 +394,8 @@ counts: y-axis = day of week (Mon → Sun), x-axis = hour of day (0–23),
 cell value = number of commits at that slot, summed across all repos
 and authors. Colorscale: Viridis. Hover shows day/hour/count.
 
-Time conversion: timestamps are converted to **UTC** for bucketing.
-A future per-report timezone flag is a roadmap item (§14.6, §14.10).
+Time conversion: timestamps are converted to the timezone given by
+`--tz` (default: local system tz) for bucketing.
 
 The HTML is fully offline-capable (Plotly bundle embedded).
 
@@ -435,21 +471,91 @@ Preprocessing pipeline applied to every message before tokenization:
    `adds`, `update`, `updated`, `updates`, `remove`, `removed`,
    `bump`.
 
-Max 200 words rendered. Stopword and size knobs are not yet
-configurable; see §14.9.
+Max 200 words rendered. Stopword and size knobs are hardcoded for
+MVP; future tuning lands in `--report-config` (§10.2).
+
+#### 9.2.6 `repo-summary` → `repo-summary.md`
+
+One markdown section per repo, ordered by name. Each section
+contains:
+
+- A heading `## <repo-name>` and the absolute repo path.
+- Totals line: `Commits: N · Authors: N · First: <iso> · Last: <iso>`.
+- Total distinct Jira ticket keys referenced (regex matches; not
+  filtered by enrichment).
+- Top 5 authors table: `Author | Commits | + | - | Files`.
+
+#### 9.2.7 `author-leaderboard` → `author-leaderboard.html`
+
+Self-contained Plotly HTML. A bar chart of the top **20** authors
+(by `commits` descending). Three traces are bound to a button:
+`Commits` (default), `Lines added`, `Lines deleted`. X-axis labels
+are author display names. The 20-cap is fixed for MVP and will
+become a `--report-config` knob (§10.2).
+
+#### 9.2.8 `identity-debug` → `identity-debug.md`
+
+Diagnostic markdown intended for tuning `identity-map.yaml`. For
+each canonical author group, in the order they appear in
+`author-summary.md`:
+
+```
+## Alice Smith   (id: 086f06e0f825)
+
+source: identity-map.yaml
+emails: alice@example.com, alice@other.com
+observed name spellings: Alice Smith (12), alice smith (3), Alice (1)
+```
+
+`source` is one of `identity-map.yaml`, `observed`, or
+`override+observed` (when the override seeded the group and
+observations later joined it). Useful for spotting unintended merges
+or splits.
+
+#### 9.2.9 `jira-tickets-by-type` (markdown) → `jira-tickets-by-type.md`
+
+**Only runs when Jira is active (§11.1).** Markdown table with one
+row per canonical author and one column per Jira issue type that
+appears in the dataset. Cells hold the **count of that author's
+commits classified by issue type**, where each commit is classified
+by the issue type of its **first** Jira ticket key in the commit
+message (see §11.1.3 for the rule). Commits whose first ticket is
+absent from Jira are silently excluded; commits with no ticket are
+excluded.
+
+```
+| Author      | Bug | Story | Task | Sub-task |
+|-------------|-----|-------|------|----------|
+| Alice Smith |  17 |     8 |    3 |        2 |
+| Bob Jones   |   4 |    11 |    1 |        0 |
+```
+
+Authors with zero classified commits are omitted. Columns are sorted
+by total commits across the column (most-touched issue type first).
+
+#### 9.2.10 `jira-tickets-by-type` (HTML) → `jira-tickets-by-type.html`
+
+**Only runs when Jira is active.** Same data as §9.2.9 rendered as a
+self-contained Plotly stacked bar chart: x-axis = authors (sorted by
+total bar height), y-axis = commit count, each issue type a stacked
+segment with hover details.
 
 ### 9.3 Run flow
 
 ```
 1. discover repos under ROOT
 2. scan in parallel  -> list[RepoStats]
-3. resolve identities -> Aggregate
-4. select reports from REPORTS based on --report / --skip
-5. for each selected report:
+3. if Jira is active (§11.1):
+     fetch / cache issue types for every Commit.jira_tickets[0]
+     attach to Commit.metadata["jira_first_issuetype"] (or skip if missing)
+4. resolve identities -> Aggregate
+5. select reports from REPORTS based on --report / --skip
+   (Jira-only reports are filtered out when Jira is inactive)
+6. for each selected report:
      try render(ctx) -> Path
      except Exception as exc: record ok=False, error=str(exc)
-6. print per-report status to stderr
-7. exit 0 if all ok, else exit 3
+7. print per-report status to stderr
+8. exit 0 if all ok, else exit 3
 ```
 
 Step 6 prints one line per report, e.g.:
@@ -460,7 +566,9 @@ Step 6 prints one line per report, e.g.:
 [fail] commit-wordcloud  -> wordcloud library not installed
 ```
 
-## 10. Configuration: `--identity-map` YAML
+## 10. Configuration
+
+### 10.1 `--identity-map` YAML
 
 A mapping from canonical display name to a list of emails:
 
@@ -483,6 +591,42 @@ Rules:
   precedence over observed identities.
 - An email may only appear in one group (no validation yet — last
   write wins).
+
+### 10.2 `--report-config` YAML
+
+A nested mapping with two top-level sections: `gitstats` for
+cross-cutting parameters and `reports` keyed by report id for
+per-report tuning.
+
+```yaml
+gitstats:
+  # Optional. Overrides --tz if both are given on the CLI.
+  tz: Europe/Zurich
+
+reports:
+  commit-heatmap:
+    tz: utc                          # overrides gitstats.tz for this report
+
+  commit-wordcloud:
+    max_words: 300
+    stopwords_file: ./stopwords.txt  # path; one extra stopword per line
+
+  author-leaderboard:
+    top_n: 30
+    default_metric: additions        # one of: commits, additions, deletions
+```
+
+Rules:
+
+- The file is loaded once. Unknown top-level sections produce a
+  warning to stderr and are otherwise ignored.
+- Unknown keys inside a known report's section produce a warning to
+  stderr and are ignored (so the file survives spec changes).
+- CLI flags override `gitstats.*` keys; `reports.<id>.<key>`
+  overrides `gitstats.<key>` for that report only.
+- MVP reports that accept parameters: **none ship configurable**.
+  The schema and resolver exist so future reports (and §14.11
+  wordcloud tuning) can read params with no further plumbing.
 
 ## 11. Extension point: `CommitEnricher`
 
@@ -507,8 +651,91 @@ Contract:
 - Enrichers may perform I/O but should cache it themselves; the
   pipeline does not memoize.
 
-The MVP ships zero enrichers. The Jira integration (§14.1) will be
-the first.
+The MVP ships **one** concrete enricher: the Jira enricher (§11.1).
+
+### 11.1 JiraEnricher
+
+**Activation.** The Jira enricher runs whenever `--jira-url` is
+given or `GITSTATS_JIRA_URL` is set. There is no separate
+`--with-jira` toggle. When inactive, no API call is made and the two
+Jira-only reports (§9.2.9, §9.2.10) are filtered out of the run.
+
+**Configuration sources (precedence high → low):**
+
+1. `--jira-url URL` CLI flag.
+2. `GITSTATS_JIRA_URL` environment variable.
+3. (User) `GITSTATS_JIRA_USER` — account email/username for basic
+   auth or `email:token` cloud Jira.
+4. (Token) `GITSTATS_JIRA_TOKEN` — Personal Access Token. **Always
+   required when Jira is active.** Never accepted as a CLI flag.
+
+If activation is on but `GITSTATS_JIRA_TOKEN` is missing, exit 2
+with a clear error before any scanning starts.
+
+**Fetch pattern.** For each unique first-ticket key across all
+commits (see §11.1.3), look up the issue via Jira's
+`/rest/api/2/issue/{key}?fields=issuetype`. We never bulk-search;
+one issue at a time, sequentially (cap on parallelism: 1, because
+Jira rate limits are nasty and this keeps the cache layer simple).
+
+**Behavior on lookup failures:**
+
+| Situation | Behavior |
+|---|---|
+| 404 (ticket not in Jira) | Skip silently. Commit gets no metadata; it's excluded from Jira-based classification. |
+| 401 / 403 (auth) | Abort the entire run, exit 2 with the Jira error message. |
+| 5xx / network error | Retry up to 3 times with exponential back-off (1s, 2s, 4s). After that, treat as 404 — skip silently and continue. |
+| Timeout (> 30 s per request) | Same as 5xx after retries. |
+
+#### 11.1.1 Cache
+
+Filesystem-backed, persistent. One file per ticket, JSON-encoded.
+
+- Default location: `~/.cache/gitstats/jira/<host>/<KEY>.json`.
+  `<host>` is the URL host (port and path stripped). `<KEY>` is the
+  Jira issue key.
+- Cache entry shape:
+  ```json
+  {"fetched_at": "2026-05-13T20:00:00+00:00", "issuetype": "Bug"}
+  ```
+- Default TTL **24 hours** (`--jira-cache-ttl` to override in
+  seconds; `--jira-no-cache` to disable both read and write).
+- A 404 is also cached (as `{"fetched_at": "...", "issuetype": null}`)
+  so we don't re-pummel Jira on every run for missing tickets.
+
+`gitstats jira clear-cache` (§4.4) deletes the
+`~/.cache/gitstats/jira/<host>/` directory for the configured host.
+
+#### 11.1.2 What lands on `Commit.metadata`
+
+Only one key is set:
+
+```python
+commit.metadata["jira_first_issuetype"] = "Bug"   # or "Story", "Task", ...
+```
+
+When the first ticket is missing from Jira (404 or skipped after
+errors), the key is **not** set — downstream reports treat missing
+keys as "unclassified".
+
+#### 11.1.3 Multi-ticket commit rule
+
+A commit message may contain several ticket keys. **First match
+wins**: the issue type used for classification is that of the
+**first** key in iteration order of `Commit.jira_tickets` (which
+preserves first-occurrence order from the regex scan, §6).
+Other tickets remain on the commit (in `jira_tickets`) but are not
+classified.
+
+This is a deliberate simplification — see §14.2 for the alternative
+designs (set-based and fractional attribution) that we deferred for
+MVP.
+
+#### 11.1.4 Ordering in the pipeline
+
+Per §9.3 step 3, the Jira enricher runs **after** scanning and
+**before** identity resolution / aggregation. The enrichment step
+itself does no parallelism (cap-1 is documented above).
 
 ## 12. Performance contract
 
@@ -539,107 +766,109 @@ the first.
 | `--output-dir` does not exist | Created (with parents) silently. |
 | A single report's `render()` raises | Caught; logged to stderr as `[fail]`; other reports still run; final exit code is 3 if any failed. |
 | Invalid date in `--since` / `--until` | Typer/strptime raises → exit 2. |
+| Invalid `--tz` value (not `utc`, `local`, or an IANA name) | Print red error to stderr, exit 2. |
+| Jira active but `GITSTATS_JIRA_TOKEN` missing | Print red error to stderr, exit 2. |
+| Jira 401 / 403 during fetch | Abort, print Jira message to stderr, exit 2. |
+| Jira 404 for a referenced ticket | Skip silently; the commit is not classified. |
+| Jira 5xx / network / timeout | Retry 3× with backoff; if still failing, treat as 404. |
+| Unknown key in `--report-config` | Warn to stderr, continue. |
 
-## 14. Roadmap (planned, not implemented)
+## 14. Roadmap
 
-### 14.1 Jira integration **[TBD]**
+Most original §14 items are now resolved (their decisions live in
+the relevant section above). What remains here is the genuinely
+open future work plus design alternatives that we deliberately
+deferred.
 
-The first enricher. Will join `Commit.jira_tickets` against a Jira
-ticket dataset and attach issue metadata to `Commit.metadata` for
-downstream aggregation.
+### 14.1 Jira integration **[resolved]**
 
-**Open questions to resolve:**
+Specified in §11.1. Activation via `--jira-url` /
+`GITSTATS_JIRA_URL` + `GITSTATS_JIRA_TOKEN`; live REST API only
+(no CSV export path); filesystem cache with 24h TTL; only the
+`issuetype` field is surfaced; missing tickets are skipped
+silently; the two `jira-tickets-by-type` reports (§9.2.9, §9.2.10)
+are the headline output.
 
-- Data source: live Jira REST API, CSV export, both?
-- Auth model if API: PAT in env var? OAuth?
-- Cache location and TTL?
-- Which Jira fields to surface: `issuetype`, `status`, `resolution`,
-  `priority`, `components`?
-- New aggregator output: `bugfixes`, `features`, `chores` per author
-  per repo and overall — what's the JSON shape?
-- New CLI flags: `--jira-export PATH`, `--jira-url URL`, …?
-- Behavior when a commit references multiple tickets (counted once
-  for each? deduped by issue type?).
-- Behavior when a referenced ticket is missing from the dataset
-  (skip silently? warn? fail?).
+Open follow-ups (not in MVP):
 
-### 14.2 Future subcommands **[TBD]**
+- Additional Jira fields (`status`, `resolution`, `components`,
+  `priority`) — once a real use case appears.
+- Bulk-search via `/rest/api/2/search?jql=key in (...)` to reduce
+  request count.
+- Distinguishing "tickets touched" (set-based) from "commits
+  classified" (current) as separate metrics in `raw-data.json`.
 
-- `gitstats author <name|email>` — detail view for one author.
-- `gitstats repo <path>` — detail view for one repo.
-- `gitstats jira <…>` — Jira-specific queries (once §14.1 lands).
-- Output contracts to be defined.
+### 14.2 Multi-ticket counting alternatives **[deferred]**
+
+Today: **first ticket wins** (§11.1.3). If feedback shows it
+loses too much signal, alternatives to evaluate are:
+
+- Count each linked ticket independently (set-of-tickets-per-type).
+- Fractional attribution (1/N to each linked ticket's type).
+- Tracking both in `raw-data.json`, presenting one in reports.
 
 ### 14.3 Time-series / activity heatmap **[resolved]**
 
-Implemented as the `commit-heatmap` report (§9.2.3). Time-series
-breakdowns (commits-per-week per author etc.) remain a candidate for
-additional reports — see §14.8.
+Implemented as `commit-heatmap` (§9.2.3). Time-series breakdowns
+beyond the day-of-week × hour grid remain candidates for additional
+reports — see §14.7.
 
-### 14.4 Unique-files counter **[TBD]**
+### 14.4 Unique-files counter **[resolved → no]**
 
-Today `files_touched` is the sum of per-commit `files_changed`.
-A `unique_files` field (set of distinct paths per author) would be
-more meaningful for some questions but increases memory. Worth it?
+Decision: stick with the summed `files_touched` (per-commit
+`files_changed` totaled). The unique-set variant was rejected for
+MVP — it doubles the memory of the aggregation step for marginal
+gain. Revisit if a real user use case appears.
 
-### 14.5 Bot/automated-author handling **[TBD]**
+### 14.5 Bot/automated-author handling **[resolved → no]**
 
-Should we treat `dependabot[bot]`, `github-actions[bot]`, web-edit
-commits (`noreply@github.com`), etc. as a separate class? Options:
-exclude, group under a synthetic "bots" identity, tag with metadata?
+Decision: bots (`dependabot[bot]`, `github-actions[bot]`, etc.)
+are treated as ordinary authors. Users who want to fold them into
+a single synthetic identity can do so via `--identity-map`.
 
-### 14.6 Date filter timezone **[TBD]**
+### 14.6 Date filter / heatmap timezone **[resolved]**
 
-Currently `--since`/`--until` are coerced to UTC midnight. Should
-we accept explicit timezones (`2025-01-01T00:00:00+02:00`), local
-time, or stay UTC-only? Same question for the `commit-heatmap` time
-bucketing (§14.10).
+Decision: a single global `--tz` flag controls both. Default is
+the local system timezone. Per-report overrides go through
+`--report-config` (§10.2).
 
-### 14.7 JSON schema versioning **[TBD]**
+### 14.7 Additional reports **[ongoing]**
 
-Once enrichers add `metadata`, the `raw-data.json` shape grows. Do
-we add a top-level `schema_version: int` for downstream consumers?
+The MVP catalog (§9.2) lists ten reports. Further candidates that
+are **not** in MVP:
 
-### 14.8 Additional reports **[TBD]**
+- `commit-timeline.html` — weekly per-author commit lines.
+- `jira-tickets-touched.md` — set-based counterpart to §14.2.
+- `pair-matrix.md` — co-authorship from `Co-authored-by:` trailers.
 
-Candidates not in the MVP catalog: `repo-summary`, `commit-timeline`
-(weekly per-author lines), `author-leaderboard` (top-N bar chart),
-`identity-debug` (groups + sources from `IdentityResolver`),
-`jira-bugfix-counts` (after §14.1). Decide per-feature whether to
-add.
+Adding a report is a non-breaking change; pick them up as need
+arises.
 
-### 14.9 Per-report parameters **[TBD]**
+### 14.8 JSON schema versioning **[resolved → no]**
 
-No mechanism in MVP for tuning individual reports (e.g. wordcloud
-max-words, heatmap timezone, top-N for a leaderboard). Possible
-designs:
+Decision: no `schema_version` field in `raw-data.json`. The
+`gitstats` package's semver covers the public surface (§16). Adding
+a field later is non-breaking; consumers should tolerate unknown
+keys.
 
-- Inline syntax: `--report commit-heatmap:tz=local,bucket=hour`.
-- Per-report TOML/YAML config: `--report-config reports.toml`.
-- Environment variables (least friendly).
+### 14.9 Per-report parameters **[resolved]**
 
-Defer until at least two reports actually need parameters.
+Mechanism shipped as `--report-config` (§10.2). MVP reports don't
+read any params yet; the schema and resolver exist so future
+reports can.
 
-### 14.10 Optional-dependency split **[TBD]**
+### 14.10 Optional-dependency split **[resolved → no]**
 
-`plotly` (~10 MB) and `wordcloud` (+ Pillow + matplotlib) inflate the
-install. If size becomes a real concern, split into extras:
+Decision: `plotly` and `wordcloud` are required runtime deps. A
+single `pip install gitstats` gets everything. Revisit if install
+size becomes a complaint.
 
-```
-pip install gitstats              # core only (markdown + json reports)
-pip install gitstats[plots]       # +commit-heatmap
-pip install gitstats[wordcloud]   # +commit-wordcloud
-pip install gitstats[all]         # everything
-```
+### 14.11 Wordcloud customization **[deferred]**
 
-In that world, a report whose import fails registers itself but
-errors at `render()` with a clear "missing extra" message.
-
-### 14.11 Wordcloud stopword / sizing customization **[TBD]**
-
-Today's stopword list is hardcoded (§9.2.5). Likely needs to become
-user-configurable (per-project stopwords, max words, image size,
-colormap). Ties into §14.9.
+The wordcloud's stopwords, max-words, dimensions, and colormap are
+hardcoded in §9.2.5. When tuning becomes necessary, the knobs will
+live under `reports.commit-wordcloud:` in `--report-config` — no
+new CLI flags.
 
 ## 15. Testing strategy
 
@@ -652,8 +881,12 @@ colormap). Ties into §14.9.
   `test_aggregator.py`, plus `tests/reports/test_<id>.py` for each
   registered report.
 - `tests/test_cli.py` covers report selection (`--report` / `--skip`
-  mutex, unknown-ID error, default-runs-all behavior), output-dir
-  creation, and exit-code semantics (0 / 1 / 2 / 3).
+  mutex, unknown-ID error, default-runs-all behavior), `--tz`
+  validation, `--report-config` loading and unknown-key warnings,
+  output-dir creation, and exit-code semantics (0 / 1 / 2 / 3).
+- `tests/test_jira.py` covers the `JiraEnricher` against a stubbed
+  Jira HTTP server: cache hit/miss, 404 silent skip, 401 abort,
+  retry-on-5xx, and first-ticket-wins classification.
 - A `slow`-marked test for scanning a real large repo (e.g. CPython)
   is allowed but not required for green CI.
 - New features in this spec must be accompanied by tests that
@@ -664,9 +897,10 @@ colormap). Ties into §14.9.
 
 `gitstats` follows semver:
 
-- **Public surface** = the `scan` and `reports` CLI flag sets, exit
-  codes, the set of registered report IDs and their filenames, and
-  the `raw-data.json` schema.
+- **Public surface** = the `scan`, `reports`, and `jira` CLI flag
+  sets, exit codes, the set of registered report IDs and their
+  filenames, the `--identity-map` and `--report-config` YAML schemas,
+  and the `raw-data.json` shape.
 - **Breaking** = removing or renaming a CLI flag, an exit-code
   meaning change, removing or renaming a report ID, removing a field
   from `raw-data.json`, or changing identity-merging rules in a way
