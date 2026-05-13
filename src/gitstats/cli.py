@@ -5,7 +5,6 @@ import sys
 from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 import typer
 from rich.console import Console
@@ -29,13 +28,13 @@ def _root() -> None:
     """gitstats — multi-repo git history analyzer."""
 
 
-def _parse_date(value: Optional[str]) -> Optional[datetime]:
+def _parse_date(value: str | None) -> datetime | None:
     if value is None:
         return None
     return datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=timezone.utc)
 
 
-def _scan_one(args: tuple[str, bool, Optional[str], Optional[str]]) -> RepoStats:
+def _scan_one(args: tuple[str, bool, str | None, str | None]) -> RepoStats:
     path, include_merges, since_iso, until_iso = args
     since = datetime.fromisoformat(since_iso) if since_iso else None
     until = datetime.fromisoformat(until_iso) if until_iso else None
@@ -48,19 +47,19 @@ def scan(
     fmt: str = typer.Option(
         "table", "--format", "-f", help="Output format: table, json, or csv."
     ),
-    output: Optional[Path] = typer.Option(
+    output: Path | None = typer.Option(
         None, "--output", "-o", help="Write to file instead of stdout."
     ),
     jobs: int = typer.Option(
         os.cpu_count() or 1, "--jobs", "-j", help="Parallel worker processes."
     ),
-    since: Optional[str] = typer.Option(
+    since: str | None = typer.Option(
         None, "--since", help="Only include commits on/after YYYY-MM-DD."
     ),
-    until: Optional[str] = typer.Option(
+    until: str | None = typer.Option(
         None, "--until", help="Only include commits on/before YYYY-MM-DD."
     ),
-    identity_map: Optional[Path] = typer.Option(
+    identity_map: Path | None = typer.Option(
         None,
         "--identity-map",
         exists=True,

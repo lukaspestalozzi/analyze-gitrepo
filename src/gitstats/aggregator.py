@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from .identity import IdentityResolver
-from .models import AuthorStats, Report, RepoAuthorStats, RepoStats, RepoSummary
+from .models import AuthorStats, RepoAuthorStats, Report, RepoStats, RepoSummary
 
 
 def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Report:
