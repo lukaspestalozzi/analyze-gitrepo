@@ -45,43 +45,78 @@ combined. It is designed to answer questions like:
 | **Identity** | A `(name, email)` pair as recorded in the git commit's author header. |
 | **Ticket** | A Jira-style key matching `[A-Z][A-Z0-9]+-\d+` found in a commit message. |
 | **Enricher** | A pluggable post-scan step that attaches metadata to commits (see §11). |
+| **Aggregate** | The in-memory cross-repo data structure produced by aggregation; the input to every report (see §8). |
+| **Report** | A user-facing artifact (markdown, HTML, PNG, JSON) written to the output directory by a `ReportRenderer` (see §9). |
 
 ## 4. CLI surface
 
-The console script is `gitstats`. There is currently one subcommand,
-`scan`. Future commands (§14) will be siblings.
+The console script is `gitstats`. Two subcommands today:
 
-```
-gitstats scan ROOT [OPTIONS]
-```
+- `gitstats scan ROOT` — discover repos, scan, generate reports.
+- `gitstats reports` (alias `gitstats reports list`) — print the
+  available-report catalog and exit.
+
+### 4.1 `gitstats scan ROOT [OPTIONS]`
 
 | Flag | Type | Default | Behavior |
 |---|---|---|---|
 | `ROOT` (positional) | dir | required | Directory to recursively search for repos. |
-| `--format / -f` | `table\|json\|csv` | `table` | Output format. |
-| `--output / -o` | path | stdout | Write to file instead of stdout. |
+| `--report ID` | str (repeatable) | — | Run only the listed reports. Mutually exclusive with `--skip`. |
+| `--skip ID` | str (repeatable) | — | Run all reports **except** the listed ones. Mutually exclusive with `--report`. |
+| `--output-dir / -o` | path | `./gitstats-reports/` | Directory where report files are written. Created if missing. Existing same-named files are overwritten. |
 | `--jobs / -j` | int | `os.cpu_count()` | Worker processes for parallel repo scanning. |
 | `--since` | `YYYY-MM-DD` | — | Drop commits older than this date (UTC, inclusive). |
 | `--until` | `YYYY-MM-DD` | — | Drop commits newer than this date (UTC, inclusive). |
 | `--identity-map` | path | — | YAML file pinning canonical identities (see §10). |
 | `--include-merges` | flag | off | Include merge commits (counted with first-parent diff). |
 
+Selection rules:
+
+- With **neither** `--report` nor `--skip`: every registered report
+  runs (see §9 for the MVP catalog).
+- With one or more `--report ID`: only those reports run; unknown IDs
+  cause exit 2.
+- With one or more `--skip ID`: every registered report runs except
+  those; unknown IDs cause exit 2.
+- Passing both `--report` and `--skip` in the same invocation is an
+  error (exit 2).
+
 **Examples**
 
 ```bash
-gitstats scan ~/code
-gitstats scan ~/code -f json -o stats.json
+gitstats scan ~/code                                # all reports
+gitstats scan ~/code -o /tmp/report                 # custom output dir
+gitstats scan ~/code --report author-summary       # just one report
+gitstats scan ~/code --skip commit-wordcloud --skip commit-heatmap
 gitstats scan ~/code --identity-map identities.yaml --since 2025-01-01
 gitstats scan ~/code -j 8 --include-merges
 ```
 
-**Exit codes**
+### 4.2 `gitstats reports [list]`
+
+Prints the registered-report catalog as a small table to stdout:
+
+```
+ID                  Output file              Description
+author-summary      author-summary.md        Markdown table of authors with totals.
+first-commits       first-commits.md         Per-author first/last commit per repo.
+commit-heatmap      commit-heatmap.html      Plotly heatmap of commit times.
+raw-data            raw-data.json            Full aggregate as JSON.
+commit-wordcloud    commit-wordcloud.png     Wordcloud of commit messages.
+```
+
+The trailing `list` keyword is optional; with no argument the same
+table is printed. Reserved for future siblings (e.g. `gitstats reports
+info <id>`).
+
+### 4.3 Exit codes
 
 | Code | Meaning |
 |---|---|
-| 0 | Success. |
+| 0 | All requested reports rendered successfully. |
 | 1 | No git repositories found under `ROOT`. |
-| 2 | Bad CLI arguments (invalid `--format`, malformed date, missing path). |
+| 2 | Bad CLI arguments — invalid path, unknown report ID, mutex violation, malformed date, etc. |
+| 3 | At least one report failed to render. Other reports may still have written files. |
 
 ## 5. Discovery rules
 
@@ -220,21 +255,119 @@ Cross-repo aggregation per canonical author: `author_id`,
 `path`, `name`, `commits`, `authors` (distinct in this repo),
 `first_commit`, `last_commit`.
 
-### `Report`
-`authors: list[AuthorStats]` (sorted by `commits` desc),
-`repos: list[RepoSummary]` (sorted by `name`),
-`generated_at: datetime` (UTC).
+### `Aggregate`
+The in-memory cross-repo aggregation produced by
+`aggregator.aggregate(...)`. Consumed by every report.
 
-## 9. Output formats
+- `authors: list[AuthorStats]` — sorted by `commits` desc.
+- `repos: list[RepoSummary]` — sorted by `name`.
+- `generated_at: datetime` — UTC.
 
-### 9.1 Table (default)
+> The class was originally named `Report`; it was renamed to free up
+> the name **Report** for the user-facing artifact concept (see §9).
 
-Rich tables, one for repos and one for authors. Truncated to the
-terminal width by Rich. No top-N limit currently (see §14 TBD).
+## 9. Reports
 
-### 9.2 JSON
+A **report** is a self-contained artifact written to a file in the
+output directory. Each report focuses on one aspect of the data and
+declares its own filename and output kind (markdown, HTML, JSON, PNG).
+A single `gitstats scan` run can produce many reports.
 
-Pretty-printed with sorted keys, 2-space indent. Top-level shape:
+### 9.1 Architecture
+
+Reports are pluggable. The protocol lives in
+`src/gitstats/reports/base.py`:
+
+```python
+@dataclass(frozen=True)
+class ReportContext:
+    repo_stats: list[RepoStats]   # raw scanned commits, in case the report needs them
+    aggregate: Aggregate          # the cross-repo aggregation
+    output_dir: Path
+
+@dataclass(frozen=True)
+class ReportResult:
+    report_id: str
+    output_path: Path
+    ok: bool
+    error: str | None = None
+
+class ReportRenderer(Protocol):
+    id: ClassVar[str]             # kebab-case, e.g. "author-summary"
+    description: ClassVar[str]    # one-line, used by `gitstats reports`
+    filename: ClassVar[str]       # e.g. "author-summary.md"
+
+    def render(self, ctx: ReportContext) -> Path: ...
+```
+
+Rules:
+
+- `id` matches `^[a-z][a-z0-9-]*$`. Used by `--report` / `--skip`.
+- `filename` is the basename inside `--output-dir`; reports never
+  write outside that directory.
+- `render` may raise; the caller catches and records a `ReportResult`
+  with `ok=False`. One failing report does not stop the others (§13).
+- `ReportContext` is read-only — reports must not mutate the input
+  collections.
+- Reports may read all of `repo_stats[i].commits` (raw `Commit` list)
+  if they need timestamps or messages; in-memory cost is the
+  already-scanned data, no extra git work.
+
+A module-level `REPORTS: list[type[ReportRenderer]]` in
+`src/gitstats/reports/__init__.py` is the registry consumed by both
+`gitstats reports` and `gitstats scan`.
+
+### 9.2 MVP report catalog
+
+Five reports ship in this MVP; all five run by default.
+
+#### 9.2.1 `author-summary` → `author-summary.md`
+
+A markdown document with two GitHub-flavored tables:
+
+1. **Repositories** — same columns as today's terminal table
+   (name, commits, authors, first/last commit).
+2. **Authors** — `Author | Commits | + | - | Files | First | Last | Repos`.
+
+Datetimes are rendered as ISO-8601 (UTC). Numbers are integers, no
+thousands-separator. Sort: authors by `commits` desc, repos by name.
+
+#### 9.2.2 `first-commits` → `first-commits.md`
+
+For each canonical author, one section:
+
+```
+## Alice Smith (alice@example.com, alice@other.com)
+
+- First commit overall: 2024-01-15T10:00:00+00:00 in repo-a (sha abc1234)
+- Last commit overall: 2026-05-12T18:30:00+00:00 in repo-b (sha def5678)
+
+| Repo    | First commit       | Last commit        | Commits |
+|---------|--------------------|--------------------|---------|
+| repo-a  | 2024-01-15T10:…    | 2025-09-04T11:…    |       9 |
+| repo-b  | 2024-08-20T09:…    | 2026-05-12T18:…    |       8 |
+```
+
+Sections are ordered by overall first-commit ascending (the earliest
+contributor first).
+
+#### 9.2.3 `commit-heatmap` → `commit-heatmap.html`
+
+A self-contained Plotly HTML file showing a 7 × 24 heatmap of commit
+counts: y-axis = day of week (Mon → Sun), x-axis = hour of day (0–23),
+cell value = number of commits at that slot, summed across all repos
+and authors. Colorscale: Viridis. Hover shows day/hour/count.
+
+Time conversion: timestamps are converted to **UTC** for bucketing.
+A future per-report timezone flag is a roadmap item (§14.6, §14.10).
+
+The HTML is fully offline-capable (Plotly bundle embedded).
+
+#### 9.2.4 `raw-data` → `raw-data.json`
+
+A JSON dump of the `Aggregate`. Identical to the file that the
+old `--format json` produced. Pretty-printed, sorted keys, 2-space
+indent. Shape:
 
 ```json
 {
@@ -276,23 +409,56 @@ Pretty-printed with sorted keys, 2-space indent. Top-level shape:
 }
 ```
 
-- All `datetime` fields are ISO-8601 strings with tz offset.
-- `emails` is serialized as a sorted list (sets aren't valid JSON).
+- All datetimes ISO-8601 with tz offset.
+- `emails` is a sorted list (sets aren't valid JSON).
 - Null `first_commit`/`last_commit` appear as `null`.
+- This file's shape is the JSON schema referred to by §16
+  (versioning).
 
-### 9.3 CSV
+#### 9.2.5 `commit-wordcloud` → `commit-wordcloud.png`
 
-Author-table only (no repo summary, no per-repo breakdown — use JSON
-for those).
+A PNG wordcloud (default 1600×900, white background) of all commit
+messages across all repos.
 
-Columns (header row required):
+Preprocessing pipeline applied to every message before tokenization:
+
+1. Strip Jira-ticket keys (the `JIRA_RE` from §6) so the cloud
+   doesn't fill with `PROJ-123`.
+2. Strip URLs (`https?://\S+`).
+3. Strip surrounded code/identifiers — backticked spans and tokens
+   matching `[A-Za-z_][\w.]*\.\w+` (paths and method-like names).
+4. Lowercase.
+5. Drop tokens shorter than 3 characters.
+6. Drop the default English stopword list from the `wordcloud`
+   library plus a small gitstats-specific list: `merge`, `revert`,
+   `wip`, `tmp`, `todo`, `fix`, `fixed`, `fixes`, `add`, `added`,
+   `adds`, `update`, `updated`, `updates`, `remove`, `removed`,
+   `bump`.
+
+Max 200 words rendered. Stopword and size knobs are not yet
+configurable; see §14.9.
+
+### 9.3 Run flow
 
 ```
-author_id,display_name,emails,commits,additions,deletions,files_touched,first_commit,last_commit
+1. discover repos under ROOT
+2. scan in parallel  -> list[RepoStats]
+3. resolve identities -> Aggregate
+4. select reports from REPORTS based on --report / --skip
+5. for each selected report:
+     try render(ctx) -> Path
+     except Exception as exc: record ok=False, error=str(exc)
+6. print per-report status to stderr
+7. exit 0 if all ok, else exit 3
 ```
 
-- `emails` is `;`-joined sorted list (semicolon, not comma).
-- Empty datetimes are empty strings.
+Step 6 prints one line per report, e.g.:
+
+```
+[ok]   author-summary    -> ./gitstats-reports/author-summary.md
+[ok]   first-commits     -> ./gitstats-reports/first-commits.md
+[fail] commit-wordcloud  -> wordcloud library not installed
+```
 
 ## 10. Configuration: `--identity-map` YAML
 
@@ -367,7 +533,11 @@ the first.
 | Repo is corrupted / pygit2 can't open it | Worker raises; the process pool re-raises in the parent. (Future: collect and continue — TBD.) |
 | Shallow clone | Treated as a full repo; only the available history is scanned. |
 | Detached HEAD | `repo.head.target` resolves; scan proceeds normally. |
-| Invalid `--format` | Print red error to stderr, exit 2. |
+| `--report` and `--skip` both given | Print red error to stderr, exit 2. |
+| Unknown report ID in `--report` or `--skip` | Print red error listing valid IDs, exit 2. |
+| `--output-dir` exists but is not writable | Print red error to stderr, exit 2. |
+| `--output-dir` does not exist | Created (with parents) silently. |
+| A single report's `render()` raises | Caught; logged to stderr as `[fail]`; other reports still run; final exit code is 3 if any failed. |
 | Invalid date in `--since` / `--until` | Typer/strptime raises → exit 2. |
 
 ## 14. Roadmap (planned, not implemented)
@@ -400,10 +570,11 @@ downstream aggregation.
 - `gitstats jira <…>` — Jira-specific queries (once §14.1 lands).
 - Output contracts to be defined.
 
-### 14.3 Time-series / activity heatmap **[TBD]**
+### 14.3 Time-series / activity heatmap **[resolved]**
 
-Was a deferred MVP option. Commits-per-week, day-of-week patterns.
-Need to decide: another subcommand, or a flag on `scan`?
+Implemented as the `commit-heatmap` report (§9.2.3). Time-series
+breakdowns (commits-per-week per author etc.) remain a candidate for
+additional reports — see §14.8.
 
 ### 14.4 Unique-files counter **[TBD]**
 
@@ -421,17 +592,54 @@ exclude, group under a synthetic "bots" identity, tag with metadata?
 
 Currently `--since`/`--until` are coerced to UTC midnight. Should
 we accept explicit timezones (`2025-01-01T00:00:00+02:00`), local
-time, or stay UTC-only?
+time, or stay UTC-only? Same question for the `commit-heatmap` time
+bucketing (§14.10).
 
 ### 14.7 JSON schema versioning **[TBD]**
 
-Once enrichers add `metadata`, the JSON shape grows. Do we add a
-top-level `schema_version: int` for downstream consumers?
+Once enrichers add `metadata`, the `raw-data.json` shape grows. Do
+we add a top-level `schema_version: int` for downstream consumers?
 
-### 14.8 Output limits / sorting **[TBD]**
+### 14.8 Additional reports **[TBD]**
 
-Should the table truncate to top-N authors by commits? Should
-sorting be configurable (`--sort commits|additions|recency`)?
+Candidates not in the MVP catalog: `repo-summary`, `commit-timeline`
+(weekly per-author lines), `author-leaderboard` (top-N bar chart),
+`identity-debug` (groups + sources from `IdentityResolver`),
+`jira-bugfix-counts` (after §14.1). Decide per-feature whether to
+add.
+
+### 14.9 Per-report parameters **[TBD]**
+
+No mechanism in MVP for tuning individual reports (e.g. wordcloud
+max-words, heatmap timezone, top-N for a leaderboard). Possible
+designs:
+
+- Inline syntax: `--report commit-heatmap:tz=local,bucket=hour`.
+- Per-report TOML/YAML config: `--report-config reports.toml`.
+- Environment variables (least friendly).
+
+Defer until at least two reports actually need parameters.
+
+### 14.10 Optional-dependency split **[TBD]**
+
+`plotly` (~10 MB) and `wordcloud` (+ Pillow + matplotlib) inflate the
+install. If size becomes a real concern, split into extras:
+
+```
+pip install gitstats              # core only (markdown + json reports)
+pip install gitstats[plots]       # +commit-heatmap
+pip install gitstats[wordcloud]   # +commit-wordcloud
+pip install gitstats[all]         # everything
+```
+
+In that world, a report whose import fails registers itself but
+errors at `render()` with a clear "missing extra" message.
+
+### 14.11 Wordcloud stopword / sizing customization **[TBD]**
+
+Today's stopword list is hardcoded (§9.2.5). Likely needs to become
+user-configurable (per-project stopwords, max words, image size,
+colormap). Ties into §14.9.
 
 ## 15. Testing strategy
 
@@ -439,9 +647,13 @@ sorting be configurable (`--sort commits|additions|recency`)?
   with two authors (one with two emails) and a Jira ticket in a
   commit message — exercises identity merging, first/last commit, and
   the Jira regex.
-- One test module per source module (`test_discovery.py`,
-  `test_scanner.py`, `test_identity.py`, `test_aggregator.py`,
-  `test_report.py`).
+- One test module per source module:
+  `test_discovery.py`, `test_scanner.py`, `test_identity.py`,
+  `test_aggregator.py`, plus `tests/reports/test_<id>.py` for each
+  registered report.
+- `tests/test_cli.py` covers report selection (`--report` / `--skip`
+  mutex, unknown-ID error, default-runs-all behavior), output-dir
+  creation, and exit-code semantics (0 / 1 / 2 / 3).
 - A `slow`-marked test for scanning a real large repo (e.g. CPython)
   is allowed but not required for green CI.
 - New features in this spec must be accompanied by tests that
@@ -452,14 +664,16 @@ sorting be configurable (`--sort commits|additions|recency`)?
 
 `gitstats` follows semver:
 
-- **Public surface** = the `scan` CLI flag set, exit codes, and the
-  JSON output schema.
-- **Breaking** = removing/renaming a flag or JSON field, changing
-  exit-code semantics, or changing identity-merging rules in a way
+- **Public surface** = the `scan` and `reports` CLI flag sets, exit
+  codes, the set of registered report IDs and their filenames, and
+  the `raw-data.json` schema.
+- **Breaking** = removing or renaming a CLI flag, an exit-code
+  meaning change, removing or renaming a report ID, removing a field
+  from `raw-data.json`, or changing identity-merging rules in a way
   that re-buckets authors.
 - **Non-breaking** = adding new flags with defaults, adding new
-  JSON fields, new subcommands, performance improvements, internal
-  refactors.
+  reports, adding new fields to `raw-data.json`, new subcommands,
+  performance improvements, internal refactors.
 
 CI must pass on all currently-supported Python versions before
 release.
