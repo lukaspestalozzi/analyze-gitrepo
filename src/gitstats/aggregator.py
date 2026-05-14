@@ -3,11 +3,11 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from .identity import IdentityResolver
-from .models import AuthorStats, RepoAuthorStats, Report, RepoStats, RepoSummary
+from .models import Aggregate, AuthorStats, RepoAuthorStats, RepoStats, RepoSummary
 
 
-def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Report:
-    """Reduce per-repo commits into a `Report` keyed by canonical author id."""
+def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Aggregate:
+    """Reduce per-repo commits into an `Aggregate` keyed by canonical author id."""
     # First pass: feed all (name, email) pairs to the resolver so the
     # union-find converges before we look anything up.
     for rs in repo_stats:
@@ -69,7 +69,7 @@ def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Report
         a.display_name = resolver.display_name(a.display_name, any_email)
 
     sorted_authors = sorted(authors.values(), key=lambda x: x.commits, reverse=True)
-    return Report(
+    return Aggregate(
         authors=sorted_authors,
         repos=sorted(repos, key=lambda r: r.name),
         generated_at=datetime.now(tz=timezone.utc),

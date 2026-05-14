@@ -66,7 +66,7 @@ class RepoSummary:
 
 
 @dataclass
-class Report:
+class Aggregate:
     authors: list[AuthorStats]
     repos: list[RepoSummary]
     generated_at: datetime

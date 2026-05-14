@@ -9,12 +9,12 @@ from tests.conftest import FixtureRepo
 def test_aggregator_merges_alice_emails_and_counts(fixture_repo: FixtureRepo) -> None:
     stats = scan_repo(fixture_repo.path)
     resolver = IdentityResolver()
-    report = aggregate([stats], resolver)
+    agg = aggregate([stats], resolver)
 
     # Two distinct authors after identity merging: Alice (2 emails) + Bob.
-    assert len(report.authors) == 2
+    assert len(agg.authors) == 2
 
-    by_name = {a.display_name: a for a in report.authors}
+    by_name = {a.display_name: a for a in agg.authors}
     alice = by_name["Alice Smith"]
     bob = by_name["Bob Jones"]
 
@@ -33,16 +33,16 @@ def test_aggregator_merges_alice_emails_and_counts(fixture_repo: FixtureRepo) ->
 
 def test_aggregator_per_repo_breakdown(fixture_repo: FixtureRepo) -> None:
     stats = scan_repo(fixture_repo.path)
-    report = aggregate([stats], IdentityResolver())
-    alice = next(a for a in report.authors if a.display_name == "Alice Smith")
+    agg = aggregate([stats], IdentityResolver())
+    alice = next(a for a in agg.authors if a.display_name == "Alice Smith")
     assert list(alice.per_repo.keys()) == [stats.name]
     assert alice.per_repo[stats.name].commits == 2
 
 
 def test_repo_summary_counts(fixture_repo: FixtureRepo) -> None:
     stats = scan_repo(fixture_repo.path)
-    report = aggregate([stats], IdentityResolver())
-    assert len(report.repos) == 1
-    repo = report.repos[0]
+    agg = aggregate([stats], IdentityResolver())
+    assert len(agg.repos) == 1
+    repo = agg.repos[0]
     assert repo.commits == 4
     assert repo.authors == 2
