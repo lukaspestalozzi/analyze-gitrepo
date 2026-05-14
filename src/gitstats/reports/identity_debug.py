@@ -11,6 +11,7 @@ class IdentityDebug:
     description: ClassVar[str] = "Markdown: which identities merged into each author."
     filename: ClassVar[str] = "identity-debug.md"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename

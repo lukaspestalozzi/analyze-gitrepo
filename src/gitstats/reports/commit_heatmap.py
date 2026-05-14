@@ -16,6 +16,7 @@ class CommitHeatmap:
     description: ClassVar[str] = "Plotly heatmap of commit times."
     filename: ClassVar[str] = "commit-heatmap.html"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset({"tz"})
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename

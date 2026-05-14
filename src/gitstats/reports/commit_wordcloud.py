@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import random
 import re
+import sys
 from pathlib import Path
 from typing import ClassVar
 
@@ -20,6 +21,8 @@ _EXTRA_STOPWORDS = {
     "update", "updated", "updates",
     "remove", "removed", "bump",
 }
+
+_DEFAULT_MAX_WORDS = 200
 
 # Wordcloud frequency / layout cost grows with input size but the visual
 # output saturates well before a few thousand messages, so cap input length
@@ -53,15 +56,55 @@ def _resolve_sample_size(raw: object) -> int | None:
     return None  # 0 or negative = no cap
 
 
+def _resolve_max_words(raw: object) -> int:
+    if raw is None:
+        return _DEFAULT_MAX_WORDS
+    if isinstance(raw, bool) or not isinstance(raw, int) or raw <= 0:
+        print(
+            f"warning: reports.commit-wordcloud.max_words={raw!r} is not a "
+            f"positive integer; falling back to {_DEFAULT_MAX_WORDS}.",
+            file=sys.stderr,
+        )
+        return _DEFAULT_MAX_WORDS
+    return raw
+
+
+def _load_stopwords_file(raw: object) -> set[str]:
+    if raw is None:
+        return set()
+    try:
+        path = Path(str(raw))
+        text = path.read_text()
+    except OSError as e:
+        print(
+            f"warning: reports.commit-wordcloud.stopwords_file={raw!r} "
+            f"could not be read ({e}); ignoring.",
+            file=sys.stderr,
+        )
+        return set()
+    extra: set[str] = set()
+    for line in text.splitlines():
+        word = line.strip()
+        if not word or word.startswith("#"):
+            continue
+        extra.add(word.lower())
+    return extra
+
+
 class CommitWordcloud:
     id: ClassVar[str] = "commit-wordcloud"
     description: ClassVar[str] = "Wordcloud of commit messages."
     filename: ClassVar[str] = "commit-wordcloud.png"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset(
+        {"sample_size", "max_words", "stopwords_file"}
+    )
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename
         sample_size = _resolve_sample_size(ctx.params.get("sample_size"))
+        max_words = _resolve_max_words(ctx.params.get("max_words"))
+        extra_stopwords = _load_stopwords_file(ctx.params.get("stopwords_file"))
 
         # Collect every commit message and (optionally) subsample. WordCloud
         # quality saturates well before a few thousand messages but layout
@@ -79,12 +122,12 @@ class CommitWordcloud:
             # by feeding a known-stable string.
             text = "no commit messages captured"
 
-        stopwords = set(STOPWORDS) | _EXTRA_STOPWORDS
+        stopwords = set(STOPWORDS) | _EXTRA_STOPWORDS | extra_stopwords
         wc = WordCloud(
             width=1600,
             height=900,
             background_color="white",
-            max_words=200,
+            max_words=max_words,
             stopwords=stopwords,
             min_word_length=3,
         )

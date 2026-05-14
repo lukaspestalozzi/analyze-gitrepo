@@ -17,6 +17,7 @@ class FirstCommits:
     description: ClassVar[str] = "Per-author first/last commit per repo."
     filename: ClassVar[str] = "first-commits.md"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename

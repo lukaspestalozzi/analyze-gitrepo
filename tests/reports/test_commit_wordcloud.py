@@ -32,6 +32,36 @@ def test_clean_strips_example_com_from_url() -> None:
     assert "example.com" not in s
 
 
+def test_resolve_max_words_default_and_overrides(capsys) -> None:
+    from gitstats.reports.commit_wordcloud import _DEFAULT_MAX_WORDS, _resolve_max_words
+
+    assert _resolve_max_words(None) == _DEFAULT_MAX_WORDS
+    assert _resolve_max_words(50) == 50
+    # bad inputs warn and fall back
+    assert _resolve_max_words(0) == _DEFAULT_MAX_WORDS
+    assert _resolve_max_words(-3) == _DEFAULT_MAX_WORDS
+    assert _resolve_max_words("plenty") == _DEFAULT_MAX_WORDS
+    err = capsys.readouterr().err
+    assert err.count("warning:") == 3
+
+
+def test_load_stopwords_file_reads_words(tmp_path: Path) -> None:
+    from gitstats.reports.commit_wordcloud import _load_stopwords_file
+
+    f = tmp_path / "stopwords.txt"
+    f.write_text("Foo\n# comment\n\nbar\nBAZ\n")
+    extra = _load_stopwords_file(str(f))
+    assert extra == {"foo", "bar", "baz"}
+
+
+def test_load_stopwords_file_missing_warns(tmp_path: Path, capsys) -> None:
+    from gitstats.reports.commit_wordcloud import _load_stopwords_file
+
+    extra = _load_stopwords_file(str(tmp_path / "nope.txt"))
+    assert extra == set()
+    assert "warning:" in capsys.readouterr().err
+
+
 def test_commit_wordcloud_writes_png(fixture_repo: FixtureRepo, tmp_path: Path) -> None:
     stats = scan_repo(fixture_repo.path)
     agg = aggregate([stats], IdentityResolver())

@@ -157,3 +157,34 @@ def test_failing_report_yields_exit_3(
     assert (out / "raw-data.json").is_file()
     # restore (pytest will restore the monkeypatch too)
     mod.AuthorSummary.render = original  # type: ignore[method-assign]
+
+
+def test_unknown_per_report_key_warns(
+    multi_repo_root: Path, tmp_path: Path
+) -> None:
+    cfg = tmp_path / "report-config.yaml"
+    cfg.write_text(
+        "reports:\n"
+        "  commit-wordcloud:\n"
+        "    fake_knob: 1\n"
+        "  author-summary:\n"
+        "    also_fake: true\n"
+    )
+    result = runner.invoke(
+        app,
+        [
+            "scan",
+            str(multi_repo_root),
+            "-o",
+            str(tmp_path / "out"),
+            "-j",
+            "1",
+            "--report-config",
+            str(cfg),
+            "--report",
+            "raw-data",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    assert "reports.commit-wordcloud.fake_knob" in result.output
+    assert "reports.author-summary.also_fake" in result.output

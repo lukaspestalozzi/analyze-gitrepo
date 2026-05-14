@@ -190,7 +190,11 @@ def scan(
         err.print(f"[red]{e}[/red]")
         raise typer.Exit(2) from e
 
-    cfg = load_report_config(report_config, known_report_ids={cls.id for cls in REPORTS})
+    cfg = load_report_config(
+        report_config,
+        known_report_ids={cls.id for cls in REPORTS},
+        known_report_params={cls.id: cls.accepted_params for cls in REPORTS},
+    )
 
     try:
         jira_config = config_from_env(

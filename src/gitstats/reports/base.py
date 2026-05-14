@@ -51,5 +51,10 @@ class ReportRenderer(Protocol):
     description: ClassVar[str]
     filename: ClassVar[str]
     requires_jira: ClassVar[bool]
+    # Keys this report reads from `ctx.params` (i.e. legal entries
+    # under `reports.<id>:` in --report-config). Used by the loader
+    # to warn on unknown keys; reports that ignore params declare
+    # `frozenset()`.
+    accepted_params: ClassVar[frozenset[str]]
 
     def render(self, ctx: ReportContext) -> Path: ...

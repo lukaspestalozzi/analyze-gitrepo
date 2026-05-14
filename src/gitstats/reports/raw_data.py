@@ -34,6 +34,7 @@ class RawData:
     description: ClassVar[str] = "Full aggregate as JSON."
     filename: ClassVar[str] = "raw-data.json"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename

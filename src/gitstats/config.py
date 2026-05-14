@@ -32,6 +32,7 @@ def load_report_config(
     path: Path | str | None,
     *,
     known_report_ids: set[str] | None = None,
+    known_report_params: dict[str, frozenset[str]] | None = None,
 ) -> ReportConfig:
     if path is None:
         return ReportConfig()
@@ -63,6 +64,15 @@ def load_report_config(
                 if not isinstance(params, dict):
                     _warn(f"`reports.{rid}` must be a mapping; ignoring")
                     continue
+                if known_report_params is not None and rid in known_report_params:
+                    accepted = known_report_params[rid]
+                    for pk in params:
+                        if pk not in accepted:
+                            _warn(
+                                f"unknown key `reports.{rid}.{pk}` in {path}; "
+                                f"ignoring (accepted: "
+                                f"{sorted(accepted) if accepted else 'none'})"
+                            )
                 per_report[rid] = dict(params)
         else:
             _warn(f"unknown top-level section `{top_key}` in {path}; ignoring")

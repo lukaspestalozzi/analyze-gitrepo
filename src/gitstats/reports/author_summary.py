@@ -17,6 +17,7 @@ class AuthorSummary:
     description: ClassVar[str] = "Markdown table of authors with totals."
     filename: ClassVar[str] = "author-summary.md"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         agg = ctx.aggregate

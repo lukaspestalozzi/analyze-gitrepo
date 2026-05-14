@@ -17,6 +17,7 @@ class RepoSummary:
     description: ClassVar[str] = "Markdown: per-repo totals and top contributors."
     filename: ClassVar[str] = "repo-summary.md"
     requires_jira: ClassVar[bool] = False
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename

@@ -44,6 +44,7 @@ class JiraTicketsByTypeMarkdown:
     description: ClassVar[str] = "Markdown: commits per author per Jira issue type."
     filename: ClassVar[str] = "jira-tickets-by-type.md"
     requires_jira: ClassVar[bool] = True
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename
@@ -78,6 +79,7 @@ class JiraTicketsByTypeHTML:
     description: ClassVar[str] = "Plotly stacked bar of the same data."
     filename: ClassVar[str] = "jira-tickets-by-type.html"
     requires_jira: ClassVar[bool] = True
+    accepted_params: ClassVar[frozenset[str]] = frozenset()
 
     def render(self, ctx: ReportContext) -> Path:
         out = ctx.output_dir / self.filename

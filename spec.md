@@ -474,8 +474,11 @@ Preprocessing pipeline applied to every message before tokenization:
    `adds`, `update`, `updated`, `updates`, `remove`, `removed`,
    `bump`.
 
-Max 200 words rendered. Stopword list and image dimensions are
-hardcoded; future tuning lands in `--report-config` (§10.2).
+Default 200 words rendered. Override via
+`reports.commit-wordcloud.max_words` in `--report-config` (§10.2).
+Image dimensions are hardcoded; the stopword list can be extended
+with `reports.commit-wordcloud.stopwords_file` (one extra word per
+line, blank lines and `#` comments ignored).
 
 To keep the report fast on large corpora the commit-message input
 is **subsampled to 5 000 messages** by default (random sample with a
@@ -509,8 +512,10 @@ contains:
 Self-contained Plotly HTML. A bar chart of the top **20** authors
 (by `commits` descending). Three traces are bound to a button:
 `Commits` (default), `Lines added`, `Lines deleted`. X-axis labels
-are author display names. The 20-cap is fixed for MVP and will
-become a `--report-config` knob (§10.2).
+are author display names. Both knobs are configurable via
+`--report-config` (§10.2): `reports.author-leaderboard.top_n`
+(default 20) and `reports.author-leaderboard.default_metric` (one
+of `commits`, `additions`, `deletions`; default `commits`).
 
 #### 9.2.8 `identity-debug` → `identity-debug.md`
 
@@ -627,6 +632,7 @@ reports:
     tz: utc                          # overrides gitstats.tz for this report
 
   commit-wordcloud:
+    sample_size: 5000                # cap input messages; null/0 disables
     max_words: 300
     stopwords_file: ./stopwords.txt  # path; one extra stopword per line
 
@@ -639,13 +645,20 @@ Rules:
 
 - The file is loaded once. Unknown top-level sections produce a
   warning to stderr and are otherwise ignored.
+- Unknown report ids under `reports:` produce a warning and are
+  ignored.
 - Unknown keys inside a known report's section produce a warning to
-  stderr and are ignored (so the file survives spec changes).
+  stderr and are ignored (so the file survives spec changes). The
+  loader reports the accepted-key set for that report alongside the
+  warning. Each report declares its accepted keys via a class-level
+  `accepted_params: ClassVar[frozenset[str]]`; reports that ignore
+  params declare `frozenset()` so any nested key warns.
 - CLI flags override `gitstats.*` keys; `reports.<id>.<key>`
   overrides `gitstats.<key>` for that report only.
-- MVP reports that accept parameters: **none ship configurable**.
-  The schema and resolver exist so future reports (and §14.11
-  wordcloud tuning) can read params with no further plumbing.
+- Currently-configurable reports (everything else ignores params):
+  - `commit-heatmap`: `tz`
+  - `commit-wordcloud`: `sample_size`, `max_words`, `stopwords_file`
+  - `author-leaderboard`: `top_n`, `default_metric`
 
 ## 11. Extension point: `CommitEnricher`
 
@@ -872,9 +885,11 @@ keys.
 
 ### 14.9 Per-report parameters **[resolved]**
 
-Mechanism shipped as `--report-config` (§10.2). MVP reports don't
-read any params yet; the schema and resolver exist so future
-reports can.
+Mechanism shipped as `--report-config` (§10.2). The reports listed
+in §10.2's "currently-configurable" section read params today;
+others ignore the section. Each report declares its accepted-key
+set via `accepted_params: ClassVar[frozenset[str]]`, so unknown
+keys warn.
 
 ### 14.10 Optional-dependency split **[resolved → no]**
 
@@ -882,12 +897,13 @@ Decision: `plotly` and `wordcloud` are required runtime deps. A
 single `pip install gitstats` gets everything. Revisit if install
 size becomes a complaint.
 
-### 14.11 Wordcloud customization **[deferred]**
+### 14.11 Wordcloud customization **[partially resolved]**
 
-The wordcloud's stopwords, max-words, dimensions, and colormap are
-hardcoded in §9.2.5. When tuning becomes necessary, the knobs will
-live under `reports.commit-wordcloud:` in `--report-config` — no
-new CLI flags.
+`sample_size`, `max_words`, and `stopwords_file` are now exposed
+under `reports.commit-wordcloud:` in `--report-config` (§10.2).
+Dimensions and colormap remain hardcoded in §9.2.5; if tuning
+becomes necessary they will be added under the same section, with
+no new CLI flags.
 
 ## 15. Testing strategy
 
