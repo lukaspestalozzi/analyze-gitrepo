@@ -82,6 +82,28 @@ def test_unknown_report_id(multi_repo_root: Path, tmp_path: Path) -> None:
     assert "unknown report" in result.output
 
 
+def test_timing_emits_per_phase_lines(multi_repo_root: Path, tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    result = runner.invoke(
+        app,
+        [
+            "scan",
+            str(multi_repo_root),
+            "-o",
+            str(out),
+            "-j",
+            "1",
+            "--report",
+            "raw-data",
+            "--timing",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    # Stderr+stdout are merged by CliRunner; look for the phase markers.
+    for marker in ("discovery:", "scan:", "aggregate:", "report:raw-data:", "total:"):
+        assert marker in result.output, f"missing {marker!r} in:\n{result.output}"
+
+
 def test_invalid_date_exits_2(multi_repo_root: Path, tmp_path: Path) -> None:
     """Regression: invalid `--since` used to bubble a Python traceback (exit 1)."""
     result = runner.invoke(

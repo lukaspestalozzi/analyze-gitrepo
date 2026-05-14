@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import time
 from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime
 from pathlib import Path
@@ -33,6 +34,33 @@ err = Console(stderr=True)
 @app.callback()
 def _root() -> None:
     """gitstats — multi-repo git history analyzer."""
+
+
+class _Timer:
+    """Print per-phase wall-clock to stderr when `--timing` is on.
+
+    Each `phase(name)` call reports the time since the previous phase
+    (or since start for the first call). `total()` prints overall
+    elapsed.
+    """
+
+    def __init__(self, enabled: bool) -> None:
+        self.enabled = enabled
+        self._t0 = time.perf_counter()
+        self._last = self._t0
+
+    def phase(self, name: str) -> None:
+        if not self.enabled:
+            return
+        now = time.perf_counter()
+        err.print(f"[dim]\\[timing][/dim] {name}: {now - self._last:.2f}s")
+        self._last = now
+
+    def total(self) -> None:
+        if not self.enabled:
+            return
+        now = time.perf_counter()
+        err.print(f"[dim]\\[timing][/dim] total: {now - self._t0:.2f}s")
 
 
 def _parse_date(value: str | None, tz) -> datetime | None:
@@ -137,8 +165,15 @@ def scan(
         "--jira-url",
         help="Jira base URL. Enables the Jira enricher. Also via GITSTATS_JIRA_URL.",
     ),
+    timing: bool = typer.Option(
+        False,
+        "--timing",
+        help="Print per-phase wall-clock timings to stderr (discovery, scan, "
+        "enrich, aggregate, each report, total).",
+    ),
 ) -> None:
     """Discover git repositories under ROOT and write report files."""
+    timer = _Timer(timing)
     try:
         tz = parse_tz(tz_arg)
     except ValueError as e:
@@ -159,6 +194,7 @@ def scan(
     selected = _resolve_selection(report or [], skip or [], jira_active=jira_config is not None)
 
     repos = list(find_repos(root))
+    timer.phase("discovery")
     if not repos:
         err.print(f"[yellow]no git repositories found under {root}[/yellow]")
         raise typer.Exit(1)
@@ -181,6 +217,7 @@ def scan(
             repo_stats = list(pool.map(_scan_one, work))
     else:
         repo_stats = [_scan_one(w) for w in work]
+    timer.phase("scan")
 
     if jira_config is not None:
         err.print(f"Fetching Jira issue types from {jira_config.base_url}...")
@@ -191,9 +228,11 @@ def scan(
         except JiraAuthError as e:
             err.print(f"[red]{e}[/red]")
             raise typer.Exit(2) from e
+        timer.phase("jira-enrich")
 
     resolver = IdentityResolver.from_yaml(identity_map)
     agg = aggregate(repo_stats, resolver)
+    timer.phase("aggregate")
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -220,6 +259,7 @@ def scan(
                     error=str(e),
                 )
             )
+        timer.phase(f"report:{cls.id}")
 
     for r in results:
         if r.ok:
@@ -227,6 +267,7 @@ def scan(
         else:
             err.print(f"[red][fail][/red] {r.report_id:24} {r.error}")
 
+    timer.total()
     if any(not r.ok for r in results):
         raise typer.Exit(3)
 
