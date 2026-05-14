@@ -63,11 +63,6 @@ def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Aggreg
             )
         )
 
-    # Refresh display names (most-common may have shifted as we observed more).
-    for a in authors.values():
-        any_email = next(iter(a.emails), "")
-        a.display_name = resolver.display_name(a.display_name, any_email)
-
     sorted_authors = sorted(authors.values(), key=lambda x: x.commits, reverse=True)
     return Aggregate(
         authors=sorted_authors,
