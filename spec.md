@@ -73,6 +73,9 @@ The console script is `gitstats`. Three subcommands today:
 | `--identity-map` | path | — | YAML file pinning canonical identities (see §10.1). |
 | `--include-merges` | flag | off | Include merge commits (counted with first-parent diff). |
 | `--jira-url URL` | url | — | If set, enables the Jira enricher (§11.1). Can also come from `GITSTATS_JIRA_URL`. |
+| `--jira-cache-ttl SECONDS` | float | `86400` | Jira on-disk cache TTL in seconds (24h default). Older entries are re-fetched. |
+| `--jira-no-cache` | flag | off | Bypass the Jira cache: always fetch, never write. |
+| `--timing` | flag | off | Print per-phase wall-clock timings to stderr (discovery, scan, jira-enrich, aggregate, each report, total). Useful for performance triage. |
 
 Auth env vars (no CLI flag — secrets never appear in shell history):
 

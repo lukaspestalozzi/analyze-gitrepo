@@ -75,6 +75,40 @@ def test_scan_with_jira_active_produces_jira_reports(
 
 
 @responses.activate
+def test_scan_with_jira_no_cache_writes_no_cache_files(
+    multi_repo_root: Path, tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setenv("GITSTATS_JIRA_TOKEN", "tok")
+    monkeypatch.setenv("HOME", str(tmp_path / "home"))
+    (tmp_path / "home").mkdir()
+    for key, kind in [("PROJ-123", "Bug"), ("PROJ-456", "Story"), ("OTHER-1", "Task")]:
+        responses.add(
+            responses.GET,
+            f"https://jira.example.com/rest/api/2/issue/{key}",
+            json={"fields": {"issuetype": {"name": kind}}},
+            status=200,
+        )
+
+    result = runner.invoke(
+        app,
+        [
+            "scan",
+            str(multi_repo_root),
+            "-o",
+            str(tmp_path / "out"),
+            "-j",
+            "1",
+            "--jira-url",
+            "https://jira.example.com",
+            "--jira-no-cache",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    cache_host_dir = tmp_path / "home" / ".cache" / "gitstats" / "jira" / "jira.example.com"
+    assert not cache_host_dir.exists() or not any(cache_host_dir.iterdir())
+
+
+@responses.activate
 def test_jira_test_connection_ok(monkeypatch) -> None:
     monkeypatch.setenv("GITSTATS_JIRA_TOKEN", "tok")
     responses.add(

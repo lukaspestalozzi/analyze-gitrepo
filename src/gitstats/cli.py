@@ -165,6 +165,16 @@ def scan(
         "--jira-url",
         help="Jira base URL. Enables the Jira enricher. Also via GITSTATS_JIRA_URL.",
     ),
+    jira_cache_ttl: float = typer.Option(
+        86_400.0,
+        "--jira-cache-ttl",
+        help="Jira on-disk cache TTL in seconds (default 86400 = 24h).",
+    ),
+    jira_no_cache: bool = typer.Option(
+        False,
+        "--jira-no-cache",
+        help="Bypass the Jira on-disk cache (always fetch, never write).",
+    ),
     timing: bool = typer.Option(
         False,
         "--timing",
@@ -183,7 +193,11 @@ def scan(
     cfg = load_report_config(report_config, known_report_ids={cls.id for cls in REPORTS})
 
     try:
-        jira_config = config_from_env(jira_url)
+        jira_config = config_from_env(
+            jira_url,
+            cache_ttl_seconds=jira_cache_ttl,
+            no_cache=jira_no_cache,
+        )
     except RuntimeError as e:
         err.print(f"[red]{e}[/red]")
         raise typer.Exit(2) from e
