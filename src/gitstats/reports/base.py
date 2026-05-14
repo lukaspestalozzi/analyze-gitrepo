@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import timezone, tzinfo
 from pathlib import Path
-from typing import Any, ClassVar, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable
 
 from ..models import Aggregate, RepoStats
+
+if TYPE_CHECKING:
+    from ..identity import IdentityResolver
 
 
 @dataclass(frozen=True)
@@ -13,13 +17,17 @@ class ReportContext:
 
     Reports may read freely from `aggregate` and `repo_stats` but must
     not mutate them. `params` carries the per-report mapping from the
-    optional `--report-config` file (empty dict if none).
+    optional `--report-config` file (empty dict if none). `tz` is the
+    CLI-resolved default timezone (`--tz`); a per-report override of
+    `tz` may live in `params`.
     """
 
     repo_stats: list[RepoStats]
     aggregate: Aggregate
     output_dir: Path
+    tz: tzinfo = timezone.utc
     params: dict[str, Any] = field(default_factory=dict)
+    resolver: IdentityResolver | None = None
 
 
 @dataclass(frozen=True)

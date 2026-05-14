@@ -15,6 +15,7 @@ class Commit:
     additions: int
     deletions: int
     files_changed: int
+    message: str = ""
     jira_tickets: tuple[str, ...] = ()
     is_merge: bool = False
     metadata: dict[str, Any] = field(default_factory=dict, hash=False, compare=False)

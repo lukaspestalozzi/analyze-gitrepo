@@ -73,6 +73,7 @@ def scan_repo(
                 additions=stats.insertions,
                 deletions=stats.deletions,
                 files_changed=stats.files_changed,
+                message=commit.message,
                 jira_tickets=extract_jira_tickets(commit.message),
                 is_merge=is_merge,
             )

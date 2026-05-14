@@ -167,7 +167,12 @@ def scan(
     for cls in selected:
         params = cfg.params_for(cls.id)
         ctx = ReportContext(
-            repo_stats=repo_stats, aggregate=agg, output_dir=output_dir, params=params
+            repo_stats=repo_stats,
+            aggregate=agg,
+            output_dir=output_dir,
+            tz=tz,
+            params=params,
+            resolver=resolver,
         )
         try:
             path = cls().render(ctx)

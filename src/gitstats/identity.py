@@ -4,6 +4,7 @@ import hashlib
 import re
 from collections import Counter
 from collections.abc import Iterable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -140,6 +141,63 @@ class IdentityResolver:
 
     def group_key(self, name: str, email: str) -> str:
         return self._root_for(name, email)
+
+    def groups(self) -> list[IdentityGroup]:
+        """Return one `IdentityGroup` per canonical author for diagnostics.
+
+        Built from the observation log so it reflects exactly what
+        `display_name()` and `author_id()` would see right now.
+        """
+        groups_map: dict[str, dict[str, Any]] = {}
+        for obs_name, obs_email in self._observations:
+            root = self._root_for(obs_name, obs_email)
+            g = groups_map.setdefault(
+                root,
+                {
+                    "author_id": self.author_id(obs_name, obs_email),
+                    "display_name": self.display_name(obs_name, obs_email),
+                    "emails": set(),
+                    "name_observations": Counter[str](),
+                    "has_override": False,
+                },
+            )
+            if obs_name:
+                g["name_observations"][obs_name] += 1
+            if obs_email:
+                g["emails"].add(obs_email)
+
+        for override_node in self._override_canonical:
+            root = self._uf.find(override_node)
+            if root in groups_map:
+                groups_map[root]["has_override"] = True
+
+        result: list[IdentityGroup] = []
+        for g in groups_map.values():
+            if g["has_override"] and g["name_observations"]:
+                source = "override+observed"
+            elif g["has_override"]:
+                source = "override"
+            else:
+                source = "observed"
+            result.append(
+                IdentityGroup(
+                    author_id=g["author_id"],
+                    display_name=g["display_name"],
+                    source=source,
+                    emails=g["emails"],
+                    name_observations=g["name_observations"],
+                )
+            )
+        return result
+
+
+@dataclass(frozen=True)
+class IdentityGroup:
+    author_id: str
+    display_name: str
+    source: str  # "override", "observed", or "override+observed"
+    emails: set[str]
+    name_observations: Counter[str]
 
 
 def load_overrides(path: Path | str | None) -> dict[str, Any] | None:
