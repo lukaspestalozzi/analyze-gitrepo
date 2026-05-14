@@ -471,8 +471,24 @@ Preprocessing pipeline applied to every message before tokenization:
    `adds`, `update`, `updated`, `updates`, `remove`, `removed`,
    `bump`.
 
-Max 200 words rendered. Stopword and size knobs are hardcoded for
-MVP; future tuning lands in `--report-config` (§10.2).
+Max 200 words rendered. Stopword list and image dimensions are
+hardcoded; future tuning lands in `--report-config` (§10.2).
+
+To keep the report fast on large corpora the commit-message input
+is **subsampled to 5 000 messages** by default (random sample with a
+fixed seed, so successive runs produce the same artwork). Override
+in `--report-config`:
+
+```yaml
+reports:
+  commit-wordcloud:
+    sample_size: 10000   # cap input at 10k messages
+    # sample_size: 0     # disable sampling (use every message)
+```
+
+Layout cost grows linearly with input length; wordcloud quality
+saturates well below 5 000 messages, so the default cap is a
+near-free speedup on big repos.
 
 #### 9.2.6 `repo-summary` → `repo-summary.md`
 
