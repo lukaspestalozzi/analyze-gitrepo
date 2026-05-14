@@ -7,6 +7,7 @@ from .commit_heatmap import CommitHeatmap
 from .commit_wordcloud import CommitWordcloud
 from .first_commits import FirstCommits
 from .identity_debug import IdentityDebug
+from .jira_tickets_by_type import JiraTicketsByTypeHTML, JiraTicketsByTypeMarkdown
 from .raw_data import RawData
 from .repo_summary import RepoSummary
 
@@ -19,6 +20,8 @@ REPORTS: list[type[ReportRenderer]] = [
     RepoSummary,
     AuthorLeaderboard,
     IdentityDebug,
+    JiraTicketsByTypeMarkdown,
+    JiraTicketsByTypeHTML,
 ]
 
 __all__ = [

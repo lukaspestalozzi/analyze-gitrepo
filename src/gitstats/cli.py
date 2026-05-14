@@ -12,6 +12,7 @@ from rich.table import Table
 from .aggregator import aggregate
 from .config import load_report_config
 from .discovery import find_repos
+from .enrichers.jira import JiraAuthError, JiraEnricher, cache_host, config_from_env
 from .identity import IdentityResolver
 from .models import RepoStats
 from .reports import REPORTS, ReportContext, ReportResult
@@ -24,6 +25,8 @@ app = typer.Typer(
 )
 reports_app = typer.Typer(help="List available reports.", invoke_without_command=True)
 app.add_typer(reports_app, name="reports")
+jira_app = typer.Typer(help="Jira-workflow utilities.")
+app.add_typer(jira_app, name="jira")
 err = Console(stderr=True)
 
 
@@ -45,7 +48,9 @@ def _scan_one(args: tuple[str, bool, str | None, str | None]) -> RepoStats:
     return scan_repo(path, include_merges=include_merges, since=since, until=until)
 
 
-def _resolve_selection(report_flags: list[str], skip_flags: list[str]) -> list[type]:
+def _resolve_selection(
+    report_flags: list[str], skip_flags: list[str], jira_active: bool
+) -> list[type]:
     known = {cls.id: cls for cls in REPORTS}
 
     if report_flags and skip_flags:
@@ -70,9 +75,13 @@ def _resolve_selection(report_flags: list[str], skip_flags: list[str]) -> list[t
                 f"available: {', '.join(known)}"
             )
             raise typer.Exit(2)
-        return [cls for cls in REPORTS if cls.id not in set(skip_flags)]
+        candidates = [cls for cls in REPORTS if cls.id not in set(skip_flags)]
+    else:
+        candidates = list(REPORTS)
 
-    return list(REPORTS)
+    if not jira_active:
+        candidates = [cls for cls in candidates if not getattr(cls, "requires_jira", False)]
+    return candidates
 
 
 @app.command()
@@ -119,6 +128,11 @@ def scan(
     include_merges: bool = typer.Option(
         False, "--include-merges", help="Include merge commits (default: skip)."
     ),
+    jira_url: str | None = typer.Option(
+        None,
+        "--jira-url",
+        help="Jira base URL. Enables the Jira enricher. Also via GITSTATS_JIRA_URL.",
+    ),
 ) -> None:
     """Discover git repositories under ROOT and write report files."""
     try:
@@ -129,10 +143,16 @@ def scan(
 
     cfg = load_report_config(report_config, known_report_ids={cls.id for cls in REPORTS})
 
+    try:
+        jira_config = config_from_env(jira_url)
+    except RuntimeError as e:
+        err.print(f"[red]{e}[/red]")
+        raise typer.Exit(2) from e
+
     since_dt = _parse_date(since, tz)
     until_dt = _parse_date(until, tz)
 
-    selected = _resolve_selection(report or [], skip or [])
+    selected = _resolve_selection(report or [], skip or [], jira_active=jira_config is not None)
 
     repos = list(find_repos(root))
     if not repos:
@@ -157,6 +177,16 @@ def scan(
             repo_stats = list(pool.map(_scan_one, work))
     else:
         repo_stats = [_scan_one(w) for w in work]
+
+    if jira_config is not None:
+        err.print(f"Fetching Jira issue types from {jira_config.base_url}...")
+        enricher = JiraEnricher(jira_config)
+        try:
+            for rs in repo_stats:
+                rs.commits = list(enricher.enrich(rs.commits))
+        except JiraAuthError as e:
+            err.print(f"[red]{e}[/red]")
+            raise typer.Exit(2) from e
 
     resolver = IdentityResolver.from_yaml(identity_map)
     agg = aggregate(repo_stats, resolver)
@@ -221,6 +251,77 @@ def _print_catalog() -> None:
         jira_mark = "✓" if getattr(cls, "requires_jira", False) else ""
         table.add_row(cls.id, cls.filename, jira_mark, cls.description)
     Console().print(table)
+
+
+@jira_app.command("test-connection")
+def jira_test_connection(
+    jira_url: str | None = typer.Option(
+        None, "--jira-url", help="Jira base URL. Also via GITSTATS_JIRA_URL."
+    ),
+) -> None:
+    """Validate Jira URL/credentials by calling /rest/api/2/myself."""
+    import requests
+
+    try:
+        cfg = config_from_env(jira_url)
+    except RuntimeError as e:
+        err.print(f"[red]{e}[/red]")
+        raise typer.Exit(2) from e
+    if cfg is None:
+        err.print("[red]Jira inactive: pass --jira-url or set GITSTATS_JIRA_URL.[/red]")
+        raise typer.Exit(2)
+
+    session = requests.Session()
+    if cfg.user:
+        session.auth = (cfg.user, cfg.token)
+    else:
+        session.headers["Authorization"] = f"Bearer {cfg.token}"
+    url = f"{cfg.base_url.rstrip('/')}/rest/api/2/myself"
+    try:
+        resp = session.get(url, timeout=30)
+    except requests.RequestException as e:
+        err.print(f"[red]network error: {e}[/red]")
+        raise typer.Exit(2) from e
+    if resp.status_code >= 400:
+        err.print(f"[red]Jira returned {resp.status_code}: {resp.text[:300]}[/red]")
+        raise typer.Exit(2)
+    data = resp.json()
+    print(
+        f"OK: {data.get('displayName', '?')} <{data.get('emailAddress', '?')}>"
+    )
+
+
+@jira_app.command("clear-cache")
+def jira_clear_cache(
+    jira_url: str | None = typer.Option(
+        None, "--jira-url", help="Jira base URL. Also via GITSTATS_JIRA_URL."
+    ),
+) -> None:
+    """Remove the per-host Jira cache directory."""
+    try:
+        cfg = config_from_env(jira_url)
+    except RuntimeError:
+        # Token isn't actually needed to clear the cache, but the URL is.
+        cfg = None
+    base_url = (
+        cfg.base_url if cfg is not None else (jira_url or os.environ.get("GITSTATS_JIRA_URL"))
+    )
+    if not base_url:
+        err.print("[red]Jira inactive: pass --jira-url or set GITSTATS_JIRA_URL.[/red]")
+        raise typer.Exit(2)
+    from .enrichers.jira import default_cache_root
+
+    host_dir = default_cache_root() / cache_host(base_url)
+    if not host_dir.is_dir():
+        print(f"No cache directory at {host_dir}.")
+        return
+    removed = 0
+    for entry in host_dir.iterdir():
+        if entry.is_file():
+            entry.unlink()
+            removed += 1
+    host_dir.rmdir()
+    print(f"Removed {removed} cached entr{'y' if removed == 1 else 'ies'} from {host_dir}.")
 
 
 def main() -> None:  # pragma: no cover

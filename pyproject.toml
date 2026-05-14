@@ -18,6 +18,7 @@ dependencies = [
     "plotly>=5.20",
     "wordcloud>=1.9",
     "tzdata>=2024.1",
+    "requests>=2.32",
 ]
 
 [project.optional-dependencies]
@@ -27,6 +28,7 @@ dev = [
     "ruff>=0.5",
     "mypy>=1.10",
     "types-PyYAML",
+    "responses>=0.25",
 ]
 
 [project.scripts]
