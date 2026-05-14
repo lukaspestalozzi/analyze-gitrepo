@@ -82,6 +82,16 @@ def test_unknown_report_id(multi_repo_root: Path, tmp_path: Path) -> None:
     assert "unknown report" in result.output
 
 
+def test_invalid_date_exits_2(multi_repo_root: Path, tmp_path: Path) -> None:
+    """Regression: invalid `--since` used to bubble a Python traceback (exit 1)."""
+    result = runner.invoke(
+        app,
+        ["scan", str(multi_repo_root), "-o", str(tmp_path), "--since", "2025-13-99"],
+    )
+    assert result.exit_code == 2, result.output
+    assert "invalid date" in result.output
+
+
 def test_invalid_tz(multi_repo_root: Path, tmp_path: Path) -> None:
     result = runner.invoke(
         app,

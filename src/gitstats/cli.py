@@ -38,7 +38,11 @@ def _root() -> None:
 def _parse_date(value: str | None, tz) -> datetime | None:
     if value is None:
         return None
-    return datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=tz)
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=tz)
+    except ValueError as e:
+        err.print(f"[red]invalid date {value!r}: expected YYYY-MM-DD ({e})[/red]")
+        raise typer.Exit(2) from e
 
 
 def _scan_one(args: tuple[str, bool, str | None, str | None]) -> RepoStats:
