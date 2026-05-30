@@ -4,6 +4,16 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      repo_url:
+        description: "Clone URL of the example repo to analyze."
+        required: false
+        default: "https://github.com/django/django.git"
+      repo_name:
+        description: "Short name for the clone dir / artifact label."
+        required: false
+        default: "django"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -50,3 +60,53 @@ jobs:
 
       - name: Run ruff
         run: ruff check .
+
+  example-reports:
+    name: Example reports (${{ github.event.inputs.repo_name || 'django' }})
+    # Generate the full report set for a large public repo and publish it as
+    # a downloadable artifact. Runs on push to main and on manual dispatch,
+    # but not on every PR (keeps PR CI fast and avoids per-PR clone flakiness).
+    needs: test
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    env:
+      REPO_URL: ${{ github.event.inputs.repo_url || 'https://github.com/django/django.git' }}
+      REPO_NAME: ${{ github.event.inputs.repo_name || 'django' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install gitstats
+        run: pip install -e .
+
+      - name: Clone example repo
+        # Full clone (no --depth / --filter): gitstats computes per-commit line
+        # stats via pygit2 diff.stats, which needs complete history + blobs.
+        run: git clone --quiet "$REPO_URL" example-repo
+
+      - name: Generate reports
+        run: gitstats scan ./example-repo -o gitstats-reports --timing -j 2
+
+      - name: Summarize generated reports
+        if: always()
+        run: |
+          {
+            echo "## gitstats reports for \`$REPO_NAME\`";
+            echo;
+            echo '```';
+            ls -la gitstats-reports || echo "no reports produced";
+            echo '```';
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload reports artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitstats-reports-${{ env.REPO_NAME }}
+          path: gitstats-reports/
+          if-no-files-found: error
+          retention-days: 14
