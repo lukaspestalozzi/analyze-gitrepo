@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+    # ready_for_review lets the example-reports job fire when a draft PR is
+    # marked ready; the others are the default pull_request activity types.
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
     inputs:
       repo_url:
@@ -64,10 +67,10 @@ jobs:
   example-reports:
     name: Example reports (${{ github.event.inputs.repo_name || 'django' }})
     # Generate the full report set for a large public repo and publish it as
-    # a downloadable artifact. Runs on push to main and on manual dispatch,
-    # but not on every PR (keeps PR CI fast and avoids per-PR clone flakiness).
+    # a downloadable artifact. Runs on push to main, on manual dispatch, and on
+    # non-draft PRs (draft PRs are skipped to avoid clone churn while iterating).
     needs: test
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     env:
       REPO_URL: ${{ github.event.inputs.repo_url || 'https://github.com/django/django.git' }}
