@@ -30,6 +30,12 @@ def test_aggregator_merges_alice_emails_and_counts(fixture_repo: FixtureRepo) ->
     assert bob.first_commit is not None
     assert bob.first_commit > alice.first_commit
 
+    # The first commit's hash and message are retained.
+    assert alice.first_commit_sha == fixture_repo.commits["c1"]
+    assert alice.first_commit_message == "Initial commit"
+    assert bob.first_commit_sha == fixture_repo.commits["c3"]
+    assert bob.first_commit_message == "Fix typo (no ticket)"
+
 
 def test_aggregator_per_repo_breakdown(fixture_repo: FixtureRepo) -> None:
     stats = scan_repo(fixture_repo.path)

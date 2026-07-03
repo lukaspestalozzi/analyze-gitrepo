@@ -26,7 +26,19 @@ produces per-author commit statistics across all of them.
 
 ## Install
 
+With [uv](https://docs.astral.sh/uv/) (recommended):
+
 ```bash
+uv venv .venv
+uv pip install --python .venv/bin/python -e ".[dev]"
+source .venv/bin/activate
+```
+
+Or with plain venv + pip:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
@@ -36,6 +48,7 @@ pip install -e ".[dev]"
 gitstats scan <root-dir>
 gitstats scan ~/code --format json --output stats.json
 gitstats scan ~/code --identity-map identities.yaml
+gitstats scan ~/code --identity-map identities.yaml --show-only-mapped-identities
 gitstats scan ~/code --since 2025-01-01 --jobs 8
 ```
 
@@ -47,6 +60,19 @@ Alice Smith:
   - asmith@new.example
   - 12345+alicesmith@users.noreply.github.com
 ```
+
+Pass `--show-only-mapped-identities` to restrict all reports to commits
+by the identities in this file (requires `--identity-map`). Commits
+under an unlisted email are still included when a shared author name
+links them to a mapped identity.
+
+### Cross-repo commit deduplication
+
+By default, commits that share an identical message **and** author-date are
+counted once even when they appear in several scanned repos (forks,
+cherry-picks, rebased branches, mirror clones). This matches on the author-date
+and message rather than the SHA, since a cherry-pick/rebase keeps those but
+changes the hash. Pass `--no-deduplicate-commits` to count every copy.
 
 ## Project layout
 

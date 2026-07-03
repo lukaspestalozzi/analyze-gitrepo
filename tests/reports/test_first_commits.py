@@ -22,3 +22,7 @@ def test_first_commits_has_section_per_author(
     assert "## Alice Smith" in text
     assert "## Bob Jones" in text
     assert "First commit overall:" in text
+    # The overall first commit shows its (abbreviated) hash and message.
+    assert agg.authors[0].first_commit_sha[:10] in text
+    assert "Initial commit" in text
+    assert "Fix typo (no ticket)" in text

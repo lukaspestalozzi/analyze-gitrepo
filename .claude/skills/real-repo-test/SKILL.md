@@ -64,6 +64,10 @@ can localize the regression by reading just that bullet.
   reported by `git log --merges`.
 - `identity-map` — a YAML override collapses aliased emails into one
   canonical author whose `source` is `override+observed`.
+- `only-mapped` — `--show-only-mapped-identities` drops every commit
+  whose author does not resolve to an identity-map group (only the
+  mapped author remains, and the per-repo commit counts sum to
+  exactly that author's total — no unmapped commits leak through).
 - `parallelism` — `-j 4` is at least as fast as `-j 1` on two repos.
 - `report-config` — nested YAML (`gitstats.tz` + `reports.<id>.*`)
   applies; per-report keys override global keys.
@@ -71,8 +75,10 @@ can localize the regression by reading just that bullet.
   `gitstats.*` keys, and unknown report ids each produce a stderr
   warning.
 - `error-mutex` / `error-unknown-id` / `error-bad-tz` /
-  `error-missing-root` / `error-no-repos` / `error-bad-date` — each
-  exit code matches spec §13.
+  `error-missing-root` / `error-no-repos` / `error-bad-date` /
+  `error-only-mapped-no-map` — each exit code matches spec §13
+  (the last one: `--show-only-mapped-identities` without
+  `--identity-map` exits 2).
 - `artifact-shapes` — `raw-data.json` has the expected top-level
   keys with `emails` as a list; PNGs have the PNG magic header;
   HTML files start with `<html`.

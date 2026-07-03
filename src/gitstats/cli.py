@@ -12,6 +12,7 @@ from rich.table import Table
 
 from .aggregator import aggregate
 from .config import load_report_config
+from .dedup import deduplicate_commits as dedup_commits
 from .discovery import find_repos
 from .enrichers.jira import JiraAuthError, JiraEnricher, cache_host, config_from_env
 from .identity import IdentityResolver
@@ -157,8 +158,20 @@ def scan(
         dir_okay=False,
         help="YAML file pinning canonical identities.",
     ),
+    show_only_mapped_identities: bool = typer.Option(
+        False,
+        "--show-only-mapped-identities",
+        help="Only include commits whose author resolves to an identity "
+        "defined in --identity-map. Requires --identity-map.",
+    ),
     include_merges: bool = typer.Option(
         False, "--include-merges", help="Include merge commits (default: skip)."
+    ),
+    deduplicate_commits: bool = typer.Option(
+        True,
+        "--deduplicate-commits/--no-deduplicate-commits",
+        help="Drop commits that share an identical message AND author-date with "
+        "an already-seen commit across repos (default: on).",
     ),
     jira_url: str | None = typer.Option(
         None,
@@ -179,7 +192,7 @@ def scan(
         False,
         "--timing",
         help="Print per-phase wall-clock timings to stderr (discovery, scan, "
-        "enrich, aggregate, each report, total).",
+        "dedup, enrich, aggregate, each report, total).",
     ),
 ) -> None:
     """Discover git repositories under ROOT and write report files."""
@@ -209,6 +222,10 @@ def scan(
     since_dt = _parse_date(since, tz)
     until_dt = _parse_date(until, tz)
 
+    if show_only_mapped_identities and identity_map is None:
+        err.print("[red]--show-only-mapped-identities requires --identity-map[/red]")
+        raise typer.Exit(2)
+
     selected = _resolve_selection(report or [], skip or [], jira_active=jira_config is not None)
 
     repos = list(find_repos(root))
@@ -237,6 +254,16 @@ def scan(
         repo_stats = [_scan_one(w) for w in work]
     timer.phase("scan")
 
+    if deduplicate_commits:
+        removed = dedup_commits(repo_stats)
+        if removed:
+            err.print(
+                f"Removed {removed} duplicate commit"
+                f"{'' if removed == 1 else 's'} "
+                f"(identical message and date)."
+            )
+        timer.phase("dedup")
+
     if jira_config is not None:
         err.print(f"Fetching Jira issue types from {jira_config.base_url}...")
         enricher = JiraEnricher(jira_config)
@@ -247,6 +274,25 @@ def scan(
             err.print(f"[red]{e}[/red]")
             raise typer.Exit(2) from e
         timer.phase("jira-enrich")
+
+    if show_only_mapped_identities:
+        # Probe resolver: observe everything so name-based unions converge,
+        # then discard it so unmapped authors never reach the report resolver
+        # (identity-debug renders resolver.groups()).
+        probe = IdentityResolver.from_yaml(identity_map)
+        for rs in repo_stats:
+            for c in rs.commits:
+                probe.observe(c.author_name, c.author_email)
+        for rs in repo_stats:
+            rs.commits = [
+                c for c in rs.commits if probe.is_mapped(c.author_name, c.author_email)
+            ]
+        if not any(rs.commits for rs in repo_stats):
+            err.print(
+                "[yellow]--show-only-mapped-identities matched no commits; "
+                "reports will be empty[/yellow]"
+            )
+        timer.phase("identity-filter")
 
     resolver = IdentityResolver.from_yaml(identity_map)
     agg = aggregate(repo_stats, resolver)

@@ -4,6 +4,7 @@ from .author_leaderboard import AuthorLeaderboard
 from .author_summary import AuthorSummary
 from .base import ReportContext, ReportRenderer, ReportResult
 from .commit_heatmap import CommitHeatmap
+from .commit_word_frequencies import CommitWordFrequencies
 from .commit_wordcloud import CommitWordcloud
 from .first_commits import FirstCommits
 from .identity_debug import IdentityDebug
@@ -17,6 +18,7 @@ REPORTS: list[type[ReportRenderer]] = [
     CommitHeatmap,
     RawData,
     CommitWordcloud,
+    CommitWordFrequencies,
     RepoSummary,
     AuthorLeaderboard,
     IdentityDebug,

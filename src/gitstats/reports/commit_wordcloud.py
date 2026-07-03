@@ -14,12 +14,22 @@ from .base import ReportContext
 _URL_RE = re.compile(r"https?://\S+")
 # Backticked spans and dotted identifiers / paths.
 _CODEY_RE = re.compile(r"`[^`]*`|[A-Za-z_][\w.]*\.\w+")
+
+# Token-level junk filtering (see `_keep_word`). `_clean` lowercases the text
+# first, so these operate on lowercase input.
+_USER_ID_RE = re.compile(r"[ue]\d{6}")  # user IDs: `u`/`e` + exactly 6 digits
+# A letter, then a digit, then a letter => a digit sitting between letters.
+_INTERIOR_DIGIT_RE = re.compile(r"[^\W\d_].*\d.*[^\W\d_]")
+# Mirrors the wordcloud library's own token shape so we filter exactly the
+# tokens it would form.
+_WORD_RE = re.compile(r"\w[\w']*")
 _EXTRA_STOPWORDS = {
     "merge", "revert", "wip", "tmp", "todo",
     "fix", "fixed", "fixes",
     "add", "added", "adds",
     "update", "updated", "updates",
     "remove", "removed", "bump",
+    "review",
 }
 
 _DEFAULT_MAX_WORDS = 200
@@ -37,6 +47,32 @@ def _clean(message: str) -> str:
     text = _URL_RE.sub(" ", text)
     text = _CODEY_RE.sub(" ", text)
     return text.lower()
+
+
+def _keep_word(word: str) -> bool:
+    """Return True if `word` should stay in the wordcloud.
+
+    A *word* cloud has no use for hash-like or number-heavy tokens, so we drop
+    them — but keep a couple of meaningful patterns. `word` is expected to be
+    lowercase (as produced by `_clean`).
+    """
+    # Keep-exceptions win over every removal rule below.
+    if _USER_ID_RE.fullmatch(word) or word.startswith("rcspf"):
+        return True
+    if len(word) < 4:  # drop 1-, 2- and 3-character words
+        return False
+    digits = sum(c.isdigit() for c in word)
+    letters = sum(c.isalpha() for c in word)
+    if digits > letters:  # more numbers than letters
+        return False
+    if _INTERIOR_DIGIT_RE.search(word):  # a digit wedged between letters
+        return False
+    return True
+
+
+def _filter_tokens(text: str) -> str:
+    """Drop junk tokens (see `_keep_word`), replacing them with a space."""
+    return _WORD_RE.sub(lambda m: m.group(0) if _keep_word(m.group(0)) else " ", text)
 
 
 def _resolve_sample_size(raw: object) -> int | None:
@@ -117,6 +153,7 @@ class CommitWordcloud:
         chunks = [_clean(m) for m in messages]
 
         text = " ".join(chunks).strip()
+        text = _filter_tokens(text).strip()
         if not text:
             # WordCloud raises on empty input; write a tiny placeholder PNG
             # by feeding a known-stable string.
@@ -129,7 +166,7 @@ class CommitWordcloud:
             background_color="white",
             max_words=max_words,
             stopwords=stopwords,
-            min_word_length=3,
+            min_word_length=4,
         )
         wc.generate(text)
         wc.to_file(str(out))

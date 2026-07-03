@@ -165,6 +165,30 @@ EOF
   log_ok $id
 }
 
+_test_only_mapped() {
+  local id=only-mapped
+  local map="$WORKDIR/identity-map.yaml"   # written by _test_identity_map
+  local out="$WORKDIR/out-only-mapped"
+  rm -rf "$out"
+  gitstats scan "$WORKDIR" -o "$out" -j 4 --identity-map "$map" \
+    --show-only-mapped-identities --report raw-data --report author-summary \
+    >/dev/null 2>&1 \
+    || { log_fail $id "exit $?"; return; }
+  python <<PY || { log_fail $id "python checks failed"; return; }
+import json
+d = json.load(open("$out/raw-data.json"))
+names = [a["display_name"] for a in d["authors"]]
+assert names == ["The Reitz Mononym"], f"expected only the mapped author, got {names}"
+total = d["authors"][0]["commits"]
+assert total > 0, "mapped author has no commits"
+by_repo = {r["name"]: r["commits"] for r in d["repos"]}
+# Every surviving commit belongs to the one mapped author.
+assert sum(by_repo.values()) == total, f"unmapped commits leaked: {by_repo} vs author total {total}"
+assert by_repo.get("requests", 0) > 0, f"requests should keep mapped commits, got {by_repo}"
+PY
+  log_ok $id
+}
+
 _test_parallelism() {
   local id=parallelism
   local out="$WORKDIR/out-par"
@@ -264,6 +288,7 @@ _test_error_no_repos()     {
   _expect_exit error-no-repos 1 gitstats scan "$empty" -o "$WORKDIR/x"
 }
 _test_error_bad_date()     { _expect_exit error-bad-date     2 gitstats scan "$WORKDIR" -o "$WORKDIR/x" --since 2025-13-99; }
+_test_error_only_mapped_no_map() { _expect_exit error-only-mapped-no-map 2 gitstats scan "$WORKDIR" -o "$WORKDIR/x" --show-only-mapped-identities; }
 
 _test_artifact_shapes() {
   local id=artifact-shapes
@@ -294,6 +319,7 @@ main() {
   _test_date_range
   _test_include_merges
   _test_identity_map
+  _test_only_mapped
   _test_parallelism
   _test_report_config
   _test_config_warnings
@@ -303,6 +329,7 @@ main() {
   _test_error_missing_root
   _test_error_no_repos
   _test_error_bad_date
+  _test_error_only_mapped_no_map
   _test_artifact_shapes
 
   echo

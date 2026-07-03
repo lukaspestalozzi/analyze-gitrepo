@@ -73,6 +73,95 @@ def test_report_and_skip_are_mutex(multi_repo_root: Path, tmp_path: Path) -> Non
     assert "mutually exclusive" in result.output
 
 
+def test_show_only_mapped_requires_identity_map(
+    multi_repo_root: Path, tmp_path: Path
+) -> None:
+    """Spec §4.1: --show-only-mapped-identities without --identity-map runs nothing."""
+    out = tmp_path / "out"
+    result = runner.invoke(
+        app,
+        ["scan", str(multi_repo_root), "-o", str(out), "--show-only-mapped-identities"],
+    )
+    assert result.exit_code == 2
+    assert "--show-only-mapped-identities requires --identity-map" in result.output
+    # Nothing ran: the output dir is only created right before reports render.
+    assert not out.exists()
+
+
+def test_show_only_mapped_filters_reports(
+    multi_repo_root: Path, tmp_path: Path
+) -> None:
+    """Spec §4.1: only mapped authors' commits reach the reports. Mapping a single
+    email must still keep Alice's other-email commit (name-based union)."""
+    import json
+
+    yml = tmp_path / "map.yaml"
+    yml.write_text("Alice Smith:\n  - alice@old.example\n")
+    out = tmp_path / "out"
+    result = runner.invoke(
+        app,
+        [
+            "scan",
+            str(multi_repo_root),
+            "-o",
+            str(out),
+            "-j",
+            "1",
+            "--identity-map",
+            str(yml),
+            "--show-only-mapped-identities",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    data = json.loads((out / "raw-data.json").read_text())
+    assert [a["display_name"] for a in data["authors"]] == ["Alice Smith"]
+    # Both of Alice's emails survive: the unlisted one is linked by author name.
+    assert set(data["authors"][0]["emails"]) == {
+        "alice@old.example",
+        "asmith@new.example",
+    }
+    assert {r["name"]: r["commits"] for r in data["repos"]} == {
+        "repo-a": 2,
+        "repo-b": 0,
+    }
+    summary = (out / "author-summary.md").read_text()
+    assert "Alice Smith" in summary
+    assert "Bob Jones" not in summary
+    assert "Carol Wu" not in summary
+
+
+def test_show_only_mapped_no_matches_warns(
+    multi_repo_root: Path, tmp_path: Path
+) -> None:
+    """Spec §4.1: a map matching no commits warns and renders empty reports."""
+    import json
+
+    yml = tmp_path / "map.yaml"
+    yml.write_text("Nobody:\n  - nobody@example.com\n")
+    out = tmp_path / "out"
+    result = runner.invoke(
+        app,
+        [
+            "scan",
+            str(multi_repo_root),
+            "-o",
+            str(out),
+            "-j",
+            "1",
+            "--identity-map",
+            str(yml),
+            "--show-only-mapped-identities",
+            "--report",
+            "raw-data",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    assert "matched no commits" in result.output
+    data = json.loads((out / "raw-data.json").read_text())
+    assert data["authors"] == []
+    assert all(repo["commits"] == 0 for repo in data["repos"])
+
+
 def test_unknown_report_id(multi_repo_root: Path, tmp_path: Path) -> None:
     result = runner.invoke(
         app,
@@ -188,3 +277,47 @@ def test_unknown_per_report_key_warns(
     assert result.exit_code == 0, result.output
     assert "reports.commit-wordcloud.fake_knob" in result.output
     assert "reports.author-summary.also_fake" in result.output
+
+
+def test_dedup_on_by_default_collapses_shared_commit(
+    dup_repo_root: Path, tmp_path: Path
+) -> None:
+    """Two repos share one (message, date)-identical commit; by default it is
+    counted once and the earlier-sorted repo path keeps it."""
+    import json
+
+    out = tmp_path / "out"
+    result = runner.invoke(app, ["scan", str(dup_repo_root), "-o", str(out), "-j", "1"])
+    assert result.exit_code == 0, result.output
+    assert "Removed 1 duplicate commit" in result.output
+
+    data = json.loads((out / "raw-data.json").read_text())
+    # repo-x sorts before repo-y, so it keeps the shared commit.
+    assert {r["name"]: r["commits"] for r in data["repos"]} == {
+        "repo-x": 2,
+        "repo-y": 1,
+    }
+    dana = next(a for a in data["authors"] if a["display_name"] == "Dana Lee")
+    assert dana["commits"] == 3  # 2 unique + 1 shared (not 4)
+
+
+def test_no_deduplicate_commits_keeps_both(
+    dup_repo_root: Path, tmp_path: Path
+) -> None:
+    import json
+
+    out = tmp_path / "out"
+    result = runner.invoke(
+        app,
+        ["scan", str(dup_repo_root), "-o", str(out), "-j", "1", "--no-deduplicate-commits"],
+    )
+    assert result.exit_code == 0, result.output
+    assert "duplicate commit" not in result.output
+
+    data = json.loads((out / "raw-data.json").read_text())
+    assert {r["name"]: r["commits"] for r in data["repos"]} == {
+        "repo-x": 2,
+        "repo-y": 2,
+    }
+    dana = next(a for a in data["authors"] if a["display_name"] == "Dana Lee")
+    assert dana["commits"] == 4

@@ -145,6 +145,16 @@ class IdentityResolver:
     def group_key(self, name: str, email: str) -> str:
         return self._root_for(name, email)
 
+    def is_mapped(self, name: str, email: str) -> bool:
+        """True if this (name, email) resolves to an override (identity-map) group.
+
+        Reflects the current union-find state: call after observing all
+        commits so name-based merges have converged.
+        """
+        if not self._override_canonical:
+            return False
+        return self._override_for_root(self._root_for(name, email)) is not None
+
     def groups(self) -> list[IdentityGroup]:
         """Return one `IdentityGroup` per canonical author for diagnostics."""
         cache = self._ensure_group_cache()

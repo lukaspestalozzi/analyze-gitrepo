@@ -53,6 +53,9 @@ class AuthorStats:
     files_touched: int = 0
     first_commit: datetime | None = None
     last_commit: datetime | None = None
+    # SHA and message of the author's overall first commit (by timestamp).
+    first_commit_sha: str | None = None
+    first_commit_message: str = ""
     per_repo: dict[str, RepoAuthorStats] = field(default_factory=dict)
 
 

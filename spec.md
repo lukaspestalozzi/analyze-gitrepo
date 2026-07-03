@@ -71,11 +71,13 @@ The console script is `gitstats`. Three subcommands today:
 | `--since` | `YYYY-MM-DD` | — | Drop commits older than this date, interpreted in `--tz`, inclusive. |
 | `--until` | `YYYY-MM-DD` | — | Drop commits newer than this date, interpreted in `--tz`, inclusive. |
 | `--identity-map` | path | — | YAML file pinning canonical identities (see §10.1). |
+| `--show-only-mapped-identities` | flag | off | Drop commits whose author does not resolve to an identity-map group. Requires `--identity-map` (exit 2 otherwise, nothing runs). The filter runs after identity merging, so unlisted emails linked to a mapped identity by a shared author name are kept. If no commits survive, a yellow warning is printed, reports render empty, and the exit code stays 0. |
 | `--include-merges` | flag | off | Include merge commits (counted with first-parent diff). |
+| `--deduplicate-commits` / `--no-deduplicate-commits` | flag | **on** | Drop commits that share an identical message **and** author-date with an already-seen commit across all scanned repos (see §6.1). Pass `--no-deduplicate-commits` to keep every copy. |
 | `--jira-url URL` | url | — | If set, enables the Jira enricher (§11.1). Can also come from `GITSTATS_JIRA_URL`. |
 | `--jira-cache-ttl SECONDS` | float | `86400` | Jira on-disk cache TTL in seconds (24h default). Older entries are re-fetched. |
 | `--jira-no-cache` | flag | off | Bypass the Jira cache: always fetch, never write. |
-| `--timing` | flag | off | Print per-phase wall-clock timings to stderr (discovery, scan, jira-enrich, aggregate, each report, total). Useful for performance triage. |
+| `--timing` | flag | off | Print per-phase wall-clock timings to stderr (discovery, scan, dedup, jira-enrich, aggregate, each report, total). Useful for performance triage. |
 
 Auth env vars (no CLI flag — secrets never appear in shell history):
 
@@ -105,6 +107,7 @@ gitstats scan ~/code -o /tmp/report                 # custom output dir
 gitstats scan ~/code --report author-summary        # just one report
 gitstats scan ~/code --skip commit-wordcloud --skip commit-heatmap
 gitstats scan ~/code --identity-map identities.yaml --since 2025-01-01
+gitstats scan ~/code --identity-map identities.yaml --show-only-mapped-identities
 gitstats scan ~/code -j 8 --include-merges
 gitstats scan ~/code --tz America/New_York
 gitstats scan ~/code --jira-url https://jira.example.com  # +2 jira reports
@@ -200,6 +203,34 @@ Implemented in `src/gitstats/scanner.py::scan_repo`.
   the regex `\b[A-Z][A-Z0-9]+-\d+\b`. Matches are deduplicated
   preserving first-occurrence order and stored on `Commit.jira_tickets`.
   This runs at scan time even before any enrichers are configured.
+
+### 6.1 Cross-repo deduplication
+
+Implemented in `src/gitstats/dedup.py::deduplicate_commits`, applied by the CLI
+immediately after scanning (before Jira enrichment and aggregation).
+
+The same logical commit can appear in more than one discovered repo — forks,
+cherry-picks, rebased branches, or mirror clones — and would otherwise be
+counted once per repo, inflating author totals, per-repo counts, and every
+downstream report.
+
+- **On by default**; disable with `--no-deduplicate-commits`.
+- **Dedup key**: the tuple `(commit message, author-date)`. Two commits with an
+  identical message and the same author instant collapse to one, **even if their
+  SHAs differ** — which is the common case, since cherry-pick/rebase rewrites the
+  committer date and hash but preserves the author date and message. The
+  committer date and SHA are deliberately **not** part of the key. Timestamps
+  compare as absolute instants, so equal instants with different UTC offsets
+  still dedup.
+- **Which copy is kept**: repos are visited in sorted path order, so for a
+  cross-repo duplicate the lexicographically-first repo path keeps the commit
+  and the others drop it. This makes attribution deterministic regardless of
+  filesystem/scan ordering. The dropped commits never reach `aggregate()`, so
+  per-repo `commits` counts (from `len(rs.commits)`) reflect the deduplicated
+  set.
+- **Trade-off**: because author identity is not part of the key, two *different*
+  people who committed the identical message in the same instant would collapse
+  to one. This is accepted as rare and is the documented behavior.
 
 ## 7. Identity merging
 
@@ -378,17 +409,22 @@ For each canonical author, one section:
 ```
 ## Alice Smith (alice@example.com, alice@other.com)
 
-- First commit overall: 2024-01-15T10:00:00+00:00 in repo-a (sha abc1234)
-- Last commit overall: 2026-05-12T18:30:00+00:00 in repo-b (sha def5678)
+- First commit overall: 2024-01-15T10:00:00+00:00
+  - Commit `abc1234def`: Initial commit
+- Last commit overall: 2026-05-12T18:30:00+00:00
+- Total commits: 17
 
-| Repo    | First commit       | Last commit        | Commits |
-|---------|--------------------|--------------------|---------|
-| repo-a  | 2024-01-15T10:…    | 2025-09-04T11:…    |       9 |
-| repo-b  | 2024-08-20T09:…    | 2026-05-12T18:…    |       8 |
+| Repo    | Commits | First commit       | Last commit        |
+|---------|---------|--------------------|--------------------|
+| repo-a  |       9 | 2024-01-15T10:…    | 2025-09-04T11:…    |
+| repo-b  |       8 | 2024-08-20T09:…    | 2026-05-12T18:…    |
 ```
 
-Sections are ordered by overall first-commit ascending (the earliest
-contributor first).
+The overall first-commit bullet carries a sub-bullet with the commit's
+abbreviated SHA (first 10 chars) and its message subject (first
+non-empty line); the sub-bullet is omitted when the author has no
+commits. Sections are ordered by overall first-commit ascending (the
+earliest contributor first).
 
 #### 9.2.3 `commit-heatmap` → `commit-heatmap.html`
 
@@ -569,17 +605,19 @@ segment with hover details.
 ```
 1. discover repos under ROOT
 2. scan in parallel  -> list[RepoStats]
-3. if Jira is active (§11.1):
+3. unless --no-deduplicate-commits: drop cross-repo (message, author-date)
+     duplicates in place (§6.1)
+4. if Jira is active (§11.1):
      fetch / cache issue types for every Commit.jira_tickets[0]
      attach to Commit.metadata["jira_first_issuetype"] (or skip if missing)
-4. resolve identities -> Aggregate
-5. select reports from REPORTS based on --report / --skip
+5. resolve identities -> Aggregate
+6. select reports from REPORTS based on --report / --skip
    (Jira-only reports are filtered out when Jira is inactive)
-6. for each selected report:
+7. for each selected report:
      try render(ctx) -> Path
      except Exception as exc: record ok=False, error=str(exc)
-7. print per-report status to stderr
-8. exit 0 if all ok, else exit 3
+8. print per-report status to stderr
+9. exit 0 if all ok, else exit 3
 ```
 
 Step 6 prints one line per report, e.g.:
@@ -615,6 +653,8 @@ Rules:
   precedence over observed identities.
 - An email may only appear in one group (no validation yet — last
   write wins).
+- `--show-only-mapped-identities` (§4.1) restricts every report to
+  commits whose author resolves to one of these groups.
 
 ### 10.2 `--report-config` YAML
 

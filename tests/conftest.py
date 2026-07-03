@@ -119,3 +119,39 @@ def multi_repo_root(tmp_path: Path, fixture_repo: FixtureRepo) -> Path:
     pygit2.init_repository(str(pruned), bare=False)
 
     return root
+
+
+@pytest.fixture
+def dup_repo_root(tmp_path: Path) -> Path:
+    """Two repos sharing one commit with identical message AND author time.
+
+    Each repo has a unique commit plus a common commit (same author signature
+    and message but a different tree, so the git SHAs differ). A (message,
+    author-date) dedup should collapse the shared commit to a single count.
+    """
+    root = tmp_path / "dupspace"
+    root.mkdir()
+
+    dana = _signature("Dana Lee", "dana@example.com", 1_700_020_000)
+    shared = _signature("Dana Lee", "dana@example.com", 1_700_030_000)
+
+    for name, unique_file in (("repo-x", "x.txt"), ("repo-y", "y.txt")):
+        target = root / name
+        target.mkdir()
+        repo = pygit2.init_repository(str(target), bare=False)
+        c1 = _commit(
+            repo,
+            parents=[],
+            files={unique_file: f"{name}\n"},
+            author=dana,
+            message=f"Unique to {name}",
+        )
+        _commit(
+            repo,
+            parents=[c1],
+            files={"shared.txt": f"shared via {name}\n"},
+            author=shared,
+            message="Shared change across repos",
+        )
+
+    return root

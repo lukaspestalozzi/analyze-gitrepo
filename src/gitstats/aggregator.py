@@ -38,7 +38,12 @@ def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Aggreg
             a.additions += c.additions
             a.deletions += c.deletions
             a.files_touched += c.files_changed
-            a.first_commit = _min_ts(a.first_commit, c.timestamp)
+            # `<=` so that on a timestamp tie the later-walked commit wins;
+            # the scanner walks newest-first, making that the graph-oldest.
+            if a.first_commit is None or c.timestamp <= a.first_commit:
+                a.first_commit = c.timestamp
+                a.first_commit_sha = c.sha
+                a.first_commit_message = c.message
             a.last_commit = _max_ts(a.last_commit, c.timestamp)
 
             per = a.per_repo.setdefault(repo_name, RepoAuthorStats(repo=repo_name))

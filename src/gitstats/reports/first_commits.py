@@ -12,6 +12,15 @@ def _iso(dt: datetime | None) -> str:
     return dt.isoformat() if dt is not None else "-"
 
 
+def _subject(message: str) -> str:
+    """First non-empty line of a commit message (the subject)."""
+    for line in message.splitlines():
+        stripped = line.strip()
+        if stripped:
+            return stripped
+    return ""
+
+
 class FirstCommits:
     id: ClassVar[str] = "first-commits"
     description: ClassVar[str] = "Per-author first/last commit per repo."
@@ -37,6 +46,11 @@ class FirstCommits:
             lines.append(f"## {a.display_name} ({emails})")
             lines.append("")
             lines.append(f"- First commit overall: {_iso(a.first_commit)}")
+            if a.first_commit_sha is not None:
+                subject = _subject(a.first_commit_message)
+                short_sha = a.first_commit_sha[:10]
+                suffix = f": {subject}" if subject else ""
+                lines.append(f"  - Commit `{short_sha}`{suffix}")
             lines.append(f"- Last commit overall: {_iso(a.last_commit)}")
             lines.append(f"- Total commits: {a.commits}")
             lines.append("")

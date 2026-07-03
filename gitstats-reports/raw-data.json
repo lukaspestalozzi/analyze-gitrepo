@@ -1,0 +1,3918 @@
+{
+  "authors": [
+    {
+      "additions": 3323537,
+      "author_id": "1328a3d32e92",
+      "commits": 5146,
+      "deletions": 3031230,
+      "display_name": "Lukas Pestalozzi",
+      "emails": [
+        "lukas.pestalozzi@sbb.ch"
+      ],
+      "files_touched": 86621,
+      "first_commit": "2019-05-23T10:42:54+02:00",
+      "last_commit": "2026-07-01T12:58:01+02:00",
+      "per_repo": {
+        "adl-dataexport": {
+          "additions": 5,
+          "commits": 2,
+          "deletions": 1,
+          "files_touched": 3,
+          "first_commit": "2023-02-20T13:33:01+01:00",
+          "last_commit": "2023-05-25T18:08:28+02:00",
+          "repo": "adl-dataexport"
+        },
+        "capaopt-grafana": {
+          "additions": 49121,
+          "commits": 60,
+          "deletions": 30214,
+          "files_touched": 602,
+          "first_commit": "2026-03-12T16:16:53+01:00",
+          "last_commit": "2026-06-25T10:40:51+02:00",
+          "repo": "capaopt-grafana"
+        },
+        "dispo": {
+          "additions": 2390996,
+          "commits": 1856,
+          "deletions": 2286369,
+          "files_touched": 52032,
+          "first_commit": "2019-06-05T09:43:23+02:00",
+          "last_commit": "2026-06-30T16:01:13+02:00",
+          "repo": "dispo"
+        },
+        "dispo-anschlussrechner": {
+          "additions": 230,
+          "commits": 4,
+          "deletions": 236,
+          "files_touched": 112,
+          "first_commit": "2021-05-05T15:52:11+02:00",
+          "last_commit": "2026-03-17T17:11:50+00:00",
+          "repo": "dispo-anschlussrechner"
+        },
+        "dispo-capacity-api": {
+          "additions": 53,
+          "commits": 6,
+          "deletions": 22,
+          "files_touched": 11,
+          "first_commit": "2023-08-22T14:26:07+02:00",
+          "last_commit": "2025-10-10T09:26:34+02:00",
+          "repo": "dispo-capacity-api"
+        },
+        "dispo-dispatching-api": {
+          "additions": 66,
+          "commits": 5,
+          "deletions": 18,
+          "files_touched": 10,
+          "first_commit": "2024-06-18T18:34:09+02:00",
+          "last_commit": "2025-10-10T09:26:35+02:00",
+          "repo": "dispo-dispatching-api"
+        },
+        "dispo-hazelcast-cache": {
+          "additions": 24449,
+          "commits": 69,
+          "deletions": 14906,
+          "files_touched": 134,
+          "first_commit": "2025-09-23T17:11:29+02:00",
+          "last_commit": "2026-06-30T14:46:21+02:00",
+          "repo": "dispo-hazelcast-cache"
+        },
+        "dispo-hazelcast-cache-model": {
+          "additions": 11777,
+          "commits": 30,
+          "deletions": 878,
+          "files_touched": 176,
+          "first_commit": "2025-10-14T11:41:40+02:00",
+          "last_commit": "2026-06-22T09:46:50+02:00",
+          "repo": "dispo-hazelcast-cache-model"
+        },
+        "dispo-helmcharts": {
+          "additions": 685,
+          "commits": 9,
+          "deletions": 586,
+          "files_touched": 35,
+          "first_commit": "2025-09-11T11:10:01+02:00",
+          "last_commit": "2025-12-10T17:07:31+01:00",
+          "repo": "dispo-helmcharts"
+        },
+        "dispo-internal-api": {
+          "additions": 13,
+          "commits": 1,
+          "deletions": 12,
+          "files_touched": 3,
+          "first_commit": "2026-03-04T13:01:13+01:00",
+          "last_commit": "2026-03-04T13:01:13+01:00",
+          "repo": "dispo-internal-api"
+        },
+        "dispo-rto-area-api": {
+          "additions": 271,
+          "commits": 7,
+          "deletions": 230,
+          "files_touched": 38,
+          "first_commit": "2024-06-18T18:34:10+02:00",
+          "last_commit": "2025-11-24T15:44:00+01:00",
+          "repo": "dispo-rto-area-api"
+        },
+        "dispo-rto-status-api": {
+          "additions": 10,
+          "commits": 1,
+          "deletions": 3,
+          "files_touched": 2,
+          "first_commit": "2025-10-10T09:26:47+02:00",
+          "last_commit": "2025-10-10T09:26:47+02:00",
+          "repo": "dispo-rto-status-api"
+        },
+        "dispo-timetable-api": {
+          "additions": 12768,
+          "commits": 111,
+          "deletions": 6694,
+          "files_touched": 545,
+          "first_commit": "2023-04-19T14:44:56+02:00",
+          "last_commit": "2026-03-09T16:52:44+01:00",
+          "repo": "dispo-timetable-api"
+        },
+        "dispo-topo-api": {
+          "additions": 14239,
+          "commits": 135,
+          "deletions": 8784,
+          "files_touched": 641,
+          "first_commit": "2023-05-02T17:34:53+02:00",
+          "last_commit": "2026-03-20T15:03:07+01:00",
+          "repo": "dispo-topo-api"
+        },
+        "dispo-umbrella": {
+          "additions": 18099,
+          "commits": 86,
+          "deletions": 7399,
+          "files_touched": 246,
+          "first_commit": "2025-05-21T14:35:51+02:00",
+          "last_commit": "2026-07-01T12:58:01+02:00",
+          "repo": "dispo-umbrella"
+        },
+        "grafana-dashboard-base": {
+          "additions": 47220,
+          "commits": 52,
+          "deletions": 31587,
+          "files_touched": 356,
+          "first_commit": "2025-04-15T10:14:41+02:00",
+          "last_commit": "2026-01-21T17:12:52+01:00",
+          "repo": "grafana-dashboard-base"
+        },
+        "guircp-admin-service": {
+          "additions": 10,
+          "commits": 2,
+          "deletions": 10,
+          "files_touched": 6,
+          "first_commit": "2025-11-24T16:50:39+01:00",
+          "last_commit": "2025-11-24T16:50:39+01:00",
+          "repo": "guircp-admin-service"
+        },
+        "halon-deployment-dev": {
+          "additions": 2214,
+          "commits": 244,
+          "deletions": 1710,
+          "files_touched": 347,
+          "first_commit": "2025-05-21T14:58:57+02:00",
+          "last_commit": "2026-06-26T15:39:26+02:00",
+          "repo": "halon-deployment-dev"
+        },
+        "halon-deployment-int": {
+          "additions": 6,
+          "commits": 5,
+          "deletions": 6,
+          "files_touched": 5,
+          "first_commit": "2026-04-01T16:40:07+02:00",
+          "last_commit": "2026-04-28T11:43:45+02:00",
+          "repo": "halon-deployment-int"
+        },
+        "hazelcast-management-center": {
+          "additions": 717,
+          "commits": 10,
+          "deletions": 86,
+          "files_touched": 40,
+          "first_commit": "2025-12-16T16:06:23+01:00",
+          "last_commit": "2026-01-20T17:24:31+01:00",
+          "repo": "hazelcast-management-center"
+        },
+        "masterdata-rtogebiet-transfer": {
+          "additions": 6875,
+          "commits": 50,
+          "deletions": 4792,
+          "files_touched": 335,
+          "first_commit": "2020-01-23T17:10:51+01:00",
+          "last_commit": "2023-06-29T13:32:36+02:00",
+          "repo": "masterdata-rtogebiet-transfer"
+        },
+        "masterdata-tagebiet-handler": {
+          "additions": 9,
+          "commits": 2,
+          "deletions": 2,
+          "files_touched": 3,
+          "first_commit": "2023-02-20T13:35:16+01:00",
+          "last_commit": "2023-05-25T18:01:33+02:00",
+          "repo": "masterdata-tagebiet-handler"
+        },
+        "masterdata-tagebiet-transfer": {
+          "additions": 77,
+          "commits": 15,
+          "deletions": 77,
+          "files_touched": 15,
+          "first_commit": "2021-06-18T13:35:16+02:00",
+          "last_commit": "2021-11-23T15:13:29+01:00",
+          "repo": "masterdata-tagebiet-transfer"
+        },
+        "oda-operationmode-transfer": {
+          "additions": 3,
+          "commits": 1,
+          "deletions": 1,
+          "files_touched": 1,
+          "first_commit": "2023-03-31T08:39:13+02:00",
+          "last_commit": "2023-03-31T08:39:13+02:00",
+          "repo": "oda-operationmode-transfer"
+        },
+        "oda-operationplangenerator": {
+          "additions": 5,
+          "commits": 3,
+          "deletions": 1,
+          "files_touched": 4,
+          "first_commit": "2023-02-20T13:42:31+01:00",
+          "last_commit": "2023-05-25T18:01:34+02:00",
+          "repo": "oda-operationplangenerator"
+        },
+        "oda-uragenerator": {
+          "additions": 8,
+          "commits": 3,
+          "deletions": 1,
+          "files_touched": 4,
+          "first_commit": "2023-02-20T13:28:50+01:00",
+          "last_commit": "2023-05-25T18:01:37+02:00",
+          "repo": "oda-uragenerator"
+        },
+        "oda-uraprocessor": {
+          "additions": 5,
+          "commits": 3,
+          "deletions": 1,
+          "files_touched": 4,
+          "first_commit": "2023-02-20T13:30:53+01:00",
+          "last_commit": "2023-05-25T18:01:36+02:00",
+          "repo": "oda-uraprocessor"
+        },
+        "optimizer": {
+          "additions": 31635,
+          "commits": 65,
+          "deletions": 18766,
+          "files_touched": 1047,
+          "first_commit": "2019-06-07T15:16:47+02:00",
+          "last_commit": "2023-05-25T16:46:22+02:00",
+          "repo": "optimizer"
+        },
+        "optimizer-rtopt-transfer": {
+          "additions": 9,
+          "commits": 2,
+          "deletions": 5,
+          "files_touched": 3,
+          "first_commit": "2021-05-18T11:04:27+02:00",
+          "last_commit": "2021-10-12T15:22:54+02:00",
+          "repo": "optimizer-rtopt-transfer"
+        },
+        "rcs": {
+          "additions": 555981,
+          "commits": 745,
+          "deletions": 512526,
+          "files_touched": 21910,
+          "first_commit": "2019-05-23T10:42:54+02:00",
+          "last_commit": "2026-06-01T10:53:33+02:00",
+          "repo": "rcs"
+        },
+        "rcsd_deployment": {
+          "additions": 3312,
+          "commits": 151,
+          "deletions": 1665,
+          "files_touched": 261,
+          "first_commit": "2022-02-21T08:44:22+01:00",
+          "last_commit": "2026-06-01T10:36:10+02:00",
+          "repo": "rcsd_deployment"
+        },
+        "releng-techstack-bom": {
+          "additions": 1,
+          "commits": 1,
+          "deletions": 1,
+          "files_touched": 1,
+          "first_commit": "2022-11-17T13:39:59+01:00",
+          "last_commit": "2022-11-17T13:39:59+01:00",
+          "repo": "releng-techstack-bom"
+        },
+        "releng-transfer-bom": {
+          "additions": 32,
+          "commits": 13,
+          "deletions": 26,
+          "files_touched": 13,
+          "first_commit": "2021-08-18T16:02:56+02:00",
+          "last_commit": "2023-01-17T15:21:57+01:00",
+          "repo": "releng-transfer-bom"
+        },
+        "restriction-einschraenkung-transfer": {
+          "additions": 178,
+          "commits": 9,
+          "deletions": 163,
+          "files_touched": 23,
+          "first_commit": "2021-05-06T14:06:58+02:00",
+          "last_commit": "2021-06-18T16:30:44+02:00",
+          "repo": "restriction-einschraenkung-transfer"
+        },
+        "spring-boot-starter-bootstrapping": {
+          "additions": 146,
+          "commits": 3,
+          "deletions": 43,
+          "files_touched": 9,
+          "first_commit": "2022-11-16T09:30:24+01:00",
+          "last_commit": "2023-04-19T10:44:59+02:00",
+          "repo": "spring-boot-starter-bootstrapping"
+        },
+        "spring-boot-starter-jmx": {
+          "additions": 76,
+          "commits": 2,
+          "deletions": 27,
+          "files_touched": 8,
+          "first_commit": "2024-09-17T10:45:07+02:00",
+          "last_commit": "2025-07-22T17:59:11+02:00",
+          "repo": "spring-boot-starter-jmx"
+        },
+        "techstack-hazelcast-cache": {
+          "additions": 272,
+          "commits": 1,
+          "deletions": 144,
+          "files_touched": 9,
+          "first_commit": "2026-01-21T17:39:48+01:00",
+          "last_commit": "2026-01-21T17:39:48+01:00",
+          "repo": "techstack-hazelcast-cache"
+        },
+        "techstack-hibernate-usertypes": {
+          "additions": 7377,
+          "commits": 16,
+          "deletions": 4552,
+          "files_touched": 154,
+          "first_commit": "2022-05-04T16:05:39+02:00",
+          "last_commit": "2022-08-10T13:49:20+02:00",
+          "repo": "techstack-hibernate-usertypes"
+        },
+        "timetable-aleamassnahmeprocessor": {
+          "additions": 7,
+          "commits": 1,
+          "deletions": 3,
+          "files_touched": 4,
+          "first_commit": "2026-03-17T17:09:43+00:00",
+          "last_commit": "2026-03-17T17:09:43+00:00",
+          "repo": "timetable-aleamassnahmeprocessor"
+        },
+        "timetable-anschlussrechner-transfer": {
+          "additions": 263,
+          "commits": 10,
+          "deletions": 147,
+          "files_touched": 33,
+          "first_commit": "2021-06-02T15:16:22+02:00",
+          "last_commit": "2026-03-17T17:11:03+00:00",
+          "repo": "timetable-anschlussrechner-transfer"
+        },
+        "timetable-capaplan-processor": {
+          "additions": 238,
+          "commits": 6,
+          "deletions": 393,
+          "files_touched": 28,
+          "first_commit": "2021-04-09T15:58:07+02:00",
+          "last_commit": "2022-11-29T17:00:53+01:00",
+          "repo": "timetable-capaplan-processor"
+        },
+        "timetable-converter-testprocess": {
+          "additions": 3527,
+          "commits": 63,
+          "deletions": 1123,
+          "files_touched": 214,
+          "first_commit": "2022-08-17T14:12:41+02:00",
+          "last_commit": "2024-06-21T14:37:03+02:00",
+          "repo": "timetable-converter-testprocess"
+        },
+        "timetable-dispo-converter": {
+          "additions": 325,
+          "commits": 2,
+          "deletions": 24,
+          "files_touched": 20,
+          "first_commit": "2024-06-19T08:05:38+00:00",
+          "last_commit": "2024-06-21T14:37:11+02:00",
+          "repo": "timetable-dispo-converter"
+        },
+        "timetable-disposition-transfer": {
+          "additions": 1803,
+          "commits": 26,
+          "deletions": 1637,
+          "files_touched": 174,
+          "first_commit": "2021-05-06T14:06:58+02:00",
+          "last_commit": "2026-06-17T11:10:37+02:00",
+          "repo": "timetable-disposition-transfer"
+        },
+        "timetable-distributor": {
+          "additions": 40887,
+          "commits": 240,
+          "deletions": 26166,
+          "files_touched": 1652,
+          "first_commit": "2022-05-30T13:10:08+02:00",
+          "last_commit": "2025-03-25T16:09:05+01:00",
+          "repo": "timetable-distributor"
+        },
+        "timetable-distributor-testprocess": {
+          "additions": 7150,
+          "commits": 116,
+          "deletions": 5957,
+          "files_touched": 441,
+          "first_commit": "2022-08-17T14:12:41+02:00",
+          "last_commit": "2023-11-24T12:00:52+01:00",
+          "repo": "timetable-distributor-testprocess"
+        },
+        "timetable-fahrplan-converter": {
+          "additions": 1649,
+          "commits": 42,
+          "deletions": 3724,
+          "files_touched": 145,
+          "first_commit": "2022-11-29T16:12:48+01:00",
+          "last_commit": "2024-06-21T14:37:07+02:00",
+          "repo": "timetable-fahrplan-converter"
+        },
+        "timetable-fahrplan-transfer": {
+          "additions": 2720,
+          "commits": 47,
+          "deletions": 1698,
+          "files_touched": 252,
+          "first_commit": "2021-05-03T16:25:02+02:00",
+          "last_commit": "2026-06-17T11:04:07+02:00",
+          "repo": "timetable-fahrplan-transfer"
+        },
+        "timetable-fahrwegrechner-transfer": {
+          "additions": 3278,
+          "commits": 57,
+          "deletions": 2459,
+          "files_touched": 140,
+          "first_commit": "2019-09-10T11:51:18+02:00",
+          "last_commit": "2023-06-29T13:32:33+02:00",
+          "repo": "timetable-fahrwegrechner-transfer"
+        },
+        "timetable-import-taxi": {
+          "additions": 30122,
+          "commits": 213,
+          "deletions": 16469,
+          "files_touched": 1557,
+          "first_commit": "2023-09-13T14:39:30+02:00",
+          "last_commit": "2024-08-20T15:05:25+02:00",
+          "repo": "timetable-import-taxi"
+        },
+        "timetable-itv-facade": {
+          "additions": 63,
+          "commits": 2,
+          "deletions": 92,
+          "files_touched": 7,
+          "first_commit": "2022-11-29T16:57:02+01:00",
+          "last_commit": "2022-11-29T17:00:16+01:00",
+          "repo": "timetable-itv-facade"
+        },
+        "timetable-taxi-transfer": {
+          "additions": 4849,
+          "commits": 25,
+          "deletions": 5652,
+          "files_touched": 160,
+          "first_commit": "2023-09-28T16:27:41+02:00",
+          "last_commit": "2025-03-27T10:56:56+01:00",
+          "repo": "timetable-taxi-transfer"
+        },
+        "timetable-utilities": {
+          "additions": 125,
+          "commits": 12,
+          "deletions": 60,
+          "files_touched": 29,
+          "first_commit": "2021-05-06T14:06:58+02:00",
+          "last_commit": "2023-09-07T13:44:49+02:00",
+          "repo": "timetable-utilities"
+        },
+        "topo-api": {
+          "additions": 1151,
+          "commits": 8,
+          "deletions": 233,
+          "files_touched": 38,
+          "first_commit": "2024-04-25T18:26:13+02:00",
+          "last_commit": "2024-06-20T18:35:14+02:00",
+          "repo": "topo-api"
+        },
+        "topo-distributor": {
+          "additions": 23941,
+          "commits": 178,
+          "deletions": 16454,
+          "files_touched": 1125,
+          "first_commit": "2022-09-09T14:45:21+02:00",
+          "last_commit": "2024-06-21T13:35:15+02:00",
+          "repo": "topo-distributor"
+        },
+        "topo-distributor-testprocess": {
+          "additions": 5039,
+          "commits": 79,
+          "deletions": 2669,
+          "files_touched": 272,
+          "first_commit": "2022-09-01T16:01:53+02:00",
+          "last_commit": "2023-11-24T12:00:54+01:00",
+          "repo": "topo-distributor-testprocess"
+        },
+        "topo-infrastructure-transfer": {
+          "additions": 4853,
+          "commits": 57,
+          "deletions": 4166,
+          "files_touched": 362,
+          "first_commit": "2019-08-21T17:10:16+02:00",
+          "last_commit": "2026-06-17T12:02:44+02:00",
+          "repo": "topo-infrastructure-transfer"
+        },
+        "topo-ottoimport-gfm": {
+          "additions": 6943,
+          "commits": 103,
+          "deletions": 5346,
+          "files_touched": 471,
+          "first_commit": "2021-01-25T09:36:49+01:00",
+          "last_commit": "2025-10-15T09:18:02+02:00",
+          "repo": "topo-ottoimport-gfm"
+        },
+        "topo-ottoimport-perron": {
+          "additions": 5635,
+          "commits": 78,
+          "deletions": 4191,
+          "files_touched": 348,
+          "first_commit": "2022-02-18T15:27:09+01:00",
+          "last_commit": "2025-10-15T09:18:00+02:00",
+          "repo": "topo-ottoimport-perron"
+        },
+        "transfer-basetype": {
+          "additions": 19,
+          "commits": 1,
+          "deletions": 23,
+          "files_touched": 1,
+          "first_commit": "2021-05-04T16:30:26+02:00",
+          "last_commit": "2021-05-04T16:30:26+02:00",
+          "repo": "transfer-basetype"
+        }
+      }
+    },
+    {
+      "additions": 1281706,
+      "author_id": "de15bdbd5505",
+      "commits": 3574,
+      "deletions": 1166171,
+      "display_name": "Alfred Schoeni",
+      "emails": [
+        "alfred.schoeni@sbb.ch"
+      ],
+      "files_touched": 24853,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "last_commit": "2026-06-10T18:22:57+02:00",
+      "per_repo": {
+        "dispo": {
+          "additions": 778266,
+          "commits": 1637,
+          "deletions": 793941,
+          "files_touched": 14084,
+          "first_commit": "2011-03-23T10:21:38+00:00",
+          "last_commit": "2026-06-10T18:22:57+02:00",
+          "repo": "dispo"
+        },
+        "dispo-anschlussrechner": {
+          "additions": 683,
+          "commits": 19,
+          "deletions": 193,
+          "files_touched": 49,
+          "first_commit": "2012-12-18T12:40:32+00:00",
+          "last_commit": "2025-10-31T14:13:22+01:00",
+          "repo": "dispo-anschlussrechner"
+        },
+        "dispo-capacity-api": {
+          "additions": 488,
+          "commits": 14,
+          "deletions": 415,
+          "files_touched": 28,
+          "first_commit": "2023-04-12T18:37:20+02:00",
+          "last_commit": "2025-11-21T11:11:06+01:00",
+          "repo": "dispo-capacity-api"
+        },
+        "dispo-dispatching-api": {
+          "additions": 541,
+          "commits": 2,
+          "deletions": 0,
+          "files_touched": 23,
+          "first_commit": "2024-03-13T12:00:38+01:00",
+          "last_commit": "2024-04-08T16:37:37+02:00",
+          "repo": "dispo-dispatching-api"
+        },
+        "dispo-rto-area-api": {
+          "additions": 4,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2025-11-20T15:30:17+01:00",
+          "last_commit": "2025-11-20T15:30:17+01:00",
+          "repo": "dispo-rto-area-api"
+        },
+        "dispo-rto-status-api": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2025-11-20T16:23:03+01:00",
+          "last_commit": "2025-11-20T16:23:03+01:00",
+          "repo": "dispo-rto-status-api"
+        },
+        "dispo-timetable-api": {
+          "additions": 681,
+          "commits": 6,
+          "deletions": 129,
+          "files_touched": 22,
+          "first_commit": "2025-09-12T11:00:54+02:00",
+          "last_commit": "2025-11-19T14:40:50+01:00",
+          "repo": "dispo-timetable-api"
+        },
+        "dispo-topo-api": {
+          "additions": 176,
+          "commits": 4,
+          "deletions": 84,
+          "files_touched": 15,
+          "first_commit": "2025-11-14T12:02:36+01:00",
+          "last_commit": "2025-12-03T09:36:05+01:00",
+          "repo": "dispo-topo-api"
+        },
+        "masterdata-rtogebiet-transfer": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2024-02-16T17:21:18+01:00",
+          "last_commit": "2024-02-16T17:21:18+01:00",
+          "repo": "masterdata-rtogebiet-transfer"
+        },
+        "masterdata-tagebiet-transfer": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 2,
+          "files_touched": 1,
+          "first_commit": "2021-06-30T16:32:47+02:00",
+          "last_commit": "2021-06-30T16:32:47+02:00",
+          "repo": "masterdata-tagebiet-transfer"
+        },
+        "ops-admintask-transfer": {
+          "additions": 29,
+          "commits": 6,
+          "deletions": 7,
+          "files_touched": 6,
+          "first_commit": "2012-09-10T14:42:53+00:00",
+          "last_commit": "2017-06-14T17:47:00+02:00",
+          "repo": "ops-admintask-transfer"
+        },
+        "optimizer": {
+          "additions": 501,
+          "commits": 36,
+          "deletions": 439,
+          "files_touched": 72,
+          "first_commit": "2011-06-17T08:02:37+00:00",
+          "last_commit": "2025-07-16T10:33:13+02:00",
+          "repo": "optimizer"
+        },
+        "rcs": {
+          "additions": 472221,
+          "commits": 1544,
+          "deletions": 354689,
+          "files_touched": 9300,
+          "first_commit": "2011-03-23T10:21:38+00:00",
+          "last_commit": "2025-09-12T11:38:55+02:00",
+          "repo": "rcs"
+        },
+        "rcsd_deployment": {
+          "additions": 106,
+          "commits": 11,
+          "deletions": 70,
+          "files_touched": 11,
+          "first_commit": "2023-11-13T09:16:43+01:00",
+          "last_commit": "2026-03-05T13:14:55+01:00",
+          "repo": "rcsd_deployment"
+        },
+        "releng-transfer-bom": {
+          "additions": 1,
+          "commits": 1,
+          "deletions": 1,
+          "files_touched": 1,
+          "first_commit": "2022-06-20T10:27:09+02:00",
+          "last_commit": "2022-06-20T10:27:09+02:00",
+          "repo": "releng-transfer-bom"
+        },
+        "restriction-einschraenkung-transfer": {
+          "additions": 108,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2019-07-17T13:27:28+02:00",
+          "last_commit": "2019-07-17T13:27:28+02:00",
+          "repo": "restriction-einschraenkung-transfer"
+        },
+        "timetable-anschlussrechner-transfer": {
+          "additions": 70,
+          "commits": 2,
+          "deletions": 35,
+          "files_touched": 8,
+          "first_commit": "2021-05-18T12:07:12+02:00",
+          "last_commit": "2022-06-16T14:56:52+02:00",
+          "repo": "timetable-anschlussrechner-transfer"
+        },
+        "timetable-capaplan-processor": {
+          "additions": 884,
+          "commits": 4,
+          "deletions": 1395,
+          "files_touched": 15,
+          "first_commit": "2020-12-04T12:28:21+01:00",
+          "last_commit": "2020-12-17T12:02:27+01:00",
+          "repo": "timetable-capaplan-processor"
+        },
+        "timetable-capaplan-transfer": {
+          "additions": 27,
+          "commits": 1,
+          "deletions": 17,
+          "files_touched": 13,
+          "first_commit": "2020-12-04T11:45:57+01:00",
+          "last_commit": "2020-12-04T11:45:57+01:00",
+          "repo": "timetable-capaplan-transfer"
+        },
+        "timetable-converter-testprocess": {
+          "additions": 1298,
+          "commits": 11,
+          "deletions": 952,
+          "files_touched": 52,
+          "first_commit": "2023-04-13T16:38:01+02:00",
+          "last_commit": "2024-04-10T16:29:39+02:00",
+          "repo": "timetable-converter-testprocess"
+        },
+        "timetable-dispo-converter": {
+          "additions": 8324,
+          "commits": 19,
+          "deletions": 1738,
+          "files_touched": 242,
+          "first_commit": "2024-02-21T15:57:43+01:00",
+          "last_commit": "2024-04-04T08:54:44+00:00",
+          "repo": "timetable-dispo-converter"
+        },
+        "timetable-disposition-transfer": {
+          "additions": 2936,
+          "commits": 68,
+          "deletions": 2176,
+          "files_touched": 191,
+          "first_commit": "2011-05-13T12:42:14+00:00",
+          "last_commit": "2024-02-16T16:33:55+01:00",
+          "repo": "timetable-disposition-transfer"
+        },
+        "timetable-distributor": {
+          "additions": 17,
+          "commits": 3,
+          "deletions": 9,
+          "files_touched": 6,
+          "first_commit": "2023-11-07T08:55:53+01:00",
+          "last_commit": "2023-11-09T12:35:48+01:00",
+          "repo": "timetable-distributor"
+        },
+        "timetable-fahrplan-converter": {
+          "additions": 11243,
+          "commits": 61,
+          "deletions": 7828,
+          "files_touched": 528,
+          "first_commit": "2022-10-11T17:48:56+02:00",
+          "last_commit": "2024-07-03T16:47:50+02:00",
+          "repo": "timetable-fahrplan-converter"
+        },
+        "timetable-fahrplan-transfer": {
+          "additions": 2387,
+          "commits": 96,
+          "deletions": 1846,
+          "files_touched": 146,
+          "first_commit": "2011-06-17T08:02:37+00:00",
+          "last_commit": "2024-11-12T13:29:21+01:00",
+          "repo": "timetable-fahrplan-transfer"
+        },
+        "timetable-fahrwegrechner-transfer": {
+          "additions": 12,
+          "commits": 3,
+          "deletions": 2,
+          "files_touched": 5,
+          "first_commit": "2023-11-06T16:58:52+01:00",
+          "last_commit": "2024-02-19T09:01:25+01:00",
+          "repo": "timetable-fahrwegrechner-transfer"
+        },
+        "timetable-taxi-transfer": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2024-02-16T16:55:30+01:00",
+          "last_commit": "2024-02-16T16:55:30+01:00",
+          "repo": "timetable-taxi-transfer"
+        },
+        "timetable-utilities": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2024-02-27T11:14:01+01:00",
+          "last_commit": "2024-02-27T11:14:01+01:00",
+          "repo": "timetable-utilities"
+        },
+        "topo-infrastructure-transfer": {
+          "additions": 693,
+          "commits": 19,
+          "deletions": 203,
+          "files_touched": 29,
+          "first_commit": "2013-01-22T13:41:01+00:00",
+          "last_commit": "2024-02-20T10:02:21+01:00",
+          "repo": "topo-infrastructure-transfer"
+        }
+      }
+    }
+  ],
+  "generated_at": "2026-07-03T11:08:14.882133+00:00",
+  "repos": [
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-abfahrt-disposition-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-abfahrt-disposition-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-basetypes",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-basetypes"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-client-simulator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-client-simulator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-data",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-data"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-data-domain-model",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-data-domain-model"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-data-domain-repository",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-data-domain-repository"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-data-domain-starter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-data-domain-starter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-data-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-data-processor"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2023-02-20T13:33:01+01:00",
+      "last_commit": "2023-05-25T18:08:28+02:00",
+      "name": "adl-dataexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-dataexport-api-corridorconflict",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport-api-corridorconflict"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-dataexport-api-corridorsignaldriving",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport-api-corridorsignaldriving"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-dataexport-api-drivingadvice",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport-api-drivingadvice"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-dataexport-api-registration",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport-api-registration"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-dataexport-api-vpro-reporting",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport-api-vpro-reporting"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-dataexport-api-vproprofile",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-dataexport-api-vproprofile"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-deltatime-calculator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-deltatime-calculator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-departuretimecountdown",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-departuretimecountdown"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-distributor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-distributor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-distributor-testtool",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-distributor-testtool"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-disturbance-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-disturbance-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-driving-advice-calculator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-driving-advice-calculator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-fahrlage",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-fahrlage"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-fahrlage-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-fahrlage-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-load-management-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-load-management-processor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-message-scheduler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-message-scheduler"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-acknowledge-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-acknowledge-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-deltatime-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-deltatime-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-departuretime-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-departuretime-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-disturbance-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-disturbance-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-drivingadvice-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-drivingadvice-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-ecospeedprofile-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-ecospeedprofile-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-forecast-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-forecast-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-gateway",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-gateway"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-gateway-solace-config",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-gateway-solace-config"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-registration-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-registration-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-mobile-warnapp-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-mobile-warnapp-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-optimierung-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-optimierung-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-optimierung-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-optimierung-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-registration-authorizer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-registration-authorizer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-registration-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-registration-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-remote-request-testtool",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-remote-request-testtool"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-spring-utilities",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-spring-utilities"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-ta-handler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-ta-handler"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-tunnelautomatregistrator-testtool",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-tunnelautomatregistrator-testtool"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-vpro",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-vpro"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-warnapp",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-warnapp"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adl-warnapp-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adl-warnapp-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "adrian_springboot",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/adrian_springboot"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "analyze-gitrepo",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/analyze-gitrepo"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "apim_deployment_kafka",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/apim_deployment_kafka"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "apim_deployment_rest",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/apim_deployment_rest"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "argocd-diff-preview",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/argocd-diff-preview"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ato-domain",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ato-domain"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ato-operational-data-adapter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ato-operational-data-adapter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ato-topo-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ato-topo-processor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "azuread-appregistration-federation",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/azuread-appregistration-federation"
+    },
+    {
+      "authors": 1,
+      "commits": 60,
+      "first_commit": "2026-03-12T16:16:53+01:00",
+      "last_commit": "2026-06-25T10:40:51+02:00",
+      "name": "capaopt-grafana",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/capaopt-grafana"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "capaopt-tekton-pipeline-templates",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/capaopt-tekton-pipeline-templates"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "demo_code",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/demo_code"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "deployinttest",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/deployinttest"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "deployinttest-apigateways",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/deployinttest-apigateways"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "deployinttest-rest-api-gateway",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/deployinttest-rest-api-gateway"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "deployinttest-rest-echo-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/deployinttest-rest-echo-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "deployinttest-sender-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/deployinttest-sender-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "deployinttest-solace-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/deployinttest-solace-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "diagnostics-files-accessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/diagnostics-files-accessor"
+    },
+    {
+      "authors": 2,
+      "commits": 3493,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "last_commit": "2026-06-30T16:01:13+02:00",
+      "name": "dispo",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo"
+    },
+    {
+      "authors": 2,
+      "commits": 23,
+      "first_commit": "2012-12-18T12:40:32+00:00",
+      "last_commit": "2026-03-17T17:11:50+00:00",
+      "name": "dispo-anschlussrechner",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-anschlussrechner"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dispo-archivexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-archivexport"
+    },
+    {
+      "authors": 2,
+      "commits": 20,
+      "first_commit": "2023-04-12T18:37:20+02:00",
+      "last_commit": "2025-11-21T11:11:06+01:00",
+      "name": "dispo-capacity-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-capacity-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dispo-connections-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-connections-api"
+    },
+    {
+      "authors": 2,
+      "commits": 7,
+      "first_commit": "2024-03-13T12:00:38+01:00",
+      "last_commit": "2025-10-10T09:26:35+02:00",
+      "name": "dispo-dispatching-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-dispatching-api"
+    },
+    {
+      "authors": 1,
+      "commits": 69,
+      "first_commit": "2025-09-23T17:11:29+02:00",
+      "last_commit": "2026-06-30T14:46:21+02:00",
+      "name": "dispo-hazelcast-cache",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-hazelcast-cache"
+    },
+    {
+      "authors": 1,
+      "commits": 30,
+      "first_commit": "2025-10-14T11:41:40+02:00",
+      "last_commit": "2026-06-22T09:46:50+02:00",
+      "name": "dispo-hazelcast-cache-model",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-hazelcast-cache-model"
+    },
+    {
+      "authors": 1,
+      "commits": 9,
+      "first_commit": "2025-09-11T11:10:01+02:00",
+      "last_commit": "2025-12-10T17:07:31+01:00",
+      "name": "dispo-helmcharts",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-helmcharts"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2026-03-04T13:01:13+01:00",
+      "last_commit": "2026-03-04T13:01:13+01:00",
+      "name": "dispo-internal-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-internal-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dispo-masterdata",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-masterdata"
+    },
+    {
+      "authors": 2,
+      "commits": 8,
+      "first_commit": "2024-06-18T18:34:10+02:00",
+      "last_commit": "2025-11-24T15:44:00+01:00",
+      "name": "dispo-rto-area-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-rto-area-api"
+    },
+    {
+      "authors": 2,
+      "commits": 2,
+      "first_commit": "2025-10-10T09:26:47+02:00",
+      "last_commit": "2025-11-20T16:23:03+01:00",
+      "name": "dispo-rto-status-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-rto-status-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dispo-state-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-state-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dispo-timetable-adar-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-timetable-adar-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dispo-timetable-alea-exporter-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-timetable-alea-exporter-api"
+    },
+    {
+      "authors": 2,
+      "commits": 117,
+      "first_commit": "2023-04-19T14:44:56+02:00",
+      "last_commit": "2026-03-09T16:52:44+01:00",
+      "name": "dispo-timetable-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-timetable-api"
+    },
+    {
+      "authors": 2,
+      "commits": 139,
+      "first_commit": "2023-05-02T17:34:53+02:00",
+      "last_commit": "2026-03-20T15:03:07+01:00",
+      "name": "dispo-topo-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-topo-api"
+    },
+    {
+      "authors": 1,
+      "commits": 86,
+      "first_commit": "2025-05-21T14:35:51+02:00",
+      "last_commit": "2026-07-01T12:58:01+02:00",
+      "name": "dispo-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dugong-tooling-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dugong-tooling-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-adl-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-adl-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-cache-model",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-cache-model"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-db-definition",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-db-definition"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-hazelcast-cache",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-hazelcast-cache"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-internal-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-internal-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-mobile-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-mobile-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-registration-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-registration-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-vpro-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-vpro-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-warnapp-masterdata-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-warnapp-masterdata-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-warnapp-masterdata-sync",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-warnapp-masterdata-sync"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-warnapp-masterdata-sync-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-warnapp-masterdata-sync-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-zlr",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-zlr"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "dynamics-zlr-calculator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dynamics-zlr-calculator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "eclipse-settings",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/eclipse-settings"
+    },
+    {
+      "authors": 1,
+      "commits": 52,
+      "first_commit": "2025-04-15T10:14:41+02:00",
+      "last_commit": "2026-01-21T17:12:52+01:00",
+      "name": "grafana-dashboard-base",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/grafana-dashboard-base"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2025-11-24T16:50:39+01:00",
+      "last_commit": "2025-11-24T16:50:39+01:00",
+      "name": "guircp-admin-service",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-admin-service"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-admin-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-admin-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-admintask-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-admintask-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-admintask-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-admintask-processor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-archivexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-archivexport"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-client-bridge",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-client-bridge"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-client-loader",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-client-loader"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-client-request-bridge",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-client-request-bridge"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-client-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-client-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-database-schema",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-database-schema"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-dtdc-proxy",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-dtdc-proxy"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-hazelcast-cache",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-hazelcast-cache"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-masterdata",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-masterdata"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-masterdata-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-masterdata-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-masterdata-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-masterdata-testprocess"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-restriction-bridge",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-restriction-bridge"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-restriction-bridge-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-restriction-bridge-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-restrictionnotification-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-restrictionnotification-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-session-manager",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-session-manager"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-techstack",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-techstack"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-telephony",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-telephony"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-timetable-bridge",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-timetable-bridge"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-timetable-bridge-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-timetable-bridge-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-topo-dataprovider",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-topo-dataprovider"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "guircp-wahlstrecke-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/guircp-wahlstrecke-api"
+    },
+    {
+      "authors": 1,
+      "commits": 244,
+      "first_commit": "2025-05-21T14:58:57+02:00",
+      "last_commit": "2026-06-26T15:39:26+02:00",
+      "name": "halon-deployment-dev",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/halon-deployment-dev"
+    },
+    {
+      "authors": 1,
+      "commits": 5,
+      "first_commit": "2026-04-01T16:40:07+02:00",
+      "last_commit": "2026-04-28T11:43:45+02:00",
+      "name": "halon-deployment-int",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/halon-deployment-int"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "halon-deployment-kangaroo-dev",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/halon-deployment-kangaroo-dev"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "halon-deployment-prod",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/halon-deployment-prod"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "halon-deployment-templates",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/halon-deployment-templates"
+    },
+    {
+      "authors": 1,
+      "commits": 10,
+      "first_commit": "2025-12-16T16:06:23+01:00",
+      "last_commit": "2026-01-20T17:24:31+01:00",
+      "name": "hazelcast-management-center",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/hazelcast-management-center"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "helm-validation-maven-plugin",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/helm-validation-maven-plugin"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "helm-validation-tests",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/helm-validation-tests"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "initialimport-orchestration-starter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/initialimport-orchestration-starter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "intellij-settings",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/intellij-settings"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "jenkins-library",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/jenkins-library"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "kafka-user-federation",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/kafka-user-federation"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "load-generator-service-description",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/load-generator-service-description"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "load-generator-umbrella-chart",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/load-generator-umbrella-chart"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-controlsystemgrouparea-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-controlsystemgrouparea-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-departuretimecountdown-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-departuretimecountdown-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-dtdc-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-dtdc-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-dtdcmasterdataservice",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-dtdcmasterdataservice"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-introductioncancellationconfig-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-introductioncancellationconfig-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-manualoperationarea-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-manualoperationarea-api"
+    },
+    {
+      "authors": 2,
+      "commits": 51,
+      "first_commit": "2020-01-23T17:10:51+01:00",
+      "last_commit": "2024-02-16T17:21:18+01:00",
+      "name": "masterdata-rtogebiet-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-rtogebiet-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-stationswitchstate-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-stationswitchstate-api"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2023-02-20T13:35:16+01:00",
+      "last_commit": "2023-05-25T18:01:33+02:00",
+      "name": "masterdata-tagebiet-handler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-tagebiet-handler"
+    },
+    {
+      "authors": 2,
+      "commits": 16,
+      "first_commit": "2021-06-18T13:35:16+02:00",
+      "last_commit": "2021-11-23T15:13:29+01:00",
+      "name": "masterdata-tagebiet-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-tagebiet-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-tamasterdataservice",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-tamasterdataservice"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-trainproperties-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-trainproperties-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "masterdata-wirkgebiet-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/masterdata-wirkgebiet-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "meseco",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/meseco"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "monalesy-service-description-provider-chart",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/monalesy-service-description-provider-chart"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-bridge-difference",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-bridge-difference"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-difference-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-difference-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-difference-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-difference-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-differenceresolutionapproval-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-differenceresolutionapproval-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-dtdc-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-dtdc-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-eventdfemapping-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-eventdfemapping-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-executiondifferenceprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-executiondifferenceprocessor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-incidentmeasure-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-incidentmeasure-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-incidentmeasureprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-incidentmeasureprocessor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-odainterfaceprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-odainterfaceprocessor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-operationallink-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-operationallink-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-operationalmovement-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-operationalmovement-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-operationalura-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-operationalura-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-operationmode-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-operationmode-api"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2023-03-31T08:39:13+02:00",
+      "last_commit": "2023-03-31T08:39:13+02:00",
+      "name": "oda-operationmode-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-operationmode-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 3,
+      "first_commit": "2023-02-20T13:42:31+01:00",
+      "last_commit": "2023-05-25T18:01:34+02:00",
+      "name": "oda-operationplangenerator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-operationplangenerator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-shuntingmovementgenerator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-shuntingmovementgenerator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-shuntingsegmentnotification-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-shuntingsegmentnotification-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-steeringinstructiongenerator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-steeringinstructiongenerator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-steeringinstructiongenerator-api-steeringinstruction",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-steeringinstructiongenerator-api-steeringinstruction"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-testmessagehandler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-testmessagehandler"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-testsupporttool",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-testsupporttool"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-trainunitdataprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-trainunitdataprocessor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "oda-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-umbrella"
+    },
+    {
+      "authors": 1,
+      "commits": 3,
+      "first_commit": "2023-02-20T13:28:50+01:00",
+      "last_commit": "2023-05-25T18:01:37+02:00",
+      "name": "oda-uragenerator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-uragenerator"
+    },
+    {
+      "authors": 1,
+      "commits": 3,
+      "first_commit": "2023-02-20T13:30:53+01:00",
+      "last_commit": "2023-05-25T18:01:36+02:00",
+      "name": "oda-uraprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/oda-uraprocessor"
+    },
+    {
+      "authors": 1,
+      "commits": 6,
+      "first_commit": "2012-09-10T14:42:53+00:00",
+      "last_commit": "2017-06-14T17:47:00+02:00",
+      "name": "ops-admintask-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-admintask-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-admintaskprocessor-client",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-admintaskprocessor-client"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-springbootadmin-server",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-springbootadmin-server"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-supervisor-bridge",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-supervisor-bridge"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-supervisor-bridge-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-supervisor-bridge-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-supervisor-bridge-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-supervisor-bridge-testprocess"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-supervisor-client",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-supervisor-client"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ops-supervisor-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ops-supervisor-transfer"
+    },
+    {
+      "authors": 2,
+      "commits": 101,
+      "first_commit": "2011-06-17T08:02:37+00:00",
+      "last_commit": "2025-07-16T10:33:13+02:00",
+      "name": "optimizer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/optimizer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "optimizer-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/optimizer-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "optimizer-auslandprognose-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/optimizer-auslandprognose-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "optimizer-dashboard-base",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/optimizer-dashboard-base"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2021-05-18T11:04:27+02:00",
+      "last_commit": "2021-10-12T15:22:54+02:00",
+      "name": "optimizer-rtopt-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/optimizer-rtopt-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "optimizer-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/optimizer-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "process-profile-library",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/process-profile-library"
+    },
+    {
+      "authors": 2,
+      "commits": 2289,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "last_commit": "2026-06-01T10:53:33+02:00",
+      "name": "rcs",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rcs"
+    },
+    {
+      "authors": 2,
+      "commits": 162,
+      "first_commit": "2022-02-21T08:44:22+01:00",
+      "last_commit": "2026-06-01T10:36:10+02:00",
+      "name": "rcsd_deployment",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rcsd_deployment"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-api-assembly-descriptor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-api-assembly-descriptor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-api-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-api-parent"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-automation",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-automation"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-base-image",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-base-image"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-docker-bench-security",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-docker-bench-security"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-generic-artifact-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-generic-artifact-parent"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-helm-chart-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-helm-chart-parent"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-inspect-targetplatforms",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-inspect-targetplatforms"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-jenkins-verify",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-jenkins-verify"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-library-archetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-library-archetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-library-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-library-parent"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-proto-api-spec-generator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-proto-api-spec-generator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-proto-generator-maven-plugin",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-proto-generator-maven-plugin"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-protobuf-library-archetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-protobuf-library-archetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-protobuf-library-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-protobuf-library-parent"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-rewrite",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-rewrite"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-spring-boot-application-archetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-spring-boot-application-archetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-spring-boot-application-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-spring-boot-application-parent"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-spring-boot-library-archetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-spring-boot-library-archetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-spring-boot-library-parent",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-spring-boot-library-parent"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2022-11-17T13:39:59+01:00",
+      "last_commit": "2022-11-17T13:39:59+01:00",
+      "name": "releng-techstack-bom",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-techstack-bom"
+    },
+    {
+      "authors": 2,
+      "commits": 14,
+      "first_commit": "2021-08-18T16:02:56+02:00",
+      "last_commit": "2023-01-17T15:21:57+01:00",
+      "name": "releng-transfer-bom",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-transfer-bom"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-verification",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-verification"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-visualisation",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-visualisation"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "releng-zlr-image",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/releng-zlr-image"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "renovate",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/renovate"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-amodel-persistence",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-amodel-persistence"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-base-persistence",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-base-persistence"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-bmodel-persistence",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-bmodel-persistence"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-cmodel-persistence",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-cmodel-persistence"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-command-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-command-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-dataexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-dataexport"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-dataexport-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-dataexport-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-dataexport-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-dataexport-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-dataprovider",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-dataprovider"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-db-definition",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-db-definition"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-distributor-restriction",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-distributor-restriction"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-einschraenkung-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-einschraenkung-api"
+    },
+    {
+      "authors": 2,
+      "commits": 10,
+      "first_commit": "2019-07-17T13:27:28+02:00",
+      "last_commit": "2021-06-18T16:30:44+02:00",
+      "name": "restriction-einschraenkung-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-einschraenkung-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-infrarestrictionprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-infrarestrictionprocessor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-interval-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-interval-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-intervalprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-intervalprocessor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-paip-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-paip-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-paip-interface-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-paip-interface-processor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-paip-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-paip-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-processingcommand-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-processingcommand-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-restrictedzone-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-restrictedzone-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-restriction-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-restriction-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-sectionentryprevention-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-sectionentryprevention-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-testmessagehandler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-testmessagehandler"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "restriction-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/restriction-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtex-infohub-export-anschluss-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtex-infohub-export-anschluss-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtex-infohub-export-bvk-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtex-infohub-export-bvk-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtex-infohub-export-istzeitkontext-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtex-infohub-export-istzeitkontext-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtex-infohub-export-prognose-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtex-infohub-export-prognose-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtex-infohub-export-sobo-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtex-infohub-export-sobo-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtex-infohub-export-zugfahrt-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtex-infohub-export-zugfahrt-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-platform-frontend",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-platform-frontend"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-portal-frontend",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-portal-frontend"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-rendering-engine",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-rendering-engine"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-shuntingmovement-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-shuntingmovement-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-shuntingmovement-service",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-shuntingmovement-service"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-shuntingsegmentrelease-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-shuntingsegmentrelease-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-ssp-frontend",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-ssp-frontend"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-ssp-frontend-tekton",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-ssp-frontend-tekton"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-ssp-frontend-test",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-ssp-frontend-test"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-ssp-frontend-test-tekton",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-ssp-frontend-test-tekton"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-ssp-schema",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-ssp-schema"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-ssp-service",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-ssp-service"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "rtui-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rtui-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "sample-application",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/sample-application"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "sample-application-extension-transferobjectgenerator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/sample-application-extension-transferobjectgenerator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "sample-application-extensions",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/sample-application-extensions"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "solace-broker-deployer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/solace-broker-deployer"
+    },
+    {
+      "authors": 1,
+      "commits": 3,
+      "first_commit": "2022-11-16T09:30:24+01:00",
+      "last_commit": "2023-04-19T10:44:59+02:00",
+      "name": "spring-boot-starter-bootstrapping",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-bootstrapping"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-cacheloader",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-cacheloader"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-conversion-fastobjectserialization",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-conversion-fastobjectserialization"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-conversion-protobuf",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-conversion-protobuf"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-conversion-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-conversion-tibrv"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-environmentenricher",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-environmentenricher"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-facade-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-facade-tibrv"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2024-09-17T10:45:07+02:00",
+      "last_commit": "2025-07-22T17:59:11+02:00",
+      "name": "spring-boot-starter-jmx",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-jmx"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-logging-filter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-logging-filter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-monitoring",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-monitoring"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-monitoring-facade",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-monitoring-facade"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-rcsconf",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-rcsconf"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-remote-protocol",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-remote-protocol"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-remote-protocol-splittable",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-remote-protocol-splittable"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-scs-binder-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-scs-binder-tibrv"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-serialization",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-serialization"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-solace-client-config",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-solace-client-config"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-solace-connection-events",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-solace-connection-events"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-splitter-aggregator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-splitter-aggregator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-tibrv"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "spring-boot-starter-time",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/spring-boot-starter-time"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "state-betriebslage-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-betriebslage-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "state-dataexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-dataexport"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "state-distributor-trainposition",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-distributor-trainposition"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "state-guircp-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-guircp-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "state-testmessagehandler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-testmessagehandler"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-architecturetests",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-architecturetests"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-cacheloader-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-cacheloader-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-envconfig-downloader",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-envconfig-downloader"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-facade-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-facade-tibrv"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2026-01-21T17:39:48+01:00",
+      "last_commit": "2026-01-21T17:39:48+01:00",
+      "name": "techstack-hazelcast-cache",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hazelcast-cache"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-hc-fastobjectserialization",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hc-fastobjectserialization"
+    },
+    {
+      "authors": 1,
+      "commits": 16,
+      "first_commit": "2022-05-04T16:05:39+02:00",
+      "last_commit": "2022-08-10T13:49:20+02:00",
+      "name": "techstack-hibernate-usertypes",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hibernate-usertypes"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-hotstandby-client",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hotstandby-client"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-hotstandby-manager",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hotstandby-manager"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-hotstandby-manager-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hotstandby-manager-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-hotstandby-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-hotstandby-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-inmemorystore",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-inmemorystore"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-jmx-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-jmx-tibrv"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-message-tibrv",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-message-tibrv"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-messagingtests",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-messagingtests"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-metric-exporter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-metric-exporter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-protobuf-basetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-protobuf-basetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-protobuf-mappers",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-protobuf-mappers"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-protobuf-serialization",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-protobuf-serialization"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-remote-protocol",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-remote-protocol"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-serialization",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-serialization"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-serializationtests",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-serializationtests"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-time",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-time"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-tracing",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-tracing"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "techstack-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/techstack-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "test-jenkins-pipelines",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/test-jenkins-pipelines"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "test-tekton-swcat",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/test-tekton-swcat"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2026-03-17T17:09:43+00:00",
+      "last_commit": "2026-03-17T17:09:43+00:00",
+      "name": "timetable-aleamassnahmeprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-aleamassnahmeprocessor"
+    },
+    {
+      "authors": 2,
+      "commits": 12,
+      "first_commit": "2021-05-18T12:07:12+02:00",
+      "last_commit": "2026-03-17T17:11:03+00:00",
+      "name": "timetable-anschlussrechner-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-anschlussrechner-transfer"
+    },
+    {
+      "authors": 2,
+      "commits": 10,
+      "first_commit": "2020-12-04T12:28:21+01:00",
+      "last_commit": "2022-11-29T17:00:53+01:00",
+      "name": "timetable-capaplan-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-capaplan-processor"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2020-12-04T11:45:57+01:00",
+      "last_commit": "2020-12-04T11:45:57+01:00",
+      "name": "timetable-capaplan-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-capaplan-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "timetable-common-techstack",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-common-techstack"
+    },
+    {
+      "authors": 2,
+      "commits": 74,
+      "first_commit": "2022-08-17T14:12:41+02:00",
+      "last_commit": "2024-06-21T14:37:03+02:00",
+      "name": "timetable-converter-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-converter-testprocess"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "timetable-dataexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-dataexport"
+    },
+    {
+      "authors": 2,
+      "commits": 21,
+      "first_commit": "2024-02-21T15:57:43+01:00",
+      "last_commit": "2024-06-21T14:37:11+02:00",
+      "name": "timetable-dispo-converter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-dispo-converter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "timetable-disposition-error",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-disposition-error"
+    },
+    {
+      "authors": 2,
+      "commits": 94,
+      "first_commit": "2011-05-13T12:42:14+00:00",
+      "last_commit": "2026-06-17T11:10:37+02:00",
+      "name": "timetable-disposition-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-disposition-transfer"
+    },
+    {
+      "authors": 2,
+      "commits": 243,
+      "first_commit": "2022-05-30T13:10:08+02:00",
+      "last_commit": "2025-03-25T16:09:05+01:00",
+      "name": "timetable-distributor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-distributor"
+    },
+    {
+      "authors": 1,
+      "commits": 116,
+      "first_commit": "2022-08-17T14:12:41+02:00",
+      "last_commit": "2023-11-24T12:00:52+01:00",
+      "name": "timetable-distributor-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-distributor-testprocess"
+    },
+    {
+      "authors": 2,
+      "commits": 103,
+      "first_commit": "2022-10-11T17:48:56+02:00",
+      "last_commit": "2024-07-03T16:47:50+02:00",
+      "name": "timetable-fahrplan-converter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-fahrplan-converter"
+    },
+    {
+      "authors": 2,
+      "commits": 143,
+      "first_commit": "2011-06-17T08:02:37+00:00",
+      "last_commit": "2026-06-17T11:04:07+02:00",
+      "name": "timetable-fahrplan-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-fahrplan-transfer"
+    },
+    {
+      "authors": 2,
+      "commits": 60,
+      "first_commit": "2019-09-10T11:51:18+02:00",
+      "last_commit": "2024-02-19T09:01:25+01:00",
+      "name": "timetable-fahrwegrechner-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-fahrwegrechner-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 213,
+      "first_commit": "2023-09-13T14:39:30+02:00",
+      "last_commit": "2024-08-20T15:05:25+02:00",
+      "name": "timetable-import-taxi",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-import-taxi"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "timetable-import-ziscargo",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-import-ziscargo"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "timetable-import-zisfos",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-import-zisfos"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2022-11-29T16:57:02+01:00",
+      "last_commit": "2022-11-29T17:00:16+01:00",
+      "name": "timetable-itv-facade",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-itv-facade"
+    },
+    {
+      "authors": 2,
+      "commits": 26,
+      "first_commit": "2023-09-28T16:27:41+02:00",
+      "last_commit": "2025-03-27T10:56:56+01:00",
+      "name": "timetable-taxi-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-taxi-transfer"
+    },
+    {
+      "authors": 2,
+      "commits": 13,
+      "first_commit": "2021-05-06T14:06:58+02:00",
+      "last_commit": "2024-02-27T11:14:01+01:00",
+      "name": "timetable-utilities",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-utilities"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-argocd-chart",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-argocd-chart"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-cicada",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-cicada"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-cluster-monitoring",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-cluster-monitoring"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-deployinttest-db-schema",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-deployinttest-db-schema"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-esta-tekton-pipeline-js-poc",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-esta-tekton-pipeline-js-poc"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-halon-crds",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-halon-crds"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-hornet",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-hornet"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-monitoring",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-monitoring"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-spider",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-spider"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-capaopt-tekton-pipeline-utils",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-capaopt-tekton-pipeline-utils"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "tms-kast-demo-ui",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/tms-kast-demo-ui"
+    },
+    {
+      "authors": 1,
+      "commits": 8,
+      "first_commit": "2024-04-25T18:26:13+02:00",
+      "last_commit": "2024-06-20T18:35:14+02:00",
+      "name": "topo-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "topo-common-techstack",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-common-techstack"
+    },
+    {
+      "authors": 1,
+      "commits": 178,
+      "first_commit": "2022-09-09T14:45:21+02:00",
+      "last_commit": "2024-06-21T13:35:15+02:00",
+      "name": "topo-distributor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-distributor"
+    },
+    {
+      "authors": 1,
+      "commits": 79,
+      "first_commit": "2022-09-01T16:01:53+02:00",
+      "last_commit": "2023-11-24T12:00:54+01:00",
+      "name": "topo-distributor-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-distributor-testprocess"
+    },
+    {
+      "authors": 2,
+      "commits": 76,
+      "first_commit": "2013-01-22T13:41:01+00:00",
+      "last_commit": "2026-06-17T12:02:44+02:00",
+      "name": "topo-infrastructure-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-infrastructure-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 103,
+      "first_commit": "2021-01-25T09:36:49+01:00",
+      "last_commit": "2025-10-15T09:18:02+02:00",
+      "name": "topo-ottoimport-gfm",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-ottoimport-gfm"
+    },
+    {
+      "authors": 1,
+      "commits": 78,
+      "first_commit": "2022-02-18T15:27:09+01:00",
+      "last_commit": "2025-10-15T09:18:00+02:00",
+      "name": "topo-ottoimport-perron",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-ottoimport-perron"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2021-05-04T16:30:26+02:00",
+      "last_commit": "2021-05-04T16:30:26+02:00",
+      "name": "transfer-basetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/transfer-basetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "transfer-common",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/transfer-common"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ui-disposition-frontend",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ui-disposition-frontend"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ui-disposition-service",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ui-disposition-service"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ui-routing-graph-visualizer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ui-routing-graph-visualizer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "ui-service-description",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/ui-service-description"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "vpro-visualizer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/vpro-visualizer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-disposition-service",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-disposition-service"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-disposition-ui",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-disposition-ui"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-helloworld",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-helloworld"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-platform-ui",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-platform-ui"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-portal-ui",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-portal-ui"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-ssp-schema",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-ssp-schema"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-ssp-service",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-ssp-service"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-ssp-ui",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-ssp-ui"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-ssp-ui-test",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-ssp-ui-test"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-tools-sspdefinition-validator",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-tools-sspdefinition-validator"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "last_commit": null,
+      "name": "web-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/web-umbrella"
+    }
+  ]
+}

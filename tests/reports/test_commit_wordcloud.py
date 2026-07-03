@@ -5,7 +5,12 @@ from pathlib import Path
 from gitstats.aggregator import aggregate
 from gitstats.identity import IdentityResolver
 from gitstats.reports import ReportContext
-from gitstats.reports.commit_wordcloud import CommitWordcloud, _clean
+from gitstats.reports.commit_wordcloud import (
+    CommitWordcloud,
+    _clean,
+    _filter_tokens,
+    _keep_word,
+)
 from gitstats.scanner import scan_repo
 from tests.conftest import FixtureRepo
 
@@ -14,6 +19,39 @@ def test_clean_strips_jira_keys_and_urls() -> None:
     s = _clean("PROJ-123 fix bug see https://example.com")
     assert "proj-123" not in s
     assert "https" not in s
+
+
+def test_keep_word_keeps_real_words_and_exceptions() -> None:
+    for word in ("refactor", "python3", "utf8", "sha256"):
+        assert _keep_word(word), word
+    # User-ID exceptions: `u`/`e` + exactly 6 digits.
+    assert _keep_word("u123456")
+    assert _keep_word("e123456")
+    # `rcspf`-prefixed words are kept regardless of digits (case-insensitive
+    # because `_clean` lowercases first).
+    assert _keep_word("rcspf12345")
+    assert _keep_word("rcspfabc")
+    assert _keep_word(_clean("RCSPF99"))
+
+
+def test_keep_word_drops_numeric_junk() -> None:
+    assert not _keep_word("cae29ce2")  # interior digit
+    assert not _keep_word("abc123def")  # interior digit
+    assert not _keep_word("123456")  # more numbers than letters
+    assert not _keep_word("1a2b3")  # more numbers than letters
+    assert not _keep_word("abc")  # 3-letter word
+    # Wrong digit count for a user ID => no exception, dropped as number-heavy.
+    assert not _keep_word("u12345")
+    assert not _keep_word("u1234567")
+
+
+def test_filter_tokens_keeps_good_drops_junk() -> None:
+    out = _filter_tokens("refactor cae29ce2 u123456 abc")
+    assert "refactor" in out
+    assert "u123456" in out
+    assert "cae29ce2" not in out
+    # `abc` dropped (3-letter); check it's gone as a standalone token.
+    assert "abc" not in out.split()
 
 
 def test_resolve_sample_size_defaults_and_overrides() -> None:
