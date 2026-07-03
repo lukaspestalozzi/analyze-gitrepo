@@ -23,6 +23,35 @@ _INTERIOR_DIGIT_RE = re.compile(r"[^\W\d_].*\d.*[^\W\d_]")
 # Mirrors the wordcloud library's own token shape so we filter exactly the
 # tokens it would form.
 _WORD_RE = re.compile(r"\w[\w']*")
+# Common German stopwords / "Bindewörter" (conjunctions, articles,
+# pronouns, prepositions, auxiliaries). Commit messages in this corpus mix
+# German and English, so these clutter the cloud just like the English
+# STOPWORDS the wordcloud library already strips.
+_GERMAN_STOPWORDS = {
+    "aber", "als", "also", "am", "an", "auch", "auf", "aus",
+    "bei", "beim", "bis", "bzw",
+    "da", "damit", "dann", "das", "dass", "dem", "den", "denn", "der",
+    "des", "diese", "diesem", "diesen", "dieser", "dieses", "doch", "dort",
+    "durch",
+    "ein", "eine", "einem", "einen", "einer", "eines", "einige", "etwas",
+    "für",
+    "gegen", "gibt",
+    "hab", "habe", "haben", "hat", "hatte", "hatten", "hier",
+    "ich", "ihr", "ihre", "im", "immer", "in", "ins", "ist",
+    "ja", "jede", "jeden", "jeder", "jetzt",
+    "kann", "kein", "keine", "keinen", "können",
+    "mal", "man", "mehr", "mit", "muss", "müssen",
+    "nach", "nicht", "noch", "nun", "nur",
+    "ob", "oder", "ohne",
+    "schon", "sehr", "sein", "seine", "sich", "sie", "sind", "so", "soll",
+    "sollen", "sondern", "sowie",
+    "über", "um", "und", "uns", "unser", "unter",
+    "vom", "von", "vor",
+    "war", "waren", "warum", "was", "weil", "weiter", "welche", "wenn",
+    "werden", "wie", "wieder", "wird", "wir", "wurde", "wurden",
+    "zu", "zum", "zur", "zwischen",
+}
+
 _EXTRA_STOPWORDS = {
     "merge", "revert", "wip", "tmp", "todo",
     "fix", "fixed", "fixes",
@@ -30,7 +59,9 @@ _EXTRA_STOPWORDS = {
     "update", "updated", "updates",
     "remove", "removed", "bump",
     "review",
-}
+    # Ubiquitous, low-signal terms from this corpus (see issue #3).
+    "commit", "author", "nicht", "bb43",
+} | _GERMAN_STOPWORDS
 
 _DEFAULT_MAX_WORDS = 200
 

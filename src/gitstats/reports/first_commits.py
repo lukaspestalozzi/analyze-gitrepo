@@ -48,9 +48,8 @@ class FirstCommits:
             lines.append(f"- First commit overall: {_iso(a.first_commit)}")
             if a.first_commit_sha is not None:
                 subject = _subject(a.first_commit_message)
-                short_sha = a.first_commit_sha[:10]
                 suffix = f": {subject}" if subject else ""
-                lines.append(f"  - Commit `{short_sha}`{suffix}")
+                lines.append(f"  - Commit `{a.first_commit_sha}`{suffix}")
             lines.append(f"- Last commit overall: {_iso(a.last_commit)}")
             lines.append(f"- Total commits: {a.commits}")
             lines.append("")

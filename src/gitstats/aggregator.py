@@ -20,6 +20,8 @@ def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Aggreg
     for rs in repo_stats:
         repo_name = rs.name
         repo_first: datetime | None = None
+        repo_first_sha: str | None = None
+        repo_first_message: str = ""
         repo_last: datetime | None = None
         repo_authors: set[str] = set()
 
@@ -54,7 +56,12 @@ def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Aggreg
             per.first_commit = _min_ts(per.first_commit, c.timestamp)
             per.last_commit = _max_ts(per.last_commit, c.timestamp)
 
-            repo_first = _min_ts(repo_first, c.timestamp)
+            # `<=` so that on a timestamp tie the later-walked commit wins;
+            # the scanner walks newest-first, making that the graph-oldest.
+            if repo_first is None or c.timestamp <= repo_first:
+                repo_first = c.timestamp
+                repo_first_sha = c.sha
+                repo_first_message = c.message
             repo_last = _max_ts(repo_last, c.timestamp)
 
         repos.append(
@@ -65,6 +72,8 @@ def aggregate(repo_stats: list[RepoStats], resolver: IdentityResolver) -> Aggreg
                 authors=len(repo_authors),
                 first_commit=repo_first,
                 last_commit=repo_last,
+                first_commit_sha=repo_first_sha,
+                first_commit_message=repo_first_message,
             )
         )
 

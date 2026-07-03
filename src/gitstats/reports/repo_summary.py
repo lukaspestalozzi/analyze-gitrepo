@@ -12,6 +12,15 @@ def _iso(dt: datetime | None) -> str:
     return dt.isoformat() if dt is not None else "-"
 
 
+def _subject(message: str) -> str:
+    """First non-empty line of a commit message (the subject)."""
+    for line in message.splitlines():
+        stripped = line.strip()
+        if stripped:
+            return stripped
+    return ""
+
+
 class RepoSummary:
     id: ClassVar[str] = "repo-summary"
     description: ClassVar[str] = "Markdown: per-repo totals and top contributors."
@@ -52,6 +61,11 @@ class RepoSummary:
                 f"First: {_iso(r.first_commit)} · Last: {_iso(r.last_commit)}"
             )
             lines.append("")
+            if r.first_commit_sha is not None:
+                subject = _subject(r.first_commit_message)
+                suffix = f": {subject}" if subject else ""
+                lines.append(f"First commit `{r.first_commit_sha}`{suffix}")
+                lines.append("")
             tickets = tickets_per_repo.get(r.name, set())
             lines.append(f"Jira ticket keys referenced (distinct): {len(tickets)}")
             lines.append("")
