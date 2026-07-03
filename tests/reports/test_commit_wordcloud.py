@@ -54,6 +54,17 @@ def test_filter_tokens_keeps_good_drops_junk() -> None:
     assert "abc" not in out.split()
 
 
+def test_extra_stopwords_include_decluttered_words() -> None:
+    from gitstats.reports.commit_wordcloud import _EXTRA_STOPWORDS
+
+    # Issue #3: these should be stripped from the cloud.
+    for word in ("commit", "author", "nicht", "bb43"):
+        assert word in _EXTRA_STOPWORDS, word
+    # A sampling of German "Bindewörter" that should also be gone.
+    for word in ("oder", "wird", "diese", "keine", "und", "werden"):
+        assert word in _EXTRA_STOPWORDS, word
+
+
 def test_resolve_sample_size_defaults_and_overrides() -> None:
     from gitstats.reports.commit_wordcloud import _DEFAULT_SAMPLE_SIZE, _resolve_sample_size
 

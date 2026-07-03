@@ -24,3 +24,9 @@ def test_repo_summary_includes_repo_and_top_authors(
     assert "Alice Smith" in text
     # The fixture has PROJ-123 and PROJ-456 in commit messages.
     assert "Jira ticket keys referenced (distinct): 2" in text
+    # The repo's first commit is shown with its full hash and message.
+    repo = agg.repos[0]
+    assert repo.first_commit_sha is not None
+    assert len(repo.first_commit_sha) == 40
+    assert f"First commit `{repo.first_commit_sha}`" in text
+    assert "Initial commit" in text

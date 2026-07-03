@@ -67,6 +67,9 @@ class RepoSummary:
     authors: int
     first_commit: datetime | None
     last_commit: datetime | None
+    # SHA and message of the repo's first commit (by timestamp).
+    first_commit_sha: str | None = None
+    first_commit_message: str = ""
 
 
 @dataclass
