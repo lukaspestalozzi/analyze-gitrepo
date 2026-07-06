@@ -106,7 +106,8 @@ _TEMPLATE = """<!doctype html>
 <body>
 <header>
   <h1>Interactive commit wordcloud</h1>
-  <p>Tune the weighting sliders, adjust or remove individual words &mdash; the cloud redraws live.</p>
+  <p>Tune the weighting sliders, adjust or remove individual words &mdash;
+     the cloud redraws live.</p>
 </header>
 <div class="layout">
   <div class="cloud">
@@ -153,7 +154,9 @@ _TEMPLATE = """<!doctype html>
   "use strict";
   var RAW = JSON.parse(document.getElementById("data").textContent || "[]");
   // Model: each word carries its base count, a per-word multiplier, and a removed flag.
-  var WORDS = RAW.map(function (p) { return { text: p[0], count: p[1], mult: 1, removed: false }; });
+  var WORDS = RAW.map(function (p) {
+    return { text: p[0], count: p[1], mult: 1, removed: false };
+  });
   var MAXCOUNT = WORDS.reduce(function (m, w) { return Math.max(m, w.count); }, 1);
 
   var PALETTE = ["#2563eb", "#059669", "#d97706", "#dc2626", "#7c3aed",
