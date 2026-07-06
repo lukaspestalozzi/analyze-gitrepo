@@ -9,12 +9,15 @@ from gitstats.models import Commit, RepoStats
 UTC = timezone.utc
 
 
-def _commit(sha: str, message: str, ts: datetime) -> Commit:
+def _commit(
+    sha: str, message: str, ts: datetime, committer_ts: datetime | None = None
+) -> Commit:
     return Commit(
         sha=sha,
         author_name="Alice",
         author_email="alice@example.com",
         timestamp=ts,
+        committer_timestamp=committer_ts,
         additions=1,
         deletions=0,
         files_changed=1,
@@ -67,6 +70,50 @@ def test_same_instant_across_offsets_is_duplicate() -> None:
     assert removed == 1
     assert len(repo_a.commits) == 1
     assert repo_b.commits == []
+
+
+def test_earliest_committer_date_kept_over_path_order() -> None:
+    ts = datetime(2024, 1, 1, 10, 0, tzinfo=UTC)  # shared author-date (cherry-pick)
+    earlier = datetime(2024, 1, 1, 10, 0, tzinfo=UTC)  # original committed first
+    later = datetime(2024, 6, 1, 10, 0, tzinfo=UTC)  # cherry-pick committed later
+    # "/a" sorts first by path but "/z" holds the original (earlier committer date).
+    repo_a = _repo("/a", [_commit("aaa", "Fix bug", ts, committer_ts=later)])
+    repo_z = _repo("/z", [_commit("zzz", "Fix bug", ts, committer_ts=earlier)])
+
+    removed = deduplicate_commits([repo_a, repo_z])
+
+    assert removed == 1
+    assert repo_a.commits == []
+    assert [c.sha for c in repo_z.commits] == ["zzz"]  # earlier committer date wins
+
+
+def test_rcs_repo_kept_on_committer_date_tie() -> None:
+    ts = datetime(2024, 1, 1, 10, 0, tzinfo=UTC)
+    committed = datetime(2024, 1, 1, 10, 0, tzinfo=UTC)  # identical committer date
+    # "/a" sorts before "/rcs", but on a tie the 'rcs' repo's copy is preferred.
+    repo_a = _repo("/a", [_commit("aaa", "Fix bug", ts, committer_ts=committed)])
+    repo_rcs = _repo("/rcs", [_commit("rrr", "Fix bug", ts, committer_ts=committed)])
+
+    removed = deduplicate_commits([repo_a, repo_rcs])
+
+    assert removed == 1
+    assert repo_a.commits == []
+    assert [c.sha for c in repo_rcs.commits] == ["rrr"]
+
+
+def test_committer_date_beats_rcs_preference() -> None:
+    ts = datetime(2024, 1, 1, 10, 0, tzinfo=UTC)
+    earlier = datetime(2024, 1, 1, 10, 0, tzinfo=UTC)
+    later = datetime(2024, 6, 1, 10, 0, tzinfo=UTC)
+    # 'rcs' holds the later (cherry-picked) copy; the earlier original elsewhere wins.
+    repo_rcs = _repo("/rcs", [_commit("rrr", "Fix bug", ts, committer_ts=later)])
+    repo_a = _repo("/a", [_commit("aaa", "Fix bug", ts, committer_ts=earlier)])
+
+    removed = deduplicate_commits([repo_rcs, repo_a])
+
+    assert removed == 1
+    assert repo_rcs.commits == []
+    assert [c.sha for c in repo_a.commits] == ["aaa"]
 
 
 def test_duplicate_within_single_repo_removed() -> None:

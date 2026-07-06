@@ -15,6 +15,7 @@ class Commit:
     additions: int
     deletions: int
     files_changed: int
+    committer_timestamp: datetime | None = None
     message: str = ""
     jira_tickets: tuple[str, ...] = ()
     is_merge: bool = False

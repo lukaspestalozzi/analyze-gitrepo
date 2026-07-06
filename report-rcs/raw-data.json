@@ -1,0 +1,41 @@
+{
+  "authors": [
+    {
+      "additions": 470657,
+      "author_id": "22c7465a8364",
+      "commits": 1530,
+      "deletions": 350686,
+      "display_name": "Fredi",
+      "emails": [
+        "alfred.schoeni@sbb.ch"
+      ],
+      "files_touched": 9197,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "first_commit_message": "Merge aus Branch 3.3.0 (von Hand nachgezogen, da nicht automatisch erfolgt)\n\ngit-svn-id: http://rcssvn1.sbb.ch/svn/dispo/trunk/Source@131443 cae29ce2-e383-fe4c-bb43-e6e0a7a5d11b\n",
+      "first_commit_sha": "d406953a38b5c504483dd526a87de71eab493d84",
+      "last_commit": "2025-09-12T11:38:55+02:00",
+      "per_repo": {
+        "rcs": {
+          "additions": 470657,
+          "commits": 1530,
+          "deletions": 350686,
+          "files_touched": 9197,
+          "first_commit": "2011-03-23T10:21:38+00:00",
+          "last_commit": "2025-09-12T11:38:55+02:00",
+          "repo": "rcs"
+        }
+      }
+    }
+  ],
+  "generated_at": "2026-07-03T15:22:51.580940+00:00",
+  "repos": [
+    {
+      "authors": 1,
+      "commits": 1530,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "last_commit": "2025-09-12T11:38:55+02:00",
+      "name": "rcs",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rcs"
+    }
+  ]
+}

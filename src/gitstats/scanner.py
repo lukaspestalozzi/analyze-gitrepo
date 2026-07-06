@@ -53,6 +53,7 @@ def scan_repo(
             continue
 
         ts = _to_datetime(commit.author.time, commit.author.offset)
+        committer_ts = _to_datetime(commit.committer.time, commit.committer.offset)
         if since is not None and ts < since:
             continue
         if until is not None and ts > until:
@@ -70,6 +71,7 @@ def scan_repo(
                 author_name=commit.author.name,
                 author_email=commit.author.email,
                 timestamp=ts,
+                committer_timestamp=committer_ts,
                 additions=stats.insertions,
                 deletions=stats.deletions,
                 files_changed=stats.files_changed,

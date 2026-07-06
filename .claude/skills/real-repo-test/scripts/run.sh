@@ -10,7 +10,7 @@ set -uo pipefail
 WORKDIR=/tmp/gs-itest
 REQUESTS_URL=https://github.com/psf/requests.git
 URLLIB3_URL=https://github.com/urllib3/urllib3.git
-EXPECTED_DEFAULT_REPORT_COUNT=8   # always-on (Jira-only reports skipped without --jira-url)
+EXPECTED_DEFAULT_REPORT_COUNT=10   # always-on (Jira-only reports skipped without --jira-url)
 EXPECTED_CATALOG_COUNT=10
 FAILED=0
 

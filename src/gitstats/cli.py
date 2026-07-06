@@ -170,8 +170,9 @@ def scan(
     deduplicate_commits: bool = typer.Option(
         True,
         "--deduplicate-commits/--no-deduplicate-commits",
-        help="Drop commits that share an identical message AND author-date with "
-        "an already-seen commit across repos (default: on).",
+        help="Collapse commits that share an identical message AND author-date "
+        "across repos, keeping the original (earliest committer date; ties break "
+        "toward the 'rcs' repo). Default: on.",
     ),
     jira_url: str | None = typer.Option(
         None,

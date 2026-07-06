@@ -6,6 +6,7 @@ from .base import ReportContext, ReportRenderer, ReportResult
 from .commit_heatmap import CommitHeatmap
 from .commit_word_frequencies import CommitWordFrequencies
 from .commit_wordcloud import CommitWordcloud
+from .commit_wordcloud_interactive import CommitWordcloudInteractive
 from .first_commits import FirstCommits
 from .identity_debug import IdentityDebug
 from .jira_tickets_by_type import JiraTicketsByTypeHTML, JiraTicketsByTypeMarkdown
@@ -19,6 +20,7 @@ REPORTS: list[type[ReportRenderer]] = [
     RawData,
     CommitWordcloud,
     CommitWordFrequencies,
+    CommitWordcloudInteractive,
     RepoSummary,
     AuthorLeaderboard,
     IdentityDebug,

@@ -26,6 +26,9 @@ def test_scan_repo_counts_commits_and_diff(fixture_repo: FixtureRepo) -> None:
     assert c1.deletions == 0
     assert c1.files_changed == 1
     assert c1.jira_tickets == ()
+    # The committer date is captured and is at least the author date.
+    assert c1.committer_timestamp is not None
+    assert c1.committer_timestamp >= c1.timestamp
 
     # c2 adds one line to a.txt and a brand new b.txt.
     c2 = next(c for c in stats.commits if c.sha == fixture_repo.commits["c2"])

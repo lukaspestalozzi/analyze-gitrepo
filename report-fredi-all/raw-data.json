@@ -1,0 +1,851 @@
+{
+  "authors": [
+    {
+      "additions": 815537,
+      "author_id": "de15bdbd5505",
+      "commits": 1982,
+      "deletions": 811674,
+      "display_name": "Fredi",
+      "emails": [
+        "alfred.schoeni@sbb.ch"
+      ],
+      "files_touched": 15723,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "first_commit_message": "Merge aus Branch 3.3.0 (von Hand nachgezogen, da nicht automatisch erfolgt)\n\ngit-svn-id: http://rcssvn1.sbb.ch/svn/dispo/trunk/Source@131443 cae29ce2-e383-fe4c-bb43-e6e0a7a5d11b\n",
+      "first_commit_sha": "85d06c38f9a13fdfd46e2921911a7f97b9a516cb",
+      "last_commit": "2026-06-10T18:22:57+02:00",
+      "per_repo": {
+        "dispo": {
+          "additions": 776753,
+          "commits": 1621,
+          "deletions": 790011,
+          "files_touched": 13992,
+          "first_commit": "2011-03-23T10:21:38+00:00",
+          "last_commit": "2026-06-10T18:22:57+02:00",
+          "repo": "dispo"
+        },
+        "dispo-anschlussrechner": {
+          "additions": 551,
+          "commits": 2,
+          "deletions": 70,
+          "files_touched": 17,
+          "first_commit": "2025-07-03T16:40:59+02:00",
+          "last_commit": "2025-10-31T14:13:22+01:00",
+          "repo": "dispo-anschlussrechner"
+        },
+        "dispo-capacity-api": {
+          "additions": 488,
+          "commits": 14,
+          "deletions": 415,
+          "files_touched": 28,
+          "first_commit": "2023-04-12T18:37:20+02:00",
+          "last_commit": "2025-11-21T11:11:06+01:00",
+          "repo": "dispo-capacity-api"
+        },
+        "dispo-dispatching-api": {
+          "additions": 541,
+          "commits": 2,
+          "deletions": 0,
+          "files_touched": 23,
+          "first_commit": "2024-03-13T12:00:38+01:00",
+          "last_commit": "2024-04-08T16:37:37+02:00",
+          "repo": "dispo-dispatching-api"
+        },
+        "dispo-rto-area-api": {
+          "additions": 4,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2025-11-20T15:30:17+01:00",
+          "last_commit": "2025-11-20T15:30:17+01:00",
+          "repo": "dispo-rto-area-api"
+        },
+        "dispo-rto-status-api": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2025-11-20T16:23:03+01:00",
+          "last_commit": "2025-11-20T16:23:03+01:00",
+          "repo": "dispo-rto-status-api"
+        },
+        "dispo-timetable-api": {
+          "additions": 681,
+          "commits": 6,
+          "deletions": 129,
+          "files_touched": 22,
+          "first_commit": "2025-09-12T11:00:54+02:00",
+          "last_commit": "2025-11-19T14:40:50+01:00",
+          "repo": "dispo-timetable-api"
+        },
+        "dispo-topo-api": {
+          "additions": 176,
+          "commits": 4,
+          "deletions": 84,
+          "files_touched": 15,
+          "first_commit": "2025-11-14T12:02:36+01:00",
+          "last_commit": "2025-12-03T09:36:05+01:00",
+          "repo": "dispo-topo-api"
+        },
+        "rcs": {
+          "additions": 14194,
+          "commits": 189,
+          "deletions": 8864,
+          "files_touched": 706,
+          "first_commit": "2011-06-23T09:45:53+00:00",
+          "last_commit": "2025-09-12T11:38:55+02:00",
+          "repo": "rcs"
+        },
+        "rcsd_deployment": {
+          "additions": 103,
+          "commits": 10,
+          "deletions": 69,
+          "files_touched": 10,
+          "first_commit": "2023-11-13T09:16:43+01:00",
+          "last_commit": "2026-03-05T13:14:55+01:00",
+          "repo": "rcsd_deployment"
+        },
+        "timetable-anschlussrechner-transfer": {
+          "additions": 19,
+          "commits": 1,
+          "deletions": 31,
+          "files_touched": 7,
+          "first_commit": "2022-06-16T14:56:52+02:00",
+          "last_commit": "2022-06-16T14:56:52+02:00",
+          "repo": "timetable-anschlussrechner-transfer"
+        },
+        "timetable-capaplan-processor": {
+          "additions": 884,
+          "commits": 4,
+          "deletions": 1395,
+          "files_touched": 15,
+          "first_commit": "2020-12-04T12:28:21+01:00",
+          "last_commit": "2020-12-17T12:02:27+01:00",
+          "repo": "timetable-capaplan-processor"
+        },
+        "timetable-capaplan-transfer": {
+          "additions": 27,
+          "commits": 1,
+          "deletions": 17,
+          "files_touched": 13,
+          "first_commit": "2020-12-04T11:45:57+01:00",
+          "last_commit": "2020-12-04T11:45:57+01:00",
+          "repo": "timetable-capaplan-transfer"
+        },
+        "timetable-converter-testprocess": {
+          "additions": 1298,
+          "commits": 11,
+          "deletions": 952,
+          "files_touched": 52,
+          "first_commit": "2023-04-13T16:38:01+02:00",
+          "last_commit": "2024-04-10T16:29:39+02:00",
+          "repo": "timetable-converter-testprocess"
+        },
+        "timetable-dispo-converter": {
+          "additions": 8324,
+          "commits": 19,
+          "deletions": 1738,
+          "files_touched": 242,
+          "first_commit": "2024-02-21T15:57:43+01:00",
+          "last_commit": "2024-04-04T08:54:44+00:00",
+          "repo": "timetable-dispo-converter"
+        },
+        "timetable-disposition-transfer": {
+          "additions": 25,
+          "commits": 7,
+          "deletions": 8,
+          "files_touched": 9,
+          "first_commit": "2021-06-30T12:21:55+02:00",
+          "last_commit": "2024-02-16T16:33:55+01:00",
+          "repo": "timetable-disposition-transfer"
+        },
+        "timetable-distributor": {
+          "additions": 3,
+          "commits": 2,
+          "deletions": 1,
+          "files_touched": 2,
+          "first_commit": "2023-11-09T11:44:08+01:00",
+          "last_commit": "2023-11-09T12:35:48+01:00",
+          "repo": "timetable-distributor"
+        },
+        "timetable-fahrplan-converter": {
+          "additions": 11243,
+          "commits": 61,
+          "deletions": 7828,
+          "files_touched": 528,
+          "first_commit": "2022-10-11T17:48:56+02:00",
+          "last_commit": "2024-07-03T16:47:50+02:00",
+          "repo": "timetable-fahrplan-converter"
+        },
+        "timetable-fahrplan-transfer": {
+          "additions": 136,
+          "commits": 13,
+          "deletions": 20,
+          "files_touched": 20,
+          "first_commit": "2018-12-17T14:19:24+01:00",
+          "last_commit": "2024-11-12T13:29:21+01:00",
+          "repo": "timetable-fahrplan-transfer"
+        },
+        "timetable-fahrwegrechner-transfer": {
+          "additions": 12,
+          "commits": 3,
+          "deletions": 2,
+          "files_touched": 5,
+          "first_commit": "2023-11-06T16:58:52+01:00",
+          "last_commit": "2024-02-19T09:01:25+01:00",
+          "repo": "timetable-fahrwegrechner-transfer"
+        },
+        "timetable-taxi-transfer": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2024-02-16T16:55:30+01:00",
+          "last_commit": "2024-02-16T16:55:30+01:00",
+          "repo": "timetable-taxi-transfer"
+        },
+        "timetable-utilities": {
+          "additions": 2,
+          "commits": 1,
+          "deletions": 0,
+          "files_touched": 1,
+          "first_commit": "2024-02-27T11:14:01+01:00",
+          "last_commit": "2024-02-27T11:14:01+01:00",
+          "repo": "timetable-utilities"
+        },
+        "topo-infrastructure-transfer": {
+          "additions": 69,
+          "commits": 8,
+          "deletions": 40,
+          "files_touched": 13,
+          "first_commit": "2021-06-25T16:21:20+02:00",
+          "last_commit": "2024-02-20T10:02:21+01:00",
+          "repo": "topo-infrastructure-transfer"
+        }
+      }
+    }
+  ],
+  "generated_at": "2026-07-03T16:57:38.541444+00:00",
+  "repos": [
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "analyze-gitrepo",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/analyze-gitrepo"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "capaopt-grafana",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/capaopt-grafana"
+    },
+    {
+      "authors": 1,
+      "commits": 1621,
+      "first_commit": "2011-03-23T10:21:38+00:00",
+      "first_commit_message": "Merge aus Branch 3.3.0 (von Hand nachgezogen, da nicht automatisch erfolgt)\n\ngit-svn-id: http://rcssvn1.sbb.ch/svn/dispo/trunk/Source@131443 cae29ce2-e383-fe4c-bb43-e6e0a7a5d11b\n",
+      "first_commit_sha": "85d06c38f9a13fdfd46e2921911a7f97b9a516cb",
+      "last_commit": "2026-06-10T18:22:57+02:00",
+      "name": "dispo",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2025-07-03T16:40:59+02:00",
+      "first_commit_message": "RCSPF-160841 send AnschlussMeldung messages only over Solace\n\n. remove TibRV bindings for AnschlussMeldung\n. change Solace topics for AnschlussMeldung to \"internal\"\n\nReview: jonas.egger@sbb.ch\n",
+      "first_commit_sha": "97faf835d73ba6c2999a203d428b863e755b8786",
+      "last_commit": "2025-10-31T14:13:22+01:00",
+      "name": "dispo-anschlussrechner",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-anschlussrechner"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-archivexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-archivexport"
+    },
+    {
+      "authors": 1,
+      "commits": 14,
+      "first_commit": "2023-04-12T18:37:20+02:00",
+      "first_commit_message": "RCSPF-128183 Rename all InterTrainRunLink classes\n\nNot only train runs can be linked but also stablings and shunting movements. Therefore the names of all link-related classes need to be more general.\n\nReview: ramona.zumbrunn@sbb.ch\n",
+      "first_commit_sha": "e5e723e4f4f339f2c0d3eb49129730d82fa39520",
+      "last_commit": "2025-11-21T11:11:06+01:00",
+      "name": "dispo-capacity-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-capacity-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-connections-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-connections-api"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2024-03-13T12:00:38+01:00",
+      "first_commit_message": "RCSPF-142634 define protobuf schema for the new Dispatching API\n\nThis is a first, experimental version with only 3 dispatching commands.\n\nReview: lukas.pestalozzi@sbb.ch\n",
+      "first_commit_sha": "2dd6d5d2833cbfac03a09e7881f77b8b7f8d68d1",
+      "last_commit": "2024-04-08T16:37:37+02:00",
+      "name": "dispo-dispatching-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-dispatching-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-hazelcast-cache",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-hazelcast-cache"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-hazelcast-cache-model",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-hazelcast-cache-model"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-helmcharts",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-helmcharts"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-internal-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-internal-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-masterdata",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-masterdata"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2025-11-20T15:30:17+01:00",
+      "first_commit_message": "RCSPF-167107 Update CHANGELOG.md, for release 2.0.2\n\nreview: lukas.pestalozzi@sbb.ch\n",
+      "first_commit_sha": "10e7e9c3ae93751f3e4f909ecb40e407356370da",
+      "last_commit": "2025-11-20T15:30:17+01:00",
+      "name": "dispo-rto-area-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-rto-area-api"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2025-11-20T16:23:03+01:00",
+      "first_commit_message": "RCSPF-167107 update CHANGELOG.md for release 1.0.1\n\nReview: lukas.heimes@sbb.ch\n",
+      "first_commit_sha": "240d754bccf479194f22193bb02bdb62cb1536ce",
+      "last_commit": "2025-11-20T16:23:03+01:00",
+      "name": "dispo-rto-status-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-rto-status-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-state-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-state-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-timetable-adar-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-timetable-adar-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-timetable-alea-exporter-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-timetable-alea-exporter-api"
+    },
+    {
+      "authors": 1,
+      "commits": 6,
+      "first_commit": "2025-09-12T11:00:54+02:00",
+      "first_commit_message": "RCSPF-165943 remove obsolete attributes from FormationEinfachMsg\n\nDie Attribute 'wichtigkeit' und 'zusatzcode' gibt es seit der CIS-ZIS Umstellung auf Kafka nicht mehr.\n\nReview: kevin.gebhardt@sbb.ch\n",
+      "first_commit_sha": "c32fd706c4997848b8048de55db4ca2dbdf6cab7",
+      "last_commit": "2025-11-19T14:40:50+01:00",
+      "name": "dispo-timetable-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-timetable-api"
+    },
+    {
+      "authors": 1,
+      "commits": 4,
+      "first_commit": "2025-11-14T12:02:36+01:00",
+      "first_commit_message": "RCSPF-165962 added masterdata request: VerwaltungsnummernCh\n\nReview: lukas.pestalozzi@sbb.ch\n",
+      "first_commit_sha": "bf022c320d6d48ec70f42d3260102a8f254d7513",
+      "last_commit": "2025-12-03T09:36:05+01:00",
+      "name": "dispo-topo-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-topo-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "dispo-umbrella",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/dispo-umbrella"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "grafana-dashboard-base",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/grafana-dashboard-base"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "hazelcast-management-center",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/hazelcast-management-center"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "initialimport-orchestration-starter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/initialimport-orchestration-starter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "monalesy-service-description-provider-chart",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/monalesy-service-description-provider-chart"
+    },
+    {
+      "authors": 1,
+      "commits": 189,
+      "first_commit": "2011-06-23T09:45:53+00:00",
+      "first_commit_message": "DispoKommandoSoboErzeugen: Umbenennen zweier Attribute (aufgrund eines Review-Kommentars von B.Soom)\n\ngit-svn-id: http://rcssvn1.sbb.ch/svn/dispo/trunk/Source@136944 cae29ce2-e383-fe4c-bb43-e6e0a7a5d11b\n",
+      "first_commit_sha": "8ab263e58abb45798c69f680422849bad2f9e91e",
+      "last_commit": "2025-09-12T11:38:55+02:00",
+      "name": "rcs",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rcs"
+    },
+    {
+      "authors": 1,
+      "commits": 10,
+      "first_commit": "2023-11-13T09:16:43+01:00",
+      "first_commit_message": "RCSPF-138582 update distributor process versions\n",
+      "first_commit_sha": "d59a0f13fed92d7c7a99f1ee96d7710f91e9ad20",
+      "last_commit": "2026-03-05T13:14:55+01:00",
+      "name": "rcsd_deployment",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/rcsd_deployment"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "state-betriebslage-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-betriebslage-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "state-dataexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-dataexport"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "state-distributor-trainposition",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-distributor-trainposition"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "state-guircp-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-guircp-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "state-testmessagehandler",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/state-testmessagehandler"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-aleamassnahmeprocessor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-aleamassnahmeprocessor"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2022-06-16T14:56:52+02:00",
+      "first_commit_message": "RCSPF-112539 Don't use the Zugkategorie class in this library.\n\nThis eliminates the dependency on timetable-fahrplan-transfer.\n\nReview: istvan.lorincz@sbb.ch\n",
+      "first_commit_sha": "54b86bf0fc9f5fb72a072032222e0bce86839cdd",
+      "last_commit": "2022-06-16T14:56:52+02:00",
+      "name": "timetable-anschlussrechner-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-anschlussrechner-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 4,
+      "first_commit": "2020-12-04T12:28:21+01:00",
+      "first_commit_message": "rmts library version update to 1.1.7, timetable-common to 0.0.13",
+      "first_commit_sha": "05c159127cb317c32ad237ec5209bb6595cf4c1e",
+      "last_commit": "2020-12-17T12:02:27+01:00",
+      "name": "timetable-capaplan-processor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-capaplan-processor"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2020-12-04T11:45:57+01:00",
+      "first_commit_message": "Update to RTMS library versions 1.1.7\n",
+      "first_commit_sha": "ad50a35ff043c1bea0dcc7e31ee7a4dbeb60a2b1",
+      "last_commit": "2020-12-04T11:45:57+01:00",
+      "name": "timetable-capaplan-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-capaplan-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-common-techstack",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-common-techstack"
+    },
+    {
+      "authors": 1,
+      "commits": 11,
+      "first_commit": "2023-04-13T16:38:01+02:00",
+      "first_commit_message": "RCSPF-128183 Rename all InterTrainRunLink classes\n\nNot only train runs can be linked but also stablings and shunting movements. Therefore the names of all link-related classes need to be more general.\n\nReview: ramona.zumbrunn@sbb.ch\n",
+      "first_commit_sha": "4d7cd78db8161b2fabb6384af394b39e7cc370fa",
+      "last_commit": "2024-04-10T16:29:39+02:00",
+      "name": "timetable-converter-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-converter-testprocess"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-dataexport",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-dataexport"
+    },
+    {
+      "authors": 1,
+      "commits": 19,
+      "first_commit": "2024-02-21T15:57:43+01:00",
+      "first_commit_message": "RCSPF-142632 create initial content of the project\n",
+      "first_commit_sha": "ce9decf8e72c127bd990cd3788cdf93e9b5e4f15",
+      "last_commit": "2024-04-04T08:54:44+00:00",
+      "name": "timetable-dispo-converter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-dispo-converter"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-disposition-error",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-disposition-error"
+    },
+    {
+      "authors": 1,
+      "commits": 7,
+      "first_commit": "2021-06-30T12:21:55+02:00",
+      "first_commit_message": "update to release 1.2.0 of transfer-common\n",
+      "first_commit_sha": "dbb63ae62db69bb64e13332fa1c8c7360b6f32a7",
+      "last_commit": "2024-02-16T16:33:55+01:00",
+      "name": "timetable-disposition-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-disposition-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 2,
+      "first_commit": "2023-11-09T11:44:08+01:00",
+      "first_commit_message": "RCSPF-138582 Release 4.5.2\n",
+      "first_commit_sha": "3206d633e501109ca6167ff6002168efac799e78",
+      "last_commit": "2023-11-09T12:35:48+01:00",
+      "name": "timetable-distributor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-distributor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-distributor-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-distributor-testprocess"
+    },
+    {
+      "authors": 1,
+      "commits": 61,
+      "first_commit": "2022-10-11T17:48:56+02:00",
+      "first_commit_message": "RCSPF-118668 Erweitere Modell und Konverter\n\n  + LineTrack (Streckengleis)\n  + TimetableEventSpecification\n  + Zugfahrtunterbruch\n  + Einbrechen/Ausbrechen\n  + konvertiere nur den befahrenen Teil der Zugfahrt!\n",
+      "first_commit_sha": "946d5d85dbd0bebb32055ce1bee2d168b663042f",
+      "last_commit": "2024-07-03T16:47:50+02:00",
+      "name": "timetable-fahrplan-converter",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-fahrplan-converter"
+    },
+    {
+      "authors": 1,
+      "commits": 13,
+      "first_commit": "2018-12-17T14:19:24+01:00",
+      "first_commit_message": "Merge pull request #9313 in PT_RCS/rcs from private/kmt/fsch/ALM-9185_Schritt2_ZLR-required to master\n\nSquashed commit of the following:\n\ncommit 5e7b53720aea983e5380c659c67f20b7c38340e7\nMerge: 4a4760b3b7c abb4820eddb\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Mon Dec 17 14:17:14 2018 +0100\n\n    Merge remote-tracking branch 'origin/master' into\n    private/kmt/fsch/ALM-9185_Schritt2_ZLR-required\n\n    Gemerged vom Master, auf den Stand nach dem ersten Commit zu ALM-9185.\n\ncommit 4a4760b3b7c759d1815a6f0b41812b878191fcfa\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Mon Dec 17 11:29:52 2018 +0100\n\n    RCSPF-45610 Kleine Verbesserungen + etwas Kosmetik.\n\ncommit 7119651f6958cb2b44327df91b2b88be313f48af\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Mon Dec 17 09:00:03 2018 +0100\n\n    RCSPF-45610 Code bereinigt. Unn\u00f6tigen Steuerketten-Check entfernt.\n\ncommit dce03438afc3f32789570361511904528b7345f5\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Fri Dec 14 16:00:59 2018 +0100\n\n    RCSPF-45610 Step 2: ZLR-required setzen, wenn FAB-Offset \u00e4ndert.\n\ncommit c41bee0784ab94a34181e5f09290b6e74ffe55b3\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Fri Dec 14 14:25:32 2018 +0100\n\n    RCSPF-45610 Deferred Tasks nicht ignorieren, sondern direkt verarbeiten.\n\ncommit 107b0628167b2c17dbb3d4da8e2583a00a879f8f\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Fri Dec 14 14:24:40 2018 +0100\n\n    RCSPF-45610 Scheduler-Intervall und Statistik-Zeugs bereinigt.\n\ncommit 4545644775010defa063029eadef31f44a77c14c\nMerge: 3bda647cab3 f5eae331710\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Thu Dec 13 18:25:50 2018 +0100\n\n    Merge remote-tracking branch 'origin/master' into private/kmt/fsch/ALM-9185_Falsche-Mindestfahrzeiten-nach-UNO-Aenderungen\n\ncommit 3bda647cab38549154a409c26ba947ab9ee221d4\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Thu Dec 13 11:32:19 2018 +0100\n\n    RCSPF-45610 ZugfahrtStatus NICHT_BEFAHREN wird Zugkopf-Attribut ersetzen\n\ncommit 7a8ce9653872ab795c1c551b69a6821815bb39d7\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Tue Dec 11 18:11:07 2018 +0100\n\n    RCSPF-45610 Vereinfachung von Scheduler und Buchhaltung.\n\ncommit 4df7d356f38f615de53866a1d23ffd5f9011db38\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Tue Dec 11 10:40:41 2018 +0100\n\n    RCSPF-45610 Anpassungen: Memory erh\u00f6hen, Activity-Counter, Kleinkram.\n\ncommit b81d5ca459bdf9f17ae50617332b358fa841e059\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Fri Dec 7 16:48:20 2018 +0100\n\n    RCSPF-45610 1.b) Immer Full Processing im ZlrFahrzeiten-Prozess.\n\ncommit 20878f2f12a6f59b2ff3c99f5fb54a279ea96094\nAuthor: u208278 <alfred.schoeni@sbb.ch>\nDate:   Fri Dec 7 11:33:22 2018 +0100\n\n    RCSPF-45610 1.a) Immer Full Processing f\u00fcr DispoKommandoZlrBerechnen.\n",
+      "first_commit_sha": "7130a5f47a998260db9fcb1bb23e13a7b16a2fbc",
+      "last_commit": "2024-11-12T13:29:21+01:00",
+      "name": "timetable-fahrplan-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-fahrplan-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 3,
+      "first_commit": "2023-11-06T16:58:52+01:00",
+      "first_commit_message": "RCSPF-138582 update timetable-fahrplan-transfer version to 15.0.0\n",
+      "first_commit_sha": "fde21f19ad81e4581ef166bf6eca55e1ca686839",
+      "last_commit": "2024-02-19T09:01:25+01:00",
+      "name": "timetable-fahrwegrechner-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-fahrwegrechner-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-import-taxi",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-import-taxi"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-import-ziscargo",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-import-ziscargo"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-import-zisfos",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-import-zisfos"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "timetable-itv-facade",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-itv-facade"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2024-02-16T16:55:30+01:00",
+      "first_commit_message": "RCSPF-138531 Update CHANGELOG.md for release 2.0.0\n",
+      "first_commit_sha": "efc5f810ad046f8282dd738a9598ce9c00ee175c",
+      "last_commit": "2024-02-16T16:55:30+01:00",
+      "name": "timetable-taxi-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-taxi-transfer"
+    },
+    {
+      "authors": 1,
+      "commits": 1,
+      "first_commit": "2024-02-27T11:14:01+01:00",
+      "first_commit_message": "RCSPF-138531 Update CHANGELOG.md for release 3.0.0\n",
+      "first_commit_sha": "68455d1060dddb0c779cd5bbecd92e9fa72ab88d",
+      "last_commit": "2024-02-27T11:14:01+01:00",
+      "name": "timetable-utilities",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/timetable-utilities"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "topo-api",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-api"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "topo-common-techstack",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-common-techstack"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "topo-distributor",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-distributor"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "topo-distributor-testprocess",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-distributor-testprocess"
+    },
+    {
+      "authors": 1,
+      "commits": 8,
+      "first_commit": "2021-06-25T16:21:20+02:00",
+      "first_commit_message": "RCSPF-101747 Added 3 missing classes to TransferObjectsProvider",
+      "first_commit_sha": "ae19cc4460416f238914e8d455dbf237ba3ad36f",
+      "last_commit": "2024-02-20T10:02:21+01:00",
+      "name": "topo-infrastructure-transfer",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-infrastructure-transfer"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "topo-ottoimport-gfm",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-ottoimport-gfm"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "topo-ottoimport-perron",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/topo-ottoimport-perron"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "transfer-basetype",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/transfer-basetype"
+    },
+    {
+      "authors": 0,
+      "commits": 0,
+      "first_commit": null,
+      "first_commit_message": "",
+      "first_commit_sha": null,
+      "last_commit": null,
+      "name": "transfer-common",
+      "path": "/home/lu/devsbb/copy-entire-capaopt/transfer-common"
+    }
+  ]
+}
